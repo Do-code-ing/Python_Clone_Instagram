@@ -25,6 +25,11 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect
+            return redirect(reverse("instagram:index"))
         return render(request, "registration/login.html", {"error": "아이디 혹은 비밀번호가 틀렸습니다."})
-    return render(request, reverse("instagram:index"))
+    return render(request, "registration/login.html")
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect(reverse("registration:login"))
