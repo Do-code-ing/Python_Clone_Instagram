@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{{ user.username }}
+
+<form action="{% url 'registration:logout' %}">
+    <input type="submit" value="Log Out">
+</form>
+
+{% endblock body %}

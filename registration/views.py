@@ -7,14 +7,18 @@ from django.urls import reverse, reverse_lazy
 
 def signup(request):
     if request.method == "POST":
-        if request.POST["password1"] == request.POST["password2"]:
-            user = User.objects.create_user(
-                username=request.POST["username"],
-                password=request.POST["password1"],
-                email=request.POST["email"],
-            )
-            auth.login(request, user)
-            return redirect(reverse("instagram:index"))
+        try:
+            User.objects.get(username=request.POST["username"])
+            return render(request, "registration/signup.html", {"error": "이미 존재하는 아이디입니다."})
+        except:
+            if request.POST["password1"] == request.POST["password2"]:
+                user = User.objects.create_user(
+                    username=request.POST["username"],
+                    password=request.POST["password1"],
+                    email=request.POST["email"],
+                )
+                auth.login(request, user)
+                return redirect(reverse("instagram:index"))
     return render(request, "registration/signup.html")
 
 
