@@ -6,6 +6,9 @@ from django.urls import reverse, reverse_lazy
 
 
 def signup(request):
+    if request.user.is_authenticated:
+        auth.logout(request)
+
     if request.method == "POST":
         try:
             User.objects.get(username=request.POST["username"])
@@ -23,6 +26,9 @@ def signup(request):
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect(reverse("instagram:index"))
+
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]

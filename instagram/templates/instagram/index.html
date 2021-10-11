@@ -2,10 +2,22 @@
 
 {% block body %}
 
-{{ user.username }}
-
 <form action="{% url 'registration:logout' %}">
     <input type="submit" value="Log Out">
 </form>
+
+{{ user.username }}
+
+<form action="{% url 'instagram:post' %}">
+    <input type="submit" value="Posting">
+</form>
+
+{% for post in user.post_set.all %}
+{{ post.title }}
+{% for image in post.image_set.all %}
+<img src="{{ image.image.url }}">
+{% endfor %}
+<br>
+{% endfor %}
 
 {% endblock body %}

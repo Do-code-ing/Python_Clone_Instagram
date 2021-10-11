@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+<link rel="stylesheet" href="{% static 'css/post.css' %}">
+<script defer src="{% static 'js/post.js' %}"></script>
+<div class="wrapper">
+    <div>
+        <h1>글쓰기</h1>
+        {{ error }}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            제목: <br>
+            <input name="title" type="text" required>
+            <br>
+            사진: <br>
+            <input name="images" type="file" id="input-multiple-image" accept="image/png, image/jpeg" multiple>
+            <br>
+            <div id="multiple-container"></div>
+            <br>
+            내용: <br>
+            <input name="content" type="text" required>
+            <br>
+            <input type="submit" value="Upload">
+        </form>
+    </div>
+</div>
+{% endblock body %}
