@@ -2,9 +2,14 @@
 
 {% block body %}
 
-{{ post.title }}
-{{ post.author }}
+{% if user == post.author %}
 <a href="{% url 'instagram:update' pk=post.pk %}">Update</a>
 <a href="{% url 'instagram:delete' pk=post.pk %}">Delete</a>
+{% endif %}
+
+{{ post.title }}
+{{ post.author }}
+{{ post.like_set.all|length }}
+<a href="{% url 'instagram:like' pk=post.pk %}">Like</a>
 
 {% endblock body %}

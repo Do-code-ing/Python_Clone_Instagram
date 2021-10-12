@@ -93,3 +93,14 @@ def user_detail(request, username):
         "user_": user_
     }
     return render(request, "instagram/user_detail.html", context)
+
+
+@login_required
+def like(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    try:
+        Like.objects.get(user=request.user, post=post)
+    except:
+        Like.objects.create(user=request.user, post=post)
+    finally:
+        return redirect("instagram:post_detail", pk=pk)
