@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{{ user_.username }}
+{{ user_.follow_set.all }}
+
+
+{% for post in user_.post_set.all %}
+<a href="{% url 'instagram:post_detail' pk=post.pk %}">{{ post.title }}</a>
+
+<img src="{{ post.main_image.url }}">
+<br>
+{% endfor %}
+
+{% endblock body %}

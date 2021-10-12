@@ -11,15 +11,15 @@
 {% if request.method == "POST" %}
 <h2>Search for {{ search_for }}</h2>
 <h2>회원 검색 결과</h2>
-{% for user_ in userlist %}
-{{ user_ }}
+{% for user_ in user_list %}
+<a href="{% url 'instagram:user_detail' username=user_.username %}">{{ user_.username }}</a>
 {% empty %}
 <h3>검색 결과 없음.</h3>
 {% endfor %}
 
 <h2>글 검색 결과</h2>
-{% for post in postlist %}
-{{ post }}
+{% for post in post_list %}
+<a href="{% url 'instagram:post_detail' pk=post.pk %}">{{ post.title }}</a>
 {% empty %}
 <h3>검색 결과 없음.</h3>
 {% endfor %}

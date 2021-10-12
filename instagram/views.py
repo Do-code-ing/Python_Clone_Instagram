@@ -75,13 +75,21 @@ def delete(request, pk):
 def search(request):
     if request.method == "POST":
         search_for = request.POST['search_for']
-        userlist = User.objects.filter(username__icontains=search_for)
-        postlist = Post.objects.filter(title__icontains=search_for)
+        user_list = User.objects.filter(username__icontains=search_for)
+        post_list = Post.objects.filter(title__icontains=search_for)
         context = {
             "search_for": search_for,
-            "userlist": userlist,
-            "postlist": postlist,
+            "user_list": user_list,
+            "post_list": post_list,
         }
         return render(request, "instagram/search.html", context)
     else:
         return render(request, "instagram/search.html")
+
+
+def user_detail(request, username):
+    user_ = User.objects.get(username=username)
+    context = {
+        "user_": user_
+    }
+    return render(request, "instagram/user_detail.html", context)
