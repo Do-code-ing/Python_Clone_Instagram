@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{{ post.title }}
+{{ post.author }}
+<a href="{% url 'instagram:update' pk=post.pk %}">Update</a>
+<a href="{% url 'instagram:delete' pk=post.pk %}">Delete</a>
+
+{% endblock body %}

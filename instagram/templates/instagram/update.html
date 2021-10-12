@@ -7,16 +7,17 @@
 <script defer src="{% static 'js/post.js' %}"></script>
 <div class="wrapper">
     <div>
-        <h1>글쓰기</h1>
+        <h1>수정하기</h1>
         {{ error }}
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <div id="multiple-container"></div>
+            {% for image in images %}
+            <img src="{{ image.image.url }}">
+            {% endfor %}
             <table>
-                {{ image_form.as_table }}
                 {{ post_form.as_table }}
             </table>
-            <input type="submit" value="Upload">
+            <input type="submit" value="Update">
         </form>
     </div>
 </div>
