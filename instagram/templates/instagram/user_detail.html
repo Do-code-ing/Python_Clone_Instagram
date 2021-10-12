@@ -3,7 +3,7 @@
 {% block body %}
 
 {{ user_.username }}
-{{ user_.follow_set.all }}
+{{ user_.follow_set }}
 
 
 {% for post in user_.post_set.all %}

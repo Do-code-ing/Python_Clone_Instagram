@@ -7,8 +7,8 @@
 <a href="{% url 'instagram:delete' pk=post.pk %}">Delete</a>
 {% endif %}
 
+<a href="{% url 'instagram:user_detail' username=post.author %}">{{ post.author }}</a>
 {{ post.title }}
-{{ post.author }}
 {{ post.like_set.all|length }}
 <a href="{% url 'instagram:like' pk=post.pk %}">Like</a>
 

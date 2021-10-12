@@ -99,7 +99,8 @@ def user_detail(request, username):
 def like(request, pk):
     post = get_object_or_404(Post, id=pk)
     try:
-        Like.objects.get(user=request.user, post=post)
+        like = Like.objects.get(user=request.user, post=post)
+        like.delete()
     except:
         Like.objects.create(user=request.user, post=post)
     finally:
