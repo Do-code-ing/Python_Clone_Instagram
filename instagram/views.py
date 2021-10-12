@@ -69,3 +69,19 @@ def delete(request, pk):
     if request.user == post.author:
         post.delete()
     return redirect("instagram:index")
+
+
+@login_required
+def search(request):
+    if request.method == "POST":
+        search_for = request.POST['search_for']
+        userlist = User.objects.filter(username__icontains=search_for)
+        postlist = Post.objects.filter(title__icontains=search_for)
+        context = {
+            "search_for": search_for,
+            "userlist": userlist,
+            "postlist": postlist,
+        }
+        return render(request, "instagram/search.html", context)
+    else:
+        return render(request, "instagram/search.html")

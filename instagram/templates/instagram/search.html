@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="search_for">
+    <input type="submit" value="Search">
+</form>
+
+{% if request.method == "POST" %}
+<h2>Search for {{ search_for }}</h2>
+<h2>회원 검색 결과</h2>
+{% for user_ in userlist %}
+{{ user_ }}
+{% empty %}
+<h3>검색 결과 없음.</h3>
+{% endfor %}
+
+<h2>글 검색 결과</h2>
+{% for post in postlist %}
+{{ post }}
+{% empty %}
+<h3>검색 결과 없음.</h3>
+{% endfor %}
+{% endif %}
+
+{% endblock body %}

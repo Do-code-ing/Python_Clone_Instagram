@@ -5,17 +5,20 @@
 <form action="{% url 'registration:logout' %}">
     <input type="submit" value="Log Out">
 </form>
-
-{{ user.username }}
-
 <form action="{% url 'instagram:post' %}">
     <input type="submit" value="Posting">
 </form>
+<form action="{% url 'instagram:search' %}" method="GET">
+    <input type="submit" value="Search">
+</form>
+
+{{ user.username }}
+
 
 {% for post in user.post_set.all %}
 <a href="{% url 'instagram:post_detail' pk=post.pk %}">{{ post.title }}</a>
 
-<img src="{{ post.main_image.url }}" alt="">
+<img src="{{ post.main_image.url }}">
 <br>
 {% endfor %}
 
