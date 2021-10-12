@@ -11,11 +11,12 @@
         {{ error }}
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <div id="multiple-container"></div>
+            <img src="{% static 'image/dummy_image.jpg' %}" id="dummy_image">
             <table>
-                {{ image_form.as_table }}
                 {{ post_form.as_table }}
+                {{ image_form.as_table }}
             </table>
+            <div id="multiple_container"></div>
             <input type="submit" value="Upload">
         </form>
     </div>

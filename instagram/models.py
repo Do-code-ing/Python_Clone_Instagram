@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Post(models.Model):
     title = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    main_image = models.ImageField(upload_to="image", null=True)
     content = models.TextField()
     create_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
@@ -15,7 +16,7 @@ class Post(models.Model):
 
 class Image(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="image", blank=True, null=True)
+    image = models.ImageField(upload_to="image", null=True)
 
 
 class Like(models.Model):

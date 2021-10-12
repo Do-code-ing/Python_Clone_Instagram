@@ -17,6 +17,7 @@ def post(request):
         post = Post.objects.create(
             title=request.POST["title"],
             author=request.user,
+            main_image=request.FILES.get('main_image'),
             content=request.POST["content"],
         )
         images = request.FILES.getlist('image')

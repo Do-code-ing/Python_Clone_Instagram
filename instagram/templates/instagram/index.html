@@ -7,7 +7,6 @@
 </form>
 
 {{ user.username }}
-{{ error }}
 
 <form action="{% url 'instagram:post' %}">
     <input type="submit" value="Posting">
@@ -15,9 +14,8 @@
 
 {% for post in user.post_set.all %}
 <a href="{% url 'instagram:post_detail' pk=post.pk %}">{{ post.title }}</a>
-{% for image in post.image_set.all %}
-<img src="{{ image.image.url }}">
-{% endfor %}
+
+<img src="{{ post.main_image.url }}" alt="">
 <br>
 {% endfor %}
 
