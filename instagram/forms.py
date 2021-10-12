@@ -24,7 +24,8 @@ class PostForm(forms.ModelForm):
 class ImageForm(forms.ModelForm):
     image = forms.ImageField(
         label="사진: ",
-        widget=forms.ClearableFileInput(attrs={'multiple': True})
+        required=False,
+        widget=forms.ClearableFileInput(attrs={'multiple': True}),
     )
 
     class Meta:

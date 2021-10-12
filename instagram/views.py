@@ -64,6 +64,7 @@ def update(request, pk):
 
 
 def delete(request, pk):
-    post = Post.objects.get(id=pk)
-    post.delete()
+    post = post = get_object_or_404(Post, id=pk)
+    if request.user == post.author:
+        post.delete()
     return redirect("instagram:index")
