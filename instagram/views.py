@@ -1,4 +1,3 @@
-from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -47,8 +46,16 @@ def post(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, id=pk)
+    comments = Comment.objects.filter(post=post.id)
+    if request.method == "POST" and request.user.is_authenticated:
+        Comment.objects.create(
+            user=request.user,
+            post=post,
+            text=request.POST["text"]
+        )
     context = {
         "post": post,
+        "comments": comments
     }
     return render(request, "instagram/post_detail.html", context)
 
@@ -119,6 +126,14 @@ def like(request, pk):
         Like.objects.create(user=request.user, post=post)
     finally:
         return redirect("instagram:post_detail", pk=pk)
+
+
+@login_required
+def comment_delete(request, pk, comment_pk):
+    comment = get_object_or_404(Comment, id=comment_pk)
+    if request.user == comment.user:
+        comment.delete()
+    return redirect("instagram:post_detail", pk=pk)
 
 
 @login_required
