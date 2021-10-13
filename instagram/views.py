@@ -1,3 +1,4 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -7,7 +8,20 @@ from .forms import *
 
 def index(request):
     if request.user.is_authenticated:
-        return render(request, "instagram/index.html")
+        follow_posts = Post.objects.none()
+        print(follow_posts)
+
+        for following in request.user.following.all():
+            print(following.follower)
+            follow_posts |= Post.objects.filter(
+                author=following.follower).order_by("-create_date")
+            print(follow_posts)
+
+        context = {
+            "follow_posts": follow_posts
+        }
+
+        return render(request, "instagram/index.html", context)
     return redirect("registration:login")
 
 

@@ -15,9 +15,13 @@
 <a href="{% url 'instagram:user_detail' username=user.username %}">{{ user.username }}</a>
 
 <div>
-    {% for post in user.post_set.all %}
-    <a href="{% url 'instagram:post_detail' pk=post.pk %}">{{ post.title }}</a>
-    <img src="{{ post.main_image.url }}">
+    {% for post in follow_posts %}
+    <div>
+        <a href="{% url 'instagram:user_detail' username=post.author %}">{{ post.author }}</a>
+        <a href="{% url 'instagram:post_detail' pk=post.pk %}">{{ post.title }}</a>
+        {{ post.create_date }}
+        <img src="{{ post.main_image.url }}">
+    </div>
     <br>
     {% endfor %}
 </div>
