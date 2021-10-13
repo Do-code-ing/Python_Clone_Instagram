@@ -109,9 +109,9 @@ def like(request, pk):
 
 @login_required
 def follow(request, username):
-    follower = get_object_or_404(User, username=request.user.username)
-    following = get_object_or_404(User, username=username)
-    if follower == following:
+    follower = get_object_or_404(User, username=username)
+    following = get_object_or_404(User, username=request.user.username)
+    if follower == following:   # 404 발생시키자
         return redirect("instagram:index")
     try:
         followed = Follow.objects.get(

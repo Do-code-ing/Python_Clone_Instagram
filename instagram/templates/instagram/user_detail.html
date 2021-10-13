@@ -2,9 +2,21 @@
 
 {% block body %}
 
-{{ user_.username }}
-{{ user_.follower.all }}
-{{ user_.following.all }}
+<div>
+    {{ user_.username }}
+    <h2>Follower</h2>
+    {% for follower in user_.follower.all %}
+    {{ follower.following }}
+    <br>
+    {% endfor %}
+    <h2>Following</h2>
+    {% for following in user_.following.all %}
+    {{ following.follower }}
+    <br>
+    {% endfor %}
+</div>
+
+
 <a href="{% url 'instagram:follow' user_.username %}">Follow</a>
 
 

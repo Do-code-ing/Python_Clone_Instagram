@@ -12,14 +12,14 @@
     <input type="submit" value="Search">
 </form>
 
-{{ user.username }}
+<a href="{% url 'instagram:user_detail' username=user.username %}">{{ user.username }}</a>
 
-
-{% for post in user.post_set.all %}
-<a href="{% url 'instagram:post_detail' pk=post.pk %}">{{ post.title }}</a>
-
-<img src="{{ post.main_image.url }}">
-<br>
-{% endfor %}
+<div>
+    {% for post in user.post_set.all %}
+    <a href="{% url 'instagram:post_detail' pk=post.pk %}">{{ post.title }}</a>
+    <img src="{{ post.main_image.url }}">
+    <br>
+    {% endfor %}
+</div>
 
 {% endblock body %}
