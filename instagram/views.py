@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse, reverse_lazy
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
@@ -8,13 +8,10 @@ from .forms import *
 def index(request):
     if request.user.is_authenticated:
         follow_posts = Post.objects.none()
-        print(follow_posts)
 
         for following in request.user.following.all():
-            print(following.follower)
             follow_posts |= Post.objects.filter(
                 author=following.follower).order_by("-create_date")
-            print(follow_posts)
 
         context = {
             "follow_posts": follow_posts
@@ -141,6 +138,7 @@ def follow(request, username):
     follower = get_object_or_404(User, username=username)
     following = get_object_or_404(User, username=request.user.username)
     if follower == following:   # 404 발생시키자
+        messages.error(request, "자기 자신을 팔로우 할 수 없습니다.")
         return redirect("instagram:index")
     try:
         followed = Follow.objects.get(
