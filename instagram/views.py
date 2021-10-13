@@ -88,7 +88,7 @@ def search(request):
 
 
 def user_detail(request, username):
-    user_ = User.objects.get(username=username)
+    user_ = get_object_or_404(User, username=username)
     context = {
         "user_": user_
     }
@@ -99,9 +99,25 @@ def user_detail(request, username):
 def like(request, pk):
     post = get_object_or_404(Post, id=pk)
     try:
-        like = Like.objects.get(user=request.user, post=post)
-        like.delete()
+        liked = Like.objects.get(user=request.user, post=post)
+        liked.delete()
     except:
         Like.objects.create(user=request.user, post=post)
     finally:
         return redirect("instagram:post_detail", pk=pk)
+
+
+@login_required
+def follow(request, username):
+    follower = get_object_or_404(User, username=request.user.username)
+    following = get_object_or_404(User, username=username)
+    if follower == following:
+        return redirect("instagram:index")
+    try:
+        followed = Follow.objects.get(
+            follower=follower, following=following)
+        followed.delete()
+    except:
+        Follow.objects.create(follower=follower, following=following)
+    finally:
+        return redirect("instagram:user_detail", username=username)

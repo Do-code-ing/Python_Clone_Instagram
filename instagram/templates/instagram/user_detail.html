@@ -3,7 +3,9 @@
 {% block body %}
 
 {{ user_.username }}
-{{ user_.follow_set }}
+{{ user_.follower.all }}
+{{ user_.following.all }}
+<a href="{% url 'instagram:follow' user_.username %}">Follow</a>
 
 
 {% for post in user_.post_set.all %}
