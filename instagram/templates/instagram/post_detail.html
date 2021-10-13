@@ -2,7 +2,7 @@
 
 {% block body %}
 
-{% if user == post.author %}
+{% if post.author == user %}
 <a href="{% url 'instagram:update' pk=post.pk %}">Update</a>
 <a href="{% url 'instagram:delete' pk=post.pk %}">Delete</a>
 {% endif %}
@@ -13,10 +13,12 @@
 <a href="{% url 'instagram:like' pk=post.pk %}">Like</a>
 <h2>Comments</h2>
 {% for comment in comments %}
-{{ comment.user }}
+{{ comment.author }}
 {{ comment.text }}
 {{ comment.create_date }}
+{% if comment.author == user %}
 <a href="{% url 'instagram:comment_delete' pk=post.pk comment_pk=comment.pk %}">Delete</a>
+{% endif %}
 <br>
 {% endfor %}
 <form method="POST">

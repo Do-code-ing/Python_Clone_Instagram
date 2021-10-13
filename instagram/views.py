@@ -49,7 +49,7 @@ def post_detail(request, pk):
     comments = Comment.objects.filter(post=post.id)
     if request.method == "POST" and request.user.is_authenticated:
         Comment.objects.create(
-            user=request.user,
+            author=request.user,
             post=post,
             text=request.POST["text"]
         )
@@ -58,6 +58,26 @@ def post_detail(request, pk):
         "comments": comments
     }
     return render(request, "instagram/post_detail.html", context)
+
+
+@login_required
+def like(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    try:
+        liked = Like.objects.get(user=request.user, post=post)
+        liked.delete()
+    except:
+        Like.objects.create(user=request.user, post=post)
+    finally:
+        return redirect("instagram:post_detail", pk=pk)
+
+
+@login_required
+def comment_delete(request, pk, comment_pk):
+    comment = get_object_or_404(Comment, id=comment_pk)
+    if request.user == comment.author:
+        comment.delete()
+    return redirect("instagram:post_detail", pk=pk)
 
 
 def update(request, pk):
@@ -114,26 +134,6 @@ def user_detail(request, username):
         "user_": user_
     }
     return render(request, "instagram/user_detail.html", context)
-
-
-@login_required
-def like(request, pk):
-    post = get_object_or_404(Post, id=pk)
-    try:
-        liked = Like.objects.get(user=request.user, post=post)
-        liked.delete()
-    except:
-        Like.objects.create(user=request.user, post=post)
-    finally:
-        return redirect("instagram:post_detail", pk=pk)
-
-
-@login_required
-def comment_delete(request, pk, comment_pk):
-    comment = get_object_or_404(Comment, id=comment_pk)
-    if request.user == comment.user:
-        comment.delete()
-    return redirect("instagram:post_detail", pk=pk)
 
 
 @login_required
