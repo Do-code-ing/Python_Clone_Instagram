@@ -14,7 +14,8 @@ def index(request):
                 author=following.follower).order_by("-create_date")
 
         context = {
-            "follow_posts": follow_posts
+            "follow_posts": follow_posts,
+            "page_name": "index",
         }
 
         return render(request, "instagram/index.html", context)
@@ -37,6 +38,7 @@ def post(request):
     context = {
         "post_form": PostForm,
         "image_form": ImageForm,
+        "page_name": "profile",
     }
     return render(request, "instagram/post.html", context)
 
@@ -94,6 +96,7 @@ def update(request, pk):
         else:
             context = {
                 "post_form": PostForm(instance=post),
+                "page_name": "profile",
             }
             if images is not None:
                 context["images"] = images

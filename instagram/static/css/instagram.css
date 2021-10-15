@@ -1,3 +1,51 @@
+header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 5vh;
+  background-color: white;
+  border: 0.1rem solid rgba(0, 0, 0, 0.12);
+  align-items: center;
+}
+
+header article {
+  grid-column: 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+}
+
+#instagram-image:active,
+nav a img:active {
+  opacity: 30%;
+}
+
+nav a img {
+  margin-left: 1rem;
+  width: 2rem;
+}
+
+input {
+  border: 0.1rem solid rgba(0, 0, 0, 0.12);
+  border-radius: 0.2rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  font-size: 0.8rem;
+  color: black;
+}
+
+input#search-input {
+  text-align: center;
+  font-size: 1rem;
+}
+
+main#instagram-main {
+  grid-column: 2;
+  margin-top: 5rem;
+}
+
 #multiple-container {
   display: flex;
   flex-direction: row;

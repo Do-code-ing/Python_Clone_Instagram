@@ -5,33 +5,34 @@
 {% endblock head %}
 
 {% block body %}
+<header>
+    {% include 'base_header.html' %}
+</header>
+<main id="instagram-main">
+    <form action="{% url 'registration:logout' %}">
+        <input type="submit" value="Log Out">
+    </form>
+    <form action="{% url 'instagram:post' %}">
+        <input type="submit" value="Posting">
+    </form>
 
-<form action="{% url 'registration:logout' %}">
-    <input type="submit" value="Log Out">
-</form>
-<form action="{% url 'instagram:post' %}">
-    <input type="submit" value="Posting">
-</form>
-<form action="{% url 'instagram:search' %}" method="GET">
-    <input type="submit" value="Search">
-</form>
-
-<a href="{% url 'instagram:user_detail' username=user.username %}">{{ user.username }}</a>
-{% for message in messages %}
-{{ message.tags }}
-{{ message.message }}
-{% endfor %}
-
-<div>
-    {% for post in follow_posts %}
-    <div>
-        <a href="{% url 'instagram:user_detail' username=post.author %}">{{ post.author }}</a>
-        <a href="{% url 'instagram:post_detail' pk=post.pk %}">{{ post.title }}</a>
-        {{ post.create_date }}
-        <img src="{{ post.main_image.url }}">
-    </div>
-    <br>
+    <a href="{% url 'instagram:user_detail' username=user.username %}">{{ user.username }}</a>
+    {% for message in messages %}
+    {{ message.tags }}
+    {{ message.message }}
     {% endfor %}
-</div>
+
+    <div>
+        {% for post in follow_posts %}
+        <div>
+            <a href="{% url 'instagram:user_detail' username=post.author %}">{{ post.author }}</a>
+            <a href="{% url 'instagram:post_detail' pk=post.pk %}">{{ post.title }}</a>
+            {{ post.create_date }}
+            <img src="{{ post.main_image.url }}">
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+</main>
 
 {% endblock body %}

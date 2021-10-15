@@ -2,6 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+class UserImage(models.Model):
+    user = models.OneToOneField(
+        User, related_name="user_image", on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="image", null=True)
+
+
 class Post(models.Model):
     title = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
