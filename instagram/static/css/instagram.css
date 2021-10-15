@@ -15,7 +15,7 @@ header article {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 0.5rem;
+  padding-top: 0.4rem;
 }
 
 #instagram-image:active,
@@ -39,11 +39,47 @@ input {
 input#search-input {
   text-align: center;
   font-size: 1rem;
+  padding: 0.2rem;
 }
 
 main#instagram-main {
   grid-column: 2;
   margin-top: 5rem;
+}
+
+main #feed {
+  display: flex;
+  flex-direction: column;
+}
+
+aside {
+  position: fixed;
+  top: 10%;
+  right: 40%;
+}
+
+.wrapper {
+  border: 0.1rem solid rgba(0, 0, 0, 0.12);
+  padding: 1.6rem 2rem;
+  text-align: center;
+  width: 30rem;
+  background-color: white;
+}
+
+.wrapper h2 {
+  font-size: 1rem;
+  margin: 1rem;
+  color: lightslategray;
+  font-weight: bolder;
+}
+
+.wrapper span {
+  font-size: 0.9rem;
+}
+
+.wrapper a {
+  text-decoration: unset;
+  color: dodgerblue;
 }
 
 #multiple-container {
