@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block head %}
 {% include 'base_registration.html' %}
 {% endblock head %}
+
 {% block body %}
 <main>
     <article>
         <section id="registration-section">
             <section class="wrapper">
-                <h1 class="instagram">Instagram</h1>
+                <img src="{% static 'image/instagram.png' %}">
                 <h2>친구들의 사진과 동영상을 보려면 가입하세요.</h2>
                 {% for message in messages %}
                 {{ message.message }}

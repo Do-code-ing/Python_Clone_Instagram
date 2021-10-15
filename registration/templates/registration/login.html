@@ -7,10 +7,10 @@
 {% block body %}
 <main>
     <article id="login-article">
-        <img src="{% static 'image/smartphone.png' %}" id="phone">
+        <img src="{% static 'image/phone.png' %}">
         <section id="registration-section">
             <section class="wrapper">
-                <h1 class="instagram">Instagram</h1>
+                <img src="{% static 'image/instagram.png' %}">
                 {% for message in messages %}
                 {{ message.message }}
                 {% endfor %}

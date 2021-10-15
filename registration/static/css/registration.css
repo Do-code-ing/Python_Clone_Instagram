@@ -1,11 +1,4 @@
 @import "reset.css";
-@font-face {
-  font-family: "ghanachoco";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ghanachoco.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
 
 main {
   justify-content: center;
@@ -14,7 +7,6 @@ main {
 #login-article {
   display: flex;
   flex-direction: row;
-  gap: 2rem;
 }
 
 #registration-section {
@@ -24,24 +16,18 @@ main {
 }
 
 .wrapper {
-  border: 0.01rem groove rgba(0, 0, 0, 0.1);
-  padding: 2rem;
+  border: 0.1rem solid rgba(0, 0, 0, 0.12);
+  padding: 1.6rem 2rem;
   text-align: center;
-  width: 15rem;
+  width: 16rem;
   background-color: white;
-}
-
-.wrapper h1 {
-  font-size: 2rem;
-  margin: 1rem;
-  margin-top: 0;
 }
 
 .wrapper h2 {
   font-size: 1rem;
   margin: 1rem;
   color: lightslategray;
-  font-weight: bold;
+  font-weight: bolder;
 }
 
 .wrapper span {
@@ -61,7 +47,7 @@ main {
 
 form input {
   margin: 0.2rem 0;
-  border: 0.01rem groove rgba(0, 0, 0, 0.1);
+  border: 0.1rem solid rgba(0, 0, 0, 0.12);
   border-radius: 0.2rem;
   padding: 0.5rem;
   background-color: rgba(0, 0, 0, 0.03);
@@ -76,13 +62,4 @@ form input[type="submit"] {
   margin-top: 1rem;
   border: none;
   padding: 0.4rem;
-}
-
-.instagram {
-  font-family: "ghanachoco";
-}
-
-#phone {
-  width: 10rem;
-  height: auto;
 }
