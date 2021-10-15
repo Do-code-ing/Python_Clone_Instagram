@@ -1,25 +1,34 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% include 'base_registration.html' %}
+{% endblock head %}
 
 {% block body %}
-
-<div class="wrapper">
-    <div>
-        <h1>로그인</h1>
-        {{ error }}
-        <form method="POST">
-            {% csrf_token %}
-            아이디: <br>
-            <input name="username" type="text" required>
-            <br>
-            비밀번호: <br>
-            <input name="password" type="password" required>
-            <br>
-            <input type="submit" value="Login">
-        </form>
-    </div>
-</div>
-<form action="{% url 'registration:signup' %}">
-    <input type="submit" value="Sign Up">
-</form>
+<main>
+    <article id="login-article">
+        <img src="{% static 'image/smartphone.png' %}" id="phone">
+        <section id="registration-section">
+            <section class="wrapper">
+                <h1 class="instagram">Instagram</h1>
+                {% for message in messages %}
+                {{ message.message }}
+                {% endfor %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <input name="username" type="text" required placeholder="아이디">
+                    <input name="password" type="password" required placeholder="비밀번호">
+                    <input type="submit" value="로그인">
+                </form>
+            </section>
+            <section class="wrapper">
+                <span>
+                    계정이 없으신가요?
+                    <a href="{% url 'registration:signup' %}">가입하기</a>
+                </span>
+            </section>
+        </section>
+    </article>
+</main>
 
 {% endblock body %}

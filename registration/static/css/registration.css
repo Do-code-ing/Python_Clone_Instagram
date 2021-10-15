@@ -1,0 +1,88 @@
+@import "reset.css";
+@font-face {
+  font-family: "ghanachoco";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ghanachoco.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+main {
+  justify-content: center;
+}
+
+#login-article {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+#registration-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.wrapper {
+  border: 0.01rem groove rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  text-align: center;
+  width: 15rem;
+  background-color: white;
+}
+
+.wrapper h1 {
+  font-size: 2rem;
+  margin: 1rem;
+  margin-top: 0;
+}
+
+.wrapper h2 {
+  font-size: 1rem;
+  margin: 1rem;
+  color: lightslategray;
+  font-weight: bold;
+}
+
+.wrapper span {
+  font-size: 0.9rem;
+}
+
+.wrapper a {
+  text-decoration: unset;
+  color: dodgerblue;
+}
+
+.wrapper form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+form input {
+  margin: 0.2rem 0;
+  border: 0.01rem groove rgba(0, 0, 0, 0.1);
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  font-size: 0.8rem;
+  color: black;
+}
+
+form input[type="submit"] {
+  background-color: dodgerblue;
+  color: white;
+  font-weight: bolder;
+  margin-top: 1rem;
+  border: none;
+  padding: 0.4rem;
+}
+
+.instagram {
+  font-family: "ghanachoco";
+}
+
+#phone {
+  width: 10rem;
+  height: auto;
+}

@@ -1,8 +1,7 @@
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.urls import reverse, reverse_lazy
 
 
 def signup(request):
@@ -12,7 +11,8 @@ def signup(request):
     if request.method == "POST":
         try:
             User.objects.get(username=request.POST["username"])
-            return render(request, "registration/signup.html", {"error": "이미 존재하는 아이디입니다."})
+            messages.error(request, "이미 존재하는 아이디입니다.")
+            return render(request, "registration/signup.html")
         except:
             if request.POST["password1"] == request.POST["password2"]:
                 user = User.objects.create_user(
@@ -21,13 +21,13 @@ def signup(request):
                     email=request.POST["email"],
                 )
                 auth.login(request, user)
-                return redirect(reverse("instagram:index"))
+                return redirect("instagram:index")
     return render(request, "registration/signup.html")
 
 
 def login(request):
     if request.user.is_authenticated:
-        return redirect(reverse("instagram:index"))
+        return redirect("instagram:index")
 
     if request.method == "POST":
         username = request.POST["username"]
@@ -35,11 +35,12 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect(reverse("instagram:index"))
-        return render(request, "registration/login.html", {"error": "아이디 혹은 비밀번호가 틀렸습니다."})
+            return redirect("instagram:index")
+        messages.error(request, "아이디 혹은 비밀번호가 틀렸습니다.")
+        return render(request, "registration/login.html")
     return render(request, "registration/login.html")
 
 
 def logout(request):
     auth.logout(request)
-    return redirect(reverse("registration:login"))
+    return redirect("registration:login")
