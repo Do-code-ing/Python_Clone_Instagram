@@ -9,7 +9,7 @@
 <header>
     {% include 'base_header.html' %}
 </header>
-<main id="instagram-main">
+<main class="instagram-main">
     <div id="feed">
         <article class="wrapper" id="follower">
             {% for follower in user.follower.all %}
@@ -18,12 +18,28 @@
         </article>
         <br>
         <article>
-            {% for post in follow_posts %}
+            {% for post in posts %}
             <section class="wrapper">
-                <a href="{% url 'instagram:user_detail' username=post.author %}">{{ post.author }}</a>
-                <a href="{% url 'instagram:post_detail' pk=post.pk %}">{{ post.title }}</a>
-                {{ post.create_date }}
-                <img src="{{ post.main_image.url }}">
+                <div>
+                    <a href="{% url 'instagram:user_detail' username=post.author %}">{{ post.author }}</a>
+                </div>
+                <div>
+                    <a href="{% url 'instagram:post_detail' pk=post.pk %}"><img src="{{ post.main_image.url }}"></a>
+                </div>
+                <div>
+                    Like {{ post.like_set.all|length }}
+                </div>
+                <div>
+                    {% for comment in post.comment_set.all|slice:":3" %}
+                    <div>
+                        {{ comment.author }}
+                        {{ comment.text }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ post.create_date }}
+                </div>
             </section>
             <br>
             {% endfor %}

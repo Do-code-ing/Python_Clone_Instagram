@@ -11,9 +11,11 @@
         <section id="registration-section">
             <section class="wrapper">
                 <img src="{% static 'image/instagram.png' %}">
-                {% for message in messages %}
-                {{ message.message }}
-                {% endfor %}
+                <div>
+                    {% for message in messages %}
+                    {{ message.message }}
+                    {% endfor %}
+                </div>
                 <form method="POST">
                     {% csrf_token %}
                     <input name="username" type="text" required placeholder="아이디">

@@ -3,27 +3,17 @@ from .models import *
 
 
 class PostForm(forms.ModelForm):
-    title = forms.CharField(
-        label="제목 :",
-    )
-
-    content = forms.CharField(
-        label="내용 :",
-    )
-
     main_image = forms.ImageField(
         label="메인 사진 :",
     )
 
     field_order = [
         "main_image",
-        "title",
-        "content",
     ]
 
     class Meta:
         model = Post
-        fields = ["title", "content", "main_image"]
+        fields = ["main_image"]
 
 
 class ImageForm(forms.ModelForm):
@@ -36,3 +26,15 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = ["image"]
+
+
+class PostingCommentForm(forms.ModelForm):
+    text = forms.CharField(
+        max_length=100,
+        label="내용 :",
+        required=False,
+    )
+
+    class Meta:
+        model = Comment
+        fields = ["text"]

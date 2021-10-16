@@ -22,6 +22,7 @@
         {% else %}
         <a href="{% url 'instagram:notice' %}"><img src="{% static 'image/notice.png' %}"></a>
         {% endif %}
+        <a href="{% url 'instagram:post' %}"><img src="{% static 'image/posting.png' %}"></a>
         {% if user_ == user or page_name == "profile" %}
         <a href="{% url 'instagram:user_detail' username=user.username %}"><img
                 src="{% static 'image/profile_black.png' %}"></a>

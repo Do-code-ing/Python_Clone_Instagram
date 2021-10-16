@@ -11,9 +11,11 @@
             <section class="wrapper">
                 <img src="{% static 'image/instagram.png' %}">
                 <h2>친구들의 사진과 동영상을 보려면 가입하세요.</h2>
-                {% for message in messages %}
-                {{ message.message }}
-                {% endfor %}
+                <div>
+                    {% for message in messages %}
+                    {{ message.message }}
+                    {% endfor %}
+                </div>
                 <form method="POST">
                     {% csrf_token %}
                     <input name="username" type="text" required placeholder="아이디">

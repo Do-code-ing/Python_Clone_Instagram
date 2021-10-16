@@ -22,6 +22,9 @@ def signup(request):
                 )
                 auth.login(request, user)
                 return redirect("instagram:index")
+            else:
+                messages.error(request, "비밀번호가 일치하지 않습니다.")
+                return render(request, "registration/signup.html")
     return render(request, "registration/signup.html")
 
 

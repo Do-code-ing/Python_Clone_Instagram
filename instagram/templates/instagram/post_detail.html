@@ -9,30 +9,30 @@
 <header>
     {% include 'base_header.html' %}
 </header>
+<main class="instagram-main">
+    {% if post.author == user %}
+    <a href="{% url 'instagram:update' pk=post.pk %}">Update</a>
+    <a href="{% url 'instagram:delete' pk=post.pk %}">Delete</a>
+    {% endif %}
 
-{% if post.author == user %}
-<a href="{% url 'instagram:update' pk=post.pk %}">Update</a>
-<a href="{% url 'instagram:delete' pk=post.pk %}">Delete</a>
-{% endif %}
-
-<a href="{% url 'instagram:user_detail' username=post.author %}">{{ post.author }}</a>
-{{ post.title }}
-{{ post.like_set.all|length }}
-<a href="{% url 'instagram:like' pk=post.pk %}">Like</a>
-<h2>Comments</h2>
-{% for comment in comments %}
-{{ comment.author }}
-{{ comment.text }}
-{{ comment.create_date }}
-{% if comment.author == user %}
-<a href="{% url 'instagram:comment_delete' pk=post.pk comment_pk=comment.pk %}">Delete</a>
-{% endif %}
-<br>
-{% endfor %}
-<form method="POST">
-    {% csrf_token %}
-    <input type="text" name="text">
-    <input type="submit" value="Comment">
-</form>
+    <a href="{% url 'instagram:user_detail' username=post.author %}">{{ post.author }}</a>
+    {{ post.like_set.all|length }}
+    <a href="{% url 'instagram:like' pk=post.pk %}">Like</a>
+    <h2>Comments</h2>
+    {% for comment in comments %}
+    {{ comment.author }}
+    {{ comment.text }}
+    {{ comment.create_date }}
+    {% if comment.author == user %}
+    <a href="{% url 'instagram:comment_delete' pk=post.pk comment_pk=comment.pk %}">Delete</a>
+    {% endif %}
+    <br>
+    {% endfor %}
+    <form action="{% url 'instagram:comment_create' pk=post.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="text">
+        <input type="submit" value="Comment">
+    </form>
+</main>
 
 {% endblock body %}

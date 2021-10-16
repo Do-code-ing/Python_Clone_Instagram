@@ -7,14 +7,15 @@ from .forms import *
 
 def index(request):
     if request.user.is_authenticated:
-        follow_posts = Post.objects.none()
+        posts = Post.objects.filter(
+            author=request.user).order_by("-create_date")
 
         for following in request.user.following.all():
-            follow_posts |= Post.objects.filter(
+            posts |= Post.objects.filter(
                 author=following.follower).order_by("-create_date")
 
         context = {
-            "follow_posts": follow_posts,
+            "posts": posts,
             "page_name": "index",
         }
 
@@ -26,18 +27,49 @@ def index(request):
 def post(request):
     if request.method == "POST":
         post = Post.objects.create(
-            title=request.POST["title"],
             author=request.user,
             main_image=request.FILES.get('main_image'),
-            content=request.POST["content"],
         )
         images = request.FILES.getlist('image')
         for image in images:
             Image.objects.create(post=post, image=image)
+
+        text = request.POST["text"]
+        comment = Comment.objects.create(
+            author=request.user, post=post, text=text)
+        tagging = False
+        tag = ""
+        for t in text:
+            if t == "#":
+                if tagging:
+                    tag = ""
+                tagging = True
+            elif t == " ":
+                tagging = False
+                try:
+                    hashtag = HashTag.objects.get(text=tag)
+                except:
+                    hashtag = HashTag.objects.create(text=tag)
+                finally:
+                    hashtag.comment.add(comment)
+                tag = ""
+            if tagging:
+                tag += t
+
+        if tag.startswith("#"):
+            try:
+                hashtag = HashTag.objects.get(text=tag)
+            except:
+                hashtag = HashTag.objects.create(text=tag)
+            finally:
+                hashtag.comment.add(comment)
+
         return redirect("instagram:index")
+
     context = {
         "post_form": PostForm,
         "image_form": ImageForm,
+        "comment_form": PostingCommentForm,
         "page_name": "profile",
     }
     return render(request, "instagram/post.html", context)
@@ -46,17 +78,34 @@ def post(request):
 def post_detail(request, pk):
     post = get_object_or_404(Post, id=pk)
     comments = Comment.objects.filter(post=post.id)
-    if request.method == "POST" and request.user.is_authenticated:
+    context = {
+        "post": post,
+        "comments": comments
+    }
+
+    for comment in comments:
+        print(comment)
+    return render(request, "instagram/post_detail.html", context)
+
+
+@login_required
+def comment_create(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    if request.method == "POST":
         Comment.objects.create(
             author=request.user,
             post=post,
             text=request.POST["text"]
         )
-    context = {
-        "post": post,
-        "comments": comments
-    }
-    return render(request, "instagram/post_detail.html", context)
+    return redirect("instagram:post_detail", pk=pk)
+
+
+@login_required
+def comment_delete(request, pk, comment_pk):
+    comment = get_object_or_404(Comment, id=comment_pk)
+    if request.user == comment.author:
+        comment.delete()
+    return redirect("instagram:post_detail", pk=pk)
 
 
 @login_required
@@ -69,14 +118,6 @@ def like(request, pk):
         Like.objects.create(user=request.user, post=post)
     finally:
         return redirect("instagram:post_detail", pk=pk)
-
-
-@login_required
-def comment_delete(request, pk, comment_pk):
-    comment = get_object_or_404(Comment, id=comment_pk)
-    if request.user == comment.author:
-        comment.delete()
-    return redirect("instagram:post_detail", pk=pk)
 
 
 def update(request, pk):

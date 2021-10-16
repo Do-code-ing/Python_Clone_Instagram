@@ -12,9 +12,8 @@ header {
 
 header article {
   grid-column: 2;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   padding-top: 0.4rem;
 }
 
@@ -38,11 +37,12 @@ input {
 
 input#search-input {
   text-align: center;
-  font-size: 1rem;
-  padding: 0.2rem;
+  font-size: 0.8rem;
+  padding: 0.4rem;
+  width: 10rem;
 }
 
-main#instagram-main {
+main.instagram-main {
   grid-column: 2;
   margin-top: 5rem;
 }
