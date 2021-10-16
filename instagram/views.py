@@ -157,12 +157,21 @@ def delete(request, pk):
 def search(request):
     if request.method == "POST":
         search_for = request.POST['search_for']
-        user_list = User.objects.filter(username__icontains=search_for)
-        post_list = Post.objects.filter(title__icontains=search_for)
+        if search_for.startswith("#"):
+            target = "hashtag"
+            search_result = []
+            hashtags = HashTag.objects.filter(text__icontains=search_for)
+            for tag in hashtags:
+                for comment in tag.comment.all():
+                    search_result.append(comment.post)
+        else:
+            target = "user"
+            search_result = User.objects.filter(username__icontains=search_for)
+
         context = {
             "search_for": search_for,
-            "user_list": user_list,
-            "post_list": post_list,
+            "search_result": search_result,
+            "target": target,
         }
         return render(request, "instagram/search.html", context)
     else:
