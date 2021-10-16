@@ -55,31 +55,68 @@ main #feed {
 aside {
   position: fixed;
   top: 10%;
-  right: 40%;
+  left: 60%;
 }
 
-.wrapper {
+.post-wrapper {
+  display: flex;
+  flex-direction: column;
   border: 0.1rem solid rgba(0, 0, 0, 0.12);
-  padding: 1.6rem 2rem;
-  text-align: center;
-  width: 30rem;
+  text-align: left;
+  width: 34rem;
   background-color: white;
+  color: darkslategray;
 }
 
-.wrapper h2 {
-  font-size: 1rem;
-  margin: 1rem;
-  color: lightslategray;
-  font-weight: bolder;
+.post-wrapper a {
+  text-decoration: unset;
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
-.wrapper span {
+.feed-post {
+  padding: 1rem;
   font-size: 0.9rem;
 }
 
-.wrapper a {
-  text-decoration: unset;
-  color: dodgerblue;
+.post-top {
+  display: grid;
+  grid-template-columns: 18fr 1fr;
+  height: 2rem;
+  align-items: center;
+}
+
+.post-top .post-user {
+  grid-column: 1;
+}
+
+.post-top .post-btn {
+  grid-column: 2;
+}
+
+.post-top .post-btn img {
+  width: 1.5rem;
+  height: auto;
+}
+
+.post-mid img {
+  width: 34rem;
+  height: auto;
+}
+
+.post-bot div {
+  display: block;
+  padding-bottom: 0.5rem;
+}
+
+.post-bot .post-like,
+.post-bot .comment-author {
+  font-weight: bold;
+}
+
+.post-bot .post-create-date {
+  font-size: 0.7rem;
+  color: silver;
 }
 
 #multiple-container {

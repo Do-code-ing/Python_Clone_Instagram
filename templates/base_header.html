@@ -4,7 +4,7 @@
             tabindex="0"></a>
     <form action="{% url 'instagram:search' %}" method="POST">
         {% csrf_token %}
-        <input type="text" name="search_for" placeholder="검색" required id="search-input">
+        <input type="text" name="search_for" placeholder="🔍 검색" required id="search-input">
     </form>
     <nav>
         {% if page_name == "index" %}
