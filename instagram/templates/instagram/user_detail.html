@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% include 'base_instagram.html' %}
+{% endblock head %}
 
 {% block body %}
+<header>
+    {% include 'base_header.html' %}
+</header>
 
 <div>
     {{ user_.username }}

@@ -151,3 +151,11 @@ def follow(request, username):
         Follow.objects.create(follower=follower, following=following)
     finally:
         return redirect("instagram:user_detail", username=username)
+
+
+def dm(request):
+    return render(request, "instagram/dm.html")
+
+
+def notice(request):
+    return render(request, "instagram/notice.html")

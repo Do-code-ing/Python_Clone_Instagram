@@ -10,19 +10,19 @@
         {% if page_name == "index" %}
         <a href="{% url 'instagram:index' %}"><img src="{% static 'image/home_black.png' %}"></a>
         {% else %}
-        <a href="{% url 'instagram:index' %}"></a><img src="{% static 'image/home.png' %}"></a>
+        <a href="{% url 'instagram:index' %}"><img src="{% static 'image/home.png' %}"></a>
         {% endif %}
         {% if request.path == "/instagram/dm/" %}
-        <a href="{% url 'instagram:index' %}"><img src="{% static 'image/dm_black.png' %}"></a>
+        <a href="{% url 'instagram:dm' %}"><img src="{% static 'image/dm_black.png' %}"></a>
         {% else %}
-        <a href="{% url 'instagram:index' %}"><img src="{% static 'image/dm.png' %}"></a>
+        <a href="{% url 'instagram:dm' %}"><img src="{% static 'image/dm.png' %}"></a>
         {% endif %}
         {% if request.path == "/instagram/notice/" %}
-        <a href="{% url 'instagram:index' %}"><img src="{% static 'image/notice_black.png' %}"></a>
+        <a href="{% url 'instagram:notice' %}"><img src="{% static 'image/notice_black.png' %}"></a>
         {% else %}
-        <a href="{% url 'instagram:index' %}"><img src="{% static 'image/notice.png' %}"></a>
+        <a href="{% url 'instagram:notice' %}"><img src="{% static 'image/notice.png' %}"></a>
         {% endif %}
-        {% if request.path == "/instagram/user_detail/user.username/" or page_name == "profile" %}
+        {% if user_ == user or page_name == "profile" %}
         <a href="{% url 'instagram:user_detail' username=user.username %}"><img
                 src="{% static 'image/profile_black.png' %}"></a>
         {% else %}
