@@ -81,8 +81,8 @@ aside {
 
 .post-top {
   display: grid;
-  grid-template-columns: 18fr 1fr;
-  height: 2rem;
+  grid-template-columns: 10fr 1fr;
+  height: 4rem;
   align-items: center;
 }
 
@@ -95,7 +95,9 @@ aside {
 }
 
 .post-top .post-btn img {
+  cursor: pointer;
   width: 1.5rem;
+  padding: 0.5rem;
   height: auto;
 }
 

@@ -20,8 +20,8 @@
         <article>
             {% for post in posts %}
             <section class="post-wrapper">
-                <section class="post-top feed-post">
-                    <div class="post-user">
+                <section class="post-top">
+                    <div class="post-user feed-post">
                         <a href="{% url 'instagram:user_detail' username=post.author %}">{{ post.author }}</a>
                     </div>
                     <div class="post-btn">
