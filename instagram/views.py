@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
 from .models import *
 from .forms import *
 
@@ -223,3 +224,18 @@ def profile_edit(request):
             user_image.save()
 
     return render(request, "instagram/profile_edit.html", context)
+
+
+@login_required
+def change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # 자동 재로그인
+            messages.success(request, "비밀번호 변경이 완료됐습니다.")
+        else:
+            messages.error(request, "기존 비밀번호와 새 비밀번호를 다시 확인해주세요.")
+
+    form = PasswordChangeForm(request.user)
+    return render(request, "instagram/change_password.html", {"form": form})

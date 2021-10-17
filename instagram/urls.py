@@ -18,5 +18,6 @@ urlpatterns = [
     path("user_detail/<str:username>/follow/", views.follow, name="follow"),
     path("dm/", views.dm, name="dm"),
     path("notice/", views.notice, name="notice"),
-    path("profile_edit/", views.profile_edit, name="profile_edit")
+    path("profile_edit/", views.profile_edit, name="profile_edit"),
+    path("change_password/", views.change_password, name="change_password")
 ]

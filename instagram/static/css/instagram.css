@@ -224,11 +224,30 @@ aside {
   display: grid;
   grid-template-columns: 1fr 3fr;
   background-color: white;
+  min-height: 40rem;
 }
 
 #profile-edit-left {
   grid-column: 1;
   border: 0.1rem solid rgba(0, 0, 0, 0.12);
+}
+
+#profile-edit-left li {
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border: 0.2rem solid white;
+}
+
+#profile-edit-left li:hover {
+  border-left: 0.2rem solid lightgray;
+}
+
+#profile-edit-left li:active {
+  opacity: 50%;
+}
+
+#profile-edit-left li.clicked {
+  border-left: 0.2rem solid black;
 }
 
 #profile-edit-right {
@@ -296,4 +315,71 @@ aside {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   font-size: 0.8rem;
+}
+
+#change-password-form {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+}
+
+#change-password-form p,
+#change-password-form #change-password-div {
+  position: relative;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#change-password-form #change-password-div {
+  margin-bottom: 2rem;
+}
+
+#change-password-form #change-password-div .image-box {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+#change-password-form p label,
+#change-password-form #change-password-div div {
+  position: absolute;
+  right: 75%;
+  padding: 0.7rem;
+  font-weight: bold;
+}
+
+#change-password-form p input[type="password"],
+#change-password-form #change-password-div h2 {
+  position: absolute;
+  left: 28%;
+  width: 25rem;
+  padding: 0.6rem;
+}
+
+#change-password-form p input[type="password"] {
+  border-radius: 0.6rem;
+}
+
+#change-password-form p input[type="password"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.05rem black;
+}
+
+#change-password-form #change-password-div h2 {
+  font-size: 1.5rem;
+}
+
+#change-password-submit {
+  position: absolute;
+  left: 28%;
+  background-color: dodgerblue;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bolder;
+  margin-top: 1rem;
+  border: none;
+  padding: 0.4rem;
+  cursor: pointer;
 }

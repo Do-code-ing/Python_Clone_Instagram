@@ -13,8 +13,10 @@
     <article class="wrapper" id="profile-edit-article">
         <section id="profile-edit-left">
             <ul>
-                <li>프로필 편집</li>
-                <li>비밀번호 변경</li>
+                <li class="clicked"><b>프로필 편집</b></li>
+                <a href="{% url 'instagram:change_password' %}">
+                    <li>비밀번호 변경</li>
+                </a>
             </ul>
         </section>
         <section id="profile-edit-right">
