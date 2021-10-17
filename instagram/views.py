@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from .models import *
 from .forms import *
+import json
 
 
 def index(request):
@@ -213,16 +214,27 @@ def notice(request):
 
 @login_required
 def profile_edit(request):
-    context = {
-        "user_image_form": UserImageForm
-    }
+    user_image_dict = {}
+    try:
+        user_image = UserImage.objects.get(user=request.user)
+        user_image_dict['url'] = user_image.image.url
+    except:
+        user_image = UserImage.objects.create(user=request.user)
+
     if request.method == "POST":
         image = request.FILES.get('image')
+        if "check" in request.POST:
+            user_image.image = "/profile.jpg"
+            user_image.save()
         if image:
-            user_image = UserImage.objects.get(user=request.user)
             user_image.image = image
             user_image.save()
+        user_image_dict['url'] = user_image.image.url
 
+    context = {
+        "user_image_form": UserImageForm,
+        "user_image": json.dumps(user_image_dict),
+    }
     return render(request, "instagram/profile_edit.html", context)
 
 

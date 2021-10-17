@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 class UserImage(models.Model):
     user = models.OneToOneField(
         User, related_name="user_image", on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="image", null=True, blank=True)
+    image = models.ImageField(
+        upload_to="image", null=True, blank=True, default="profile.jpg")
 
 
 class Post(models.Model):

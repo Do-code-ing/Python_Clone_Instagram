@@ -42,13 +42,18 @@ header article {
   padding-top: 0.4rem;
 }
 
-.instagram-image:active {
-  opacity: 30%;
+#header-two {
+  text-align: center;
 }
 
-article nav {
+#header-three {
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
+}
+
+.instagram-image:active {
+  opacity: 30%;
 }
 
 nav .nav-div {
@@ -128,7 +133,7 @@ input#search-input {
   text-align: center;
   font-size: 0.8rem;
   padding: 0.4rem;
-  width: 10rem;
+  width: 14rem;
 }
 
 main.instagram-main {
@@ -343,15 +348,14 @@ aside {
 }
 
 .profile-edit-form p label,
-.profile-edit-form .profile-edit-form-div div {
+.profile-edit-form .profile-edit-form-div .image-box {
   position: absolute;
   right: 75%;
-  padding: 0.7rem;
   font-weight: bold;
 }
 
 .profile-edit-form p input[type="password"],
-.profile-edit-form .profile-edit-form-div h2 {
+.profile-edit-form .profile-edit-form-div .profile-edit-username-div {
   position: absolute;
   left: 28%;
   width: 25rem;
@@ -381,5 +385,31 @@ aside {
   margin-top: 1rem;
   border: none;
   padding: 0.4rem;
+  cursor: pointer;
+}
+
+/* input file */
+.file-box {
+  color: dodgerblue;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.file-box label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0;
+}
+input[type="file"] {
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+#default-profile-image-btn {
   cursor: pointer;
 }
