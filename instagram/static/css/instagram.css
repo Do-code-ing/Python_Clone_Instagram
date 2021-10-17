@@ -375,7 +375,7 @@ aside {
   font-size: 1.5rem;
 }
 
-#profile-edit-submit {
+#profile-edit-form-submit {
   position: absolute;
   left: 28%;
   background-color: dodgerblue;
