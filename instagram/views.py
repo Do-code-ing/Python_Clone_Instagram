@@ -10,9 +10,9 @@ def index(request):
         posts = Post.objects.filter(
             author=request.user).order_by("-create_date")
 
-        for following in request.user.following.all():
+        for follower in request.user.follower.all():
             posts |= Post.objects.filter(
-                author=following.follower).order_by("-create_date")
+                author=follower.following).order_by("-create_date")
 
         context = {
             "posts": posts,
