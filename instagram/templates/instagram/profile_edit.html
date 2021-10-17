@@ -3,6 +3,7 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
+<script defer src="{% static 'js/profile_edit.js' %}"></script>
 {% endblock head %}
 
 {% block body %}
@@ -20,16 +21,18 @@
             </ul>
         </section>
         <section id="profile-edit-right">
-            <form method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data" class="profile-edit-form">
                 {% csrf_token %}
-                <div class="image-box">
-                    {% if user.user_image %}
-                    <img src="{{ user.user_image.image.url }}" class="profile-image">
-                    {% else %}
-                    <img src="{% static 'image/profile.jpg' %}" class="profile-image">
-                    {% endif %}
+                <div class="profile-edit-form-div">
+                    <div class="image-box">
+                        {% if user.user_image %}
+                        <img src="{{ user.user_image.image.url }}" class="profile-image" id="profile-image">
+                        {% else %}
+                        <img src="{% static 'image/profile.jpg' %}" class="profile-image" id="profile-image">
+                        {% endif %}
+                    </div>
+                    <h2 class="profile-edit-form-username">{{ user.username }}</h2>
                 </div>
-                {{ user.username }}
                 {{ user_image_form }}
                 <input type="submit" value="제출">
             </form>

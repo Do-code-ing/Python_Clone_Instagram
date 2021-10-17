@@ -3,6 +3,8 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
+<link rel="stylesheet" href="{% static 'css/post.css' %}">
+<script defer src="{% static 'js/post.js' %}"></script>
 {% endblock head %}
 
 {% block body %}
@@ -10,8 +12,6 @@
     {% include 'base_header.html' %}
 </header>
 
-<link rel="stylesheet" href="{% static 'css/post.css' %}">
-<script defer src="{% static 'js/post.js' %}"></script>
 <div class="wrapper">
     <div>
         <h1>글쓰기</h1>

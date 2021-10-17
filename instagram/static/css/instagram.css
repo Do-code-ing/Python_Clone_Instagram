@@ -317,14 +317,14 @@ aside {
   font-size: 0.8rem;
 }
 
-#change-password-form {
+.profile-edit-form {
   display: flex;
   flex-direction: column;
   padding: 2rem 0;
 }
 
-#change-password-form p,
-#change-password-form #change-password-div {
+.profile-edit-form p,
+.profile-edit-form .profile-edit-form-div {
   position: relative;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -333,45 +333,45 @@ aside {
   align-items: center;
 }
 
-#change-password-form #change-password-div {
+.profile-edit-form .profile-edit-form-div {
   margin-bottom: 2rem;
 }
 
-#change-password-form #change-password-div .image-box {
+.profile-edit-form .profile-edit-form-div .image-box {
   width: 2.5rem;
   height: 2.5rem;
 }
 
-#change-password-form p label,
-#change-password-form #change-password-div div {
+.profile-edit-form p label,
+.profile-edit-form .profile-edit-form-div div {
   position: absolute;
   right: 75%;
   padding: 0.7rem;
   font-weight: bold;
 }
 
-#change-password-form p input[type="password"],
-#change-password-form #change-password-div h2 {
+.profile-edit-form p input[type="password"],
+.profile-edit-form .profile-edit-form-div h2 {
   position: absolute;
   left: 28%;
   width: 25rem;
   padding: 0.6rem;
 }
 
-#change-password-form p input[type="password"] {
+.profile-edit-form p input[type="password"] {
   border-radius: 0.6rem;
 }
 
-#change-password-form p input[type="password"]:focus {
+.profile-edit-form p input[type="password"]:focus {
   outline: none;
   box-shadow: 0 0 0 0.05rem black;
 }
 
-#change-password-form #change-password-div h2 {
+.profile-edit-form .profile-edit-form-div h2 {
   font-size: 1.5rem;
 }
 
-#change-password-submit {
+#profile-edit-submit {
   position: absolute;
   left: 28%;
   background-color: dodgerblue;
