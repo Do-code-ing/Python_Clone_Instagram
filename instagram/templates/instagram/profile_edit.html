@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% include 'base_instagram.html' %}
+{% endblock head %}
+
+{% block body %}
+<header>
+    {% include 'base_header.html' %}
+</header>
+<main class="instagram-main">
+    <article class="wrapper" id="profile-edit-article">
+        <section id="profile-edit-left">
+            <ul>
+                <li>프로필 편집</li>
+                <li>비밀번호 변경</li>
+            </ul>
+        </section>
+        <section id="profile-edit-right">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="image-box">
+                    {% if user.user_image %}
+                    <img src="{{ user.user_image.image.url }}" class="profile-image">
+                    {% else %}
+                    <img src="{% static 'image/profile.jpg' %}" class="profile-image">
+                    {% endif %}
+                </div>
+                {{ user.username }}
+                {{ user_image_form }}
+                <input type="submit" value="제출">
+            </form>
+        </section>
+    </article>
+</main>
+{% endblock body %}

@@ -38,3 +38,13 @@ class PostingCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ["text"]
+
+
+class UserImageForm(forms.ModelForm):
+    image = forms.ImageField(
+        required=False,
+    )
+
+    class Meta:
+        model = Image
+        fields = ["image"]

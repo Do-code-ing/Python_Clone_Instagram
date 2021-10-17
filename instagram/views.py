@@ -185,8 +185,8 @@ def user_detail(request, username):
 
 @login_required
 def follow(request, username):
-    follower = get_object_or_404(User, username=username)
-    following = get_object_or_404(User, username=request.user.username)
+    follower = get_object_or_404(User, username=request.user.username)
+    following = get_object_or_404(User, username=username)
     if follower == following:   # 404 발생시키자
         messages.error(request, "자기 자신을 팔로우 할 수 없습니다.")
         return redirect("instagram:index")
@@ -200,9 +200,26 @@ def follow(request, username):
         return redirect("instagram:user_detail", username=username)
 
 
+@login_required
 def dm(request):
     return render(request, "instagram/dm.html")
 
 
+@login_required
 def notice(request):
     return render(request, "instagram/notice.html")
+
+
+@login_required
+def profile_edit(request):
+    context = {
+        "user_image_form": UserImageForm
+    }
+    if request.method == "POST":
+        image = request.FILES.get('image')
+        if image:
+            user_image = UserImage.objects.get(user=request.user)
+            user_image.image = image
+            user_image.save()
+
+    return render(request, "instagram/profile_edit.html", context)

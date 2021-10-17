@@ -5,6 +5,16 @@ a:visited {
   color: inherit;
 }
 
+b {
+  font-weight: bold;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 #feed a:hover {
   text-decoration: underline;
 }
@@ -41,9 +51,25 @@ article nav {
   flex-direction: row;
 }
 
-nav a img {
+nav .nav-div {
   margin-left: 1rem;
+}
+
+nav a img {
   width: 2rem;
+}
+
+.image-box {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 70%;
+  overflow: hidden;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 nav .nav-menu {
@@ -79,10 +105,15 @@ nav .nav-menu a:active {
   background-color: lightgray;
 }
 
+hr {
+  margin: 0;
+  border: 0;
+  height: 0.01rem;
+  background-color: lightgray;
+}
+
 nav .nav-menu hr {
   width: 10rem;
-  margin: 0;
-  border: 0.01rem solid lightgray;
 }
 
 input {
@@ -159,7 +190,7 @@ aside {
   height: auto;
 }
 
-.post-mid img {
+.post-image {
   width: 34rem;
   height: auto;
 }
@@ -186,4 +217,83 @@ aside {
 #multiple-container {
   display: flex;
   flex-direction: row;
+}
+
+/* profile-edit */
+#profile-edit-article {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  background-color: white;
+}
+
+#profile-edit-left {
+  grid-column: 1;
+  border: 0.1rem solid rgba(0, 0, 0, 0.12);
+}
+
+#profile-edit-right {
+  grid-column: 2;
+  border: 0.1rem solid rgba(0, 0, 0, 0.12);
+  border-left: none;
+}
+
+/* user-detail */
+#user-detail-top {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  padding: 2rem;
+  padding-top: 0;
+}
+
+#user-detail-top h2 {
+  font-size: 2rem;
+  font-weight: 100;
+}
+
+#user-detail-top .image-box {
+  width: 10rem;
+  height: 10rem;
+}
+
+#user-detail-top #user-detail-info-top {
+  gap: 1rem;
+}
+
+#user-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#user-detail-info #user-detail-info-bot {
+  gap: 1rem;
+}
+
+#user-detail-bot .post-image {
+  width: 18rem;
+  padding: 0.8rem;
+}
+
+.btn {
+  border: 0.1rem solid rgba(0, 0, 0, 0.12);
+  border-radius: 0.4rem;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.margin {
+  margin: 1rem;
+}
+
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#user-detail-bot #user-detail-nav {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  font-size: 0.8rem;
 }

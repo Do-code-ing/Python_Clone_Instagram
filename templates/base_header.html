@@ -1,43 +1,49 @@
 {% load static %}
 <article>
-    <a href="{% url 'instagram:index' %}"><img src="{% static 'image/instagram_small.png' %}" id="instagram-image"
+    <a href="{% url 'instagram:index' %}"><img src="{% static 'image/instagram_small.png' %}" class="instagram-image"
             tabindex="0"></a>
     <form action="{% url 'instagram:search' %}" method="POST">
         {% csrf_token %}
         <input type="text" name="search_for" placeholder="🔍검색" required id="search-input">
     </form>
     <nav>
-        <div class="instagram-image">
+        <div class="instagram-image nav-div">
             {% if page_name == "index" %}
             <a href="{% url 'instagram:index' %}"><img src="{% static 'image/home_black.png' %}"></a>
             {% else %}
             <a href="{% url 'instagram:index' %}"><img src="{% static 'image/home.png' %}"></a>
             {% endif %}
         </div>
-        <div class="instagram-image">
+        <div class="instagram-image nav-div">
             {% if request.path == "/instagram/dm/" %}
             <a href="{% url 'instagram:dm' %}"><img src="{% static 'image/dm_black.png' %}"></a>
             {% else %}
             <a href="{% url 'instagram:dm' %}"><img src="{% static 'image/dm.png' %}"></a>
             {% endif %}
         </div>
-        <div class="instagram-image">
+        <div class="instagram-image nav-div">
             {% if request.path == "/instagram/notice/" %}
             <a href="{% url 'instagram:notice' %}"><img src="{% static 'image/notice_black.png' %}"></a>
             {% else %}
             <a href="{% url 'instagram:notice' %}"><img src="{% static 'image/notice.png' %}"></a>
             {% endif %}
         </div>
-        <div class="instagram-image">
+        <div class="instagram-image nav-div">
             <a href="{% url 'instagram:post' %}"><img src="{% static 'image/posting.png' %}"></a>
         </div>
-        <div>
-            {% if user.userimage %}
-            <a href="{% url 'instagram:user_detail' username=user.username %}" id="nav-profile"><img
-                    src="{{ user.userimage.url }}"></a>
+        <div class="nav-div">
+            {% if user.user_image %}
+            <a href="{% url 'instagram:user_detail' username=user.username %}" id="nav-profile">
+                <div class="image-box">
+                    <img src="{{ user.user_image.image.url }}" class="profile-image">
+                </div>
+            </a>
             {% else %}
-            <a href="{% url 'instagram:user_detail' username=user.username %}" id="nav-profile"><img
-                    src="{% static 'image/profile.jpg' %}"></a>
+            <a href="{% url 'instagram:user_detail' username=user.username %}" id="nav-profile">
+                <div class="image-box">
+                    <img src="{% static 'image/profile.jpg' %}" class="profile-image">
+                </div>
+            </a>
             {% endif %}
             <ul class="nav-menu" id="nav-profile-menu">
                 <a href="{% url 'instagram:user_detail' username=user.username %}">

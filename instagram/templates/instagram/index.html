@@ -29,7 +29,8 @@
                     </div>
                 </section>
                 <section class="post-mid">
-                    <a href="{% url 'instagram:post_detail' pk=post.pk %}"><img src="{{ post.main_image.url }}"></a>
+                    <a href="{% url 'instagram:post_detail' pk=post.pk %}"><img src="{{ post.main_image.url }}"
+                            class="post-image"></a>
                 </section>
                 <section class="post-bot feed-post">
                     <div class="post-like">좋아요 {{ post.like_set.all|length }}개</div>
