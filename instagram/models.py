@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class UserImage(models.Model):
     user = models.OneToOneField(
         User, related_name="user_image", on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="image", null=True)
+    image = models.ImageField(upload_to="image", null=True, blank=True)
 
 
 class Post(models.Model):
@@ -42,8 +42,3 @@ class Comment(models.Model):
 class HashTag(models.Model):
     comment = models.ManyToManyField(Comment, blank=True)
     text = models.TextField(unique=True)
-
-
-class UserImage(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="image", null=True, blank=True)

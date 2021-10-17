@@ -82,9 +82,6 @@ def post_detail(request, pk):
         "post": post,
         "comments": comments
     }
-
-    for comment in comments:
-        print(comment)
     return render(request, "instagram/post_detail.html", context)
 
 
