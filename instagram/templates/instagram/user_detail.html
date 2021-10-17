@@ -9,30 +9,29 @@
 <header>
     {% include 'base_header.html' %}
 </header>
+<main class="instagram-main">
+    <div>
+        <a href="{% url 'registration:logout' %}">Logout</a>
+        {{ user_.username }}
+        <h2>Follower</h2>
+        {% for follower in user_.follower.all %}
+        {{ follower.following }}
+        <br>
+        {% endfor %}
+        <h2>Following</h2>
+        {% for following in user_.following.all %}
+        {{ following.follower }}
+        <br>
+        {% endfor %}
+    </div>
+    <a href="{% url 'instagram:follow' user_.username %}">Follow</a>
+    {% for post in user_.post_set.all %}
+    <a href="{% url 'instagram:post_detail' pk=post.pk %}">{{ post.title }}</a>
 
-<div>
-    {{ user_.username }}
-    <h2>Follower</h2>
-    {% for follower in user_.follower.all %}
-    {{ follower.following }}
+    <img src="{{ post.main_image.url }}">
     <br>
     {% endfor %}
-    <h2>Following</h2>
-    {% for following in user_.following.all %}
-    {{ following.follower }}
-    <br>
-    {% endfor %}
-</div>
+</main>
 
-
-<a href="{% url 'instagram:follow' user_.username %}">Follow</a>
-
-
-{% for post in user_.post_set.all %}
-<a href="{% url 'instagram:post_detail' pk=post.pk %}">{{ post.title }}</a>
-
-<img src="{{ post.main_image.url }}">
-<br>
-{% endfor %}
 
 {% endblock body %}

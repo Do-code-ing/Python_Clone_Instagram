@@ -35,8 +35,11 @@
                     <div class="post-like">좋아요 {{ post.like_set.all|length }}개</div>
                     <div>
                         {% for comment in post.comment_set.all|slice:":3" %}
-                        <span class="comment-author">{{ comment.author }}</span>
-                        <span class="comment-text">{{ comment.text }}</span>
+                        <div class="post-comment">
+                            <span class="comment-author"><a
+                                    href="{% url 'instagram:user_detail' username=comment.author %}">{{ comment.author }}</a></span>
+                            <span class="comment-text">{{ comment.text }}</span>
+                        </div>
                         {% endfor %}
                     </div>
                     <div class="post-create-date">{{ post.create_date }}</div>

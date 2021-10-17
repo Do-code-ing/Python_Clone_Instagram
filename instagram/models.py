@@ -42,3 +42,8 @@ class Comment(models.Model):
 class HashTag(models.Model):
     comment = models.ManyToManyField(Comment, blank=True)
     text = models.TextField(unique=True)
+
+
+class UserImage(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="image", null=True, blank=True)

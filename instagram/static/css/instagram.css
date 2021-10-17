@@ -1,3 +1,18 @@
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+#feed a:hover {
+  text-decoration: underline;
+}
+
+#feed a:active {
+  color: lightslategray;
+}
+
 header {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -17,14 +32,57 @@ header article {
   padding-top: 0.4rem;
 }
 
-#instagram-image:active,
-nav a img:active {
+.instagram-image:active {
   opacity: 30%;
+}
+
+article nav {
+  display: flex;
+  flex-direction: row;
 }
 
 nav a img {
   margin-left: 1rem;
   width: 2rem;
+}
+
+nav .nav-menu {
+  display: none;
+  flex-direction: column;
+  z-index: 100;
+  position: absolute;
+  border: 0.1rem solid rgba(0, 0, 0, 0.12);
+  border-radius: 0.3rem;
+  box-shadow: 0 0.1rem 1rem lightgray;
+  text-align: left;
+  background-color: white;
+  color: darkslategray;
+
+  width: 10rem;
+}
+
+nav .nav-menu li {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0.7rem;
+  font-size: 0.9rem;
+}
+
+nav .nav-menu li img {
+  width: 1rem;
+  margin: 0;
+}
+
+nav .nav-menu a:active {
+  background-color: lightgray;
+}
+
+nav .nav-menu hr {
+  width: 10rem;
+  margin: 0;
+  border: 0.01rem solid lightgray;
 }
 
 input {
@@ -108,12 +166,16 @@ aside {
 
 .post-bot div {
   display: block;
-  padding-bottom: 0.5rem;
+  padding: 0.3rem 0;
 }
 
 .post-bot .post-like,
 .post-bot .comment-author {
   font-weight: bold;
+}
+
+.post-bot .post-comment {
+  padding: 0.1rem 0;
 }
 
 .post-bot .post-create-date {
