@@ -24,10 +24,6 @@
             <form method="POST" enctype="multipart/form-data" class="profile-edit-form">
                 {% csrf_token %}
                 <div class="profile-edit-form-div">
-                    <script>
-                        const userImage = JSON.parse("{{ user_image | escapejs }}")
-                        console.log(userImage)
-                    </script>
                     <div class="image-box">
                         {% if user.user_image %}
                         <img src="{{ user.user_image.image.url }}" class="profile-image" id="profile-image">
@@ -38,7 +34,7 @@
                     <div class="profile-edit-username-div">
                         <h2 class="profile-edit-form-username">{{ user.username }}</h2>
                         <div class="file-box">
-                            {{ user_image_form }}
+                            {{ user_image_form }} | <a href="{% url 'instagram:change_profile_image' %}">초기화</a>
                         </div>
                     </div>
                 </div>

@@ -19,5 +19,7 @@ urlpatterns = [
     path("dm/", views.dm, name="dm"),
     path("notice/", views.notice, name="notice"),
     path("profile_edit/", views.profile_edit, name="profile_edit"),
-    path("change_password/", views.change_password, name="change_password")
+    path("profile_edit/change_profile_image",
+         views.change_profile_image, name="change_profile_image"),
+    path("change_password/", views.change_password, name="change_password"),
 ]
