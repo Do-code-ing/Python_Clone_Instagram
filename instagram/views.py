@@ -85,6 +85,15 @@ def post_detail(request, pk):
         "comments": comments,
         "comment_form": CommentForm,
     }
+
+    try:
+        liked = post.like_set.get(user=request.user)
+    except:
+        liked = None
+
+    if liked:
+        context["liked"] = True
+
     return render(request, "instagram/post_detail.html", context)
 
 

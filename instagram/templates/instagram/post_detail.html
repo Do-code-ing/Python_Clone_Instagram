@@ -50,7 +50,12 @@
                 <div class="border-light-top post-bot-top">
                     <div class="image-box">
                         <a href="{% url 'instagram:like' pk=post.pk %}">
-                            <img src="{% static 'image/notice.png' %}" alt="" class="profile-image"></a>
+                            {% if liked %}
+                            <img src="{% static 'image/notice_black.png' %}" alt="" class="profile-image">
+                            {% else %}
+                            <img src="{% static 'image/notice.png' %}" alt="" class="profile-image">
+                            {% endif %}
+                        </a>
                     </div>
                     <div class="post-like">좋아요 {{ post.like_set.all|length }}개</div>
                     <div class="post-create-date">{{ post.create_date }}</div>
