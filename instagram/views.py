@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
+from django.db.models import Count
 from .models import *
 from .forms import *
-import json
 
 
 def index(request):
@@ -12,9 +12,9 @@ def index(request):
         posts = Post.objects.filter(
             author=request.user).order_by("-create_date")
 
-        for follower in request.user.follower.all():
+        for following in request.user.following.all():
             posts |= Post.objects.filter(
-                author=follower.following).order_by("-create_date")
+                author=following.follower).order_by("-create_date")
 
         context = {
             "posts": posts,
@@ -152,26 +152,34 @@ def delete(request, pk):
     return redirect("instagram:index")
 
 
-@login_required
 def search(request):
     if request.method == "POST":
         search_for = request.POST['search_for']
-        if search_for.startswith("#"):
-            target = "hashtag"
-            search_result = []
-            hashtags = HashTag.objects.filter(text__icontains=search_for)
-            for tag in hashtags:
-                for comment in tag.comment.all():
-                    search_result.append(comment.post)
-        else:
-            target = "user"
-            search_result = User.objects.filter(username__icontains=search_for)
-
+        target = "tag only"
         context = {
             "search_for": search_for,
-            "search_result": search_result,
             "target": target,
         }
+
+        post_ids = []
+        hashtags = HashTag.objects.filter(text__icontains=search_for)
+        for tag in hashtags:
+            for comment in tag.comment.all():
+                post_ids.append(comment.post.pk)
+
+        tag_result = Post.objects.filter(id__in=post_ids)
+        tag_result_like = tag_result.order_by("-like")[:6]
+        tag_result_date = tag_result.order_by("-create_date")
+        context["tag_result_like"] = tag_result_like
+        context["tag_result_date"] = tag_result_date
+
+        if not search_for.startswith("#"):
+            user_result = User.objects.filter(username__icontains=search_for)
+            user_result = user_result.annotate(
+                count=Count("follower")).order_by("-count")
+            context["user_result"] = user_result
+            context["target"] = "both"
+
         return render(request, "instagram/search.html", context)
     else:
         return render(request, "instagram/search.html")
@@ -187,8 +195,8 @@ def user_detail(request, username):
 
 @login_required
 def follow(request, username):
-    follower = get_object_or_404(User, username=request.user.username)
-    following = get_object_or_404(User, username=username)
+    follower = get_object_or_404(User, username=username)
+    following = get_object_or_404(User, username=request.user.username)
     if follower == following:   # 404 발생시키자
         messages.error(request, "자기 자신을 팔로우 할 수 없습니다.")
         return redirect("instagram:index")

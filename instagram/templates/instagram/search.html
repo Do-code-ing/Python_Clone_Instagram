@@ -10,20 +10,48 @@
     {% include 'base_header.html' %}
 </header>
 <main class="instagram-main">
-    {% if request.method == "POST" %}
-    <h2>Search for {{ search_for }}</h2>
-    <h2>Search Result:</h2>
-    {% for item in search_result %}
-    {% if target == "hashtag" %}
-    <a href="{% url 'instagram:post_detail' pk=item.pk %}"><img src="{{ item.main_image.url }}"></a>
-    {% else %}
-    <a href="{% url 'instagram:user_detail' username=item.username %}">{{ item.username }}</a>
-    {% endif %}
-    <br>
-    {% empty %}
-    검색 결과 없음.
-    {% endfor %}
-    {% endif %}
+    <article id="search-result">
+        {% if request.method == "POST" %}
+        <section id="search-result-user">
+            {% if target == "both" %}
+            <h3>회원</h3>
+            {% for user_ in user_result %}
+            <div class="flex-row">
+                <div class="image-box">
+                    <a href="{% url 'instagram:user_detail' username=user_.username %}">
+                        {% if user_.user_image %}
+                        <img src="{{ user_.user_image.image.url }}" alt="" class="profile-image">
+                        {% else %}
+                        <img src="{% static 'image/profile.jpg' %}" class="profile-image">
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="search-result-user-div">
+                    <a href="{% url 'instagram:user_detail' username=user_.username %}"
+                        class="search-result-user">{{ user_.username }}</a>
+                    <p>팔로워 <b>{{ user_.follower.all|length }}</b></p>
+                    <a href="{% url 'instagram:follow' username=user_.username %}" class="a-btn">팔로우</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </section>
+        <section class="search-result-tag" id="search-result-tag-like">
+            <h3>인기 게시물</h3>
+            {% for post in tag_result_like %}
+            <a href="{% url 'instagram:post_detail' pk=post.pk %}"><img src="{{ post.main_image.url }}" alt=""
+                    class="post-image"></a>
+            {% endfor %}
+        </section>
+        <section class="search-result-tag" id="search-result-tag-date">
+            <h3>최신 게시물</h3>
+            {% for post in tag_result_date %}
+            <a href="{% url 'instagram:post_detail' pk=post.pk %}"><img src="{{ post.main_image.url }}" alt=""
+                    class="post-image"></a>
+            {% endfor %}
+        </section>
+        {% endif %}
+    </article>
 </main>
 
 {% endblock body %}
