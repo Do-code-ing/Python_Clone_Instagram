@@ -46,6 +46,18 @@ class PostingCommentForm(forms.ModelForm):
         fields = ["text"]
 
 
+class CommentForm(forms.ModelForm):
+    text = forms.CharField(
+        max_length=100,
+        label="",
+        widget=forms.TextInput(attrs={'placeholder': '댓글 달기'})
+    )
+
+    class Meta:
+        model = Comment
+        fields = ["text"]
+
+
 class UserImageForm(forms.ModelForm):
     image = forms.ImageField(
         required=False,

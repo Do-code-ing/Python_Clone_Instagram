@@ -22,7 +22,12 @@
             <section class="post-wrapper">
                 <section class="post-top">
                     <div class="post-user feed-post">
-                        <a href="{% url 'instagram:user_detail' username=post.author %}">{{ post.author }}</a>
+                        <div class="image-box">
+                            <a href="{% url 'instagram:user_detail' username=post.author %}">
+                                <img src="{{ post.author.user_image.image.url }}" alt="" class="profile-image"></a>
+                        </div>
+                        <a href="{% url 'instagram:user_detail' username=post.author %}"
+                            class="user-href">{{ post.author }}</a>
                     </div>
                     <div class="post-btn">
                         <img src="{% static 'image/horiz.png' %}">
@@ -38,7 +43,8 @@
                         {% for comment in post.comment_set.all|slice:":3" %}
                         <div class="post-comment">
                             <span class="comment-author"><a
-                                    href="{% url 'instagram:user_detail' username=comment.author %}">{{ comment.author }}</a></span>
+                                    href="{% url 'instagram:user_detail' username=comment.author %}"
+                                    class="user-href">{{ comment.author }}</a></span>
                             <span class="comment-text">{{ comment.text }}</span>
                         </div>
                         {% endfor %}

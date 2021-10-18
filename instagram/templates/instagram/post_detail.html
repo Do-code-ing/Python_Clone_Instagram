@@ -10,29 +10,60 @@
     {% include 'base_header.html' %}
 </header>
 <main class="instagram-main">
-    {% if post.author == user %}
-    <a href="{% url 'instagram:update' pk=post.pk %}">Update</a>
-    <a href="{% url 'instagram:delete' pk=post.pk %}">Delete</a>
-    {% endif %}
-
-    <a href="{% url 'instagram:user_detail' username=post.author %}">{{ post.author }}</a>
-    {{ post.like_set.all|length }}
-    <a href="{% url 'instagram:like' pk=post.pk %}">Like</a>
-    <h2>Comments</h2>
-    {% for comment in comments %}
-    {{ comment.author }}
-    {{ comment.text }}
-    {{ comment.create_date }}
-    {% if comment.author == user %}
-    <a href="{% url 'instagram:comment_delete' pk=post.pk comment_pk=comment.pk %}">Delete</a>
-    {% endif %}
-    <br>
-    {% endfor %}
-    <form action="{% url 'instagram:comment_create' pk=post.pk %}" method="POST">
-        {% csrf_token %}
-        <input type="text" name="text" required>
-        <input type="submit" value="Comment">
-    </form>
+    <article class="post-wrapper post-detail">
+        <section class="post-left">
+            <img src="{{ post.main_image.url }}" alt="" class="post-image">
+        </section>
+        <section class="post-right">
+            <section class="post-top">
+                <div class="post-user feed-post">
+                    <div class="image-box">
+                        <a href="{% url 'instagram:user_detail' username=post.author %}">
+                            <img src="{{ post.author.user_image.image.url }}" alt="" class="profile-image"></a>
+                    </div>
+                    <a href="{% url 'instagram:user_detail' username=post.author %}"
+                        class="user-href">{{ post.author }}</a>
+                </div>
+                <div class="post-btn">
+                    <img src="{% static 'image/horiz.png' %}">
+                </div>
+            </section>
+            <section class="post-mid border-light-top">
+                {% for comment in comments %}
+                <div class="post-user feed-post">
+                    <div class="image-box">
+                        <a href="{% url 'instagram:user_detail' username=comment.author %}">
+                            <img src="{{ comment.author.user_image.image.url }}" alt="" class="profile-image"></a>
+                    </div>
+                    <div class="comment-div">
+                        <div>
+                            <a href="{% url 'instagram:user_detail' username=comment.author %}"
+                                class="user-href">{{ comment.author }}</a>
+                            <span class="comment-text">{{ comment.text }}</span>
+                        </div>
+                        <div class="comment-create-date">{{ comment.create_date }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </section>
+            <section class="post-bot">
+                <div class="border-light-top post-bot-top">
+                    <div class="image-box">
+                        <a href="{% url 'instagram:like' pk=post.pk %}">
+                            <img src="{% static 'image/notice.png' %}" alt="" class="profile-image"></a>
+                    </div>
+                    <div class="post-like">좋아요 {{ post.like_set.all|length }}개</div>
+                    <div class="post-create-date">{{ post.create_date }}</div>
+                </div>
+                <form action="{% url 'instagram:comment_create' pk=post.pk %}" method="POST"
+                    class="post-bot-bot border-light-top">
+                    {% csrf_token %}
+                    {{ comment_form }}
+                    <input type="submit" value="게시">
+                </form>
+            </section>
+        </section>
+    </article>
 </main>
 
 {% endblock body %}

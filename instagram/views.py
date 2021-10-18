@@ -82,7 +82,8 @@ def post_detail(request, pk):
     comments = Comment.objects.filter(post=post.id)
     context = {
         "post": post,
-        "comments": comments
+        "comments": comments,
+        "comment_form": CommentForm,
     }
     return render(request, "instagram/post_detail.html", context)
 
