@@ -3,6 +3,7 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
+<script defer src="{% static 'js/toggle.js' %}"></script>
 {% endblock head %}
 
 {% block body %}
@@ -64,8 +65,16 @@
     {{ message.message }}
     {% endfor %}
 </aside>
-{% comment %} <div class="post-manage-view">
+{% comment %} <article class="post-manage-view">
     <div class="background-div"></div>
-</div> {% endcomment %}
+    <div class="post-manage-btns">
+        <button class="post-manage-unfollow"><b>팔로우 취소</b></button>
+        <button class="post-manage-gotopost">게시물로 이동</button>
+        <button class="post-manage-update"><b>수정</b></button>
+        <button class="post-manage-delete"><b>삭제</b></button>
+        <button class="post-manage-copylink">링크 복사</button>
+        <button class="post-manage-cancle">취소</button>
+    </div>
+</article> {% endcomment %}
 
 {% endblock body %}
