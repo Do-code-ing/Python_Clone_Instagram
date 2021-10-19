@@ -18,7 +18,7 @@
             {% for user_ in user_result %}
             <div class="flex-row">
                 <div class="image-box">
-                    <a href="{% url 'instagram:user_detail' username=user_.username %}">
+                    <a href="{% url 'instagram:profile' username=user_.username %}">
                         {% if user_.user_image %}
                         <img src="{{ user_.user_image.image.url }}" alt="" class="profile-image">
                         {% else %}
@@ -27,7 +27,7 @@
                     </a>
                 </div>
                 <div class="search-result-user-div">
-                    <a href="{% url 'instagram:user_detail' username=user_.username %}"
+                    <a href="{% url 'instagram:profile' username=user_.username %}"
                         class="search-result-user">{{ user_.username }}</a>
                     <p>팔로워 <b>{{ user_.follower.all|length }}</b></p>
                     <a href="{% url 'instagram:follow' username=user_.username %}" class="a-btn">팔로우</a>

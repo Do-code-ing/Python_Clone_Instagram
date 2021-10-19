@@ -203,7 +203,7 @@ def search(request):
         return render(request, "instagram/search.html")
 
 
-def user_detail(request, username):
+def profile(request, username):
     user_ = get_object_or_404(User, username=username)
     try:
         Follow.objects.get(follower=user_, following=request.user)
@@ -215,7 +215,7 @@ def user_detail(request, username):
         "user_": user_,
         "followed": followed,
     }
-    return render(request, "instagram/user_detail.html", context)
+    return render(request, "instagram/profile.html", context)
 
 
 @login_required
@@ -232,7 +232,7 @@ def follow(request, username):
     except:
         Follow.objects.create(follower=follower, following=following)
     finally:
-        return redirect("instagram:user_detail", username=username)
+        return redirect("instagram:profile", username=username)
 
 
 @login_required

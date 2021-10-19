@@ -28,11 +28,10 @@
             <section class="post-top">
                 <div class="post-user feed-post">
                     <div class="image-box">
-                        <a href="{% url 'instagram:user_detail' username=post.author %}">
+                        <a href="{% url 'instagram:profile' username=post.author %}">
                             <img src="{{ post.author.user_image.image.url }}" alt="" class="profile-image"></a>
                     </div>
-                    <a href="{% url 'instagram:user_detail' username=post.author %}"
-                        class="user-href">{{ post.author }}</a>
+                    <a href="{% url 'instagram:profile' username=post.author %}" class="user-href">{{ post.author }}</a>
                 </div>
                 <div class="post-btn">
                     <img src="{% static 'image/horiz.png' %}" data-id-one="{{ post.author }}"
@@ -43,12 +42,12 @@
                 {% for comment in comments %}
                 <div class="post-user feed-post">
                     <div class="image-box">
-                        <a href="{% url 'instagram:user_detail' username=comment.author %}">
+                        <a href="{% url 'instagram:profile' username=comment.author %}">
                             <img src="{{ comment.author.user_image.image.url }}" alt="" class="profile-image"></a>
                     </div>
                     <div class="comment-div">
                         <div>
-                            <a href="{% url 'instagram:user_detail' username=comment.author %}"
+                            <a href="{% url 'instagram:profile' username=comment.author %}"
                                 class="user-href">{{ comment.author }}</a>
                             <span class="comment-text">{{ comment.text }}</span>
                         </div>
