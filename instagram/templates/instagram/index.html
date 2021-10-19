@@ -3,7 +3,7 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
-<script defer src="{% static 'js/toggle.js' %}"></script>
+<script defer src="{% static 'js/toggle_index.js' %}"></script>
 <script defer>
     const user = "{{ user }}"
     const postURL = "{% url 'instagram:post_detail' pk='❤' %}"

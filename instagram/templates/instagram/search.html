@@ -12,8 +12,8 @@
 <main class="instagram-main">
     <article id="search-result">
         {% if request.method == "POST" %}
+        {% if target == "both" %}
         <section id="search-result-user">
-            {% if target == "both" %}
             <h3>회원</h3>
             {% for user_ in user_result %}
             <div class="flex-row">
@@ -34,8 +34,8 @@
                 </div>
             </div>
             {% endfor %}
-            {% endif %}
         </section>
+        {% endif %}
         <section class="search-result-tag" id="search-result-tag-like">
             <h3>인기 게시물</h3>
             {% for post in tag_result_like %}
