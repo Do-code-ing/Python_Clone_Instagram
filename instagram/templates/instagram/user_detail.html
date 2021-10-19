@@ -16,15 +16,20 @@
             <img src="{{ user_.user_image.image.url }}" class="profile-image">
         </div>
         {% else %}
-        <img src="{% static 'image/profile.jpg' %}">
+        <div class="image-box">
+            <img src="{% static 'image/profile.jpg' %}" class="profile-image">
+        </div>
         {% endif %}
         <div id="user-detail-info">
             <div class="flex-row" id="user-detail-info-top">
                 <h2>{{ user_.username }}</h2>
                 {% if user_ == user %}
                 <a href="{% url 'instagram:profile_edit' %}" class="btn">프로필 편집</a>
+                {% elif followed == "True" %}
+                <div id="unfollow-btn"><img src="{% static 'image/follow.png' %}" alt=""><img
+                        src="{% static 'image/check.png' %}" alt=""></div>
                 {% else %}
-                <a href="{% url 'instagram:follow' username=user_.username %}">팔로우</a>
+                <a href="{% url 'instagram:follow' username=user_.username %}" id="follow-btn"><b>팔로우</b></a>
                 {% endif %}
             </div>
             <div class="flex-row" id="user-detail-info-bot">

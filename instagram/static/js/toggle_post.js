@@ -9,7 +9,6 @@ if (toggleBtns) {
 
 function handleToggleBtnClick(event) {
   const postAuthor = event.target.dataset.idOne;
-  const postPk = event.target.dataset.idTwo;
 
   const postManageView = document.createElement("article");
   const backgroundDiv = document.createElement("div");
@@ -42,7 +41,7 @@ function handleToggleBtnClick(event) {
   });
 
   copyLinkBtn.addEventListener("click", (event) => {
-    const newURL = `${window.location.protocol}${window.location.host}${newPostURL}`;
+    const newURL = `${window.location.protocol}${window.location.host}${postURL}`;
     navigator.clipboard.writeText(newURL).then(() => {
       cancleBtn.click();
     });
@@ -60,14 +59,9 @@ function handleToggleBtnClick(event) {
     deleteA.click();
   });
 
-  const newPostURL = postURL.replace("%E2%9D%A4", postPk);
-  const newUpdateURL = updateURL.replace("%E2%9D%A4", postPk);
-  const newDeleteURL = deleteURL.replace("%E2%9D%A4", postPk);
-  const newFollowURL = followURL.replace("%E2%9D%A4", postAuthor);
-
-  updateA.href = newUpdateURL;
-  deleteA.href = newDeleteURL;
-  unFollowA.href = newFollowURL;
+  updateA.href = updateURL;
+  deleteA.href = deleteURL;
+  unFollowA.href = followURL;
 
   if (isFollowing === "True") {
     unFollowA.append("팔로우 취소");
@@ -90,6 +84,60 @@ function handleToggleBtnClick(event) {
     postManageBtns.appendChild(unFollowBtn);
   }
   postManageBtns.appendChild(copyLinkBtn);
+  postManageBtns.appendChild(cancleBtn);
+
+  postManageView.appendChild(backgroundDiv);
+  postManageView.appendChild(postManageBtns);
+
+  document.body.appendChild(postManageView);
+}
+
+// comment btn
+
+const toggleCommentBtns = document.getElementsByClassName("comment-btn");
+if (toggleCommentBtns) {
+  Array.from(toggleCommentBtns).forEach((toggleBtn) => {
+    toggleBtn.addEventListener("click", handleToggleCommentBtnClick);
+  });
+}
+
+function handleToggleCommentBtnClick(event) {
+  const commentPk = event.target.dataset.idOne;
+
+  const postManageView = document.createElement("article");
+  const backgroundDiv = document.createElement("div");
+  const postManageBtns = document.createElement("div");
+
+  const deleteBtn = document.createElement("button");
+  const deleteA = document.createElement("a");
+  const cancleBtn = document.createElement("button");
+
+  postManageView.className = "post-manage-view";
+  backgroundDiv.className = "background-div";
+  postManageBtns.className = "post-manage-btns";
+  deleteBtn.className = "post-manage-delete";
+  cancleBtn.className = "post-manage-cancle";
+
+  cancleBtn.addEventListener("click", (event) => {
+    postManageView.remove();
+  });
+
+  backgroundDiv.addEventListener("click", (event) => {
+    cancleBtn.click();
+  });
+
+  deleteBtn.addEventListener("click", (event) => {
+    deleteA.click();
+  });
+
+  const newCommentURL = commentURL.replace("%E2%9D%A4", commentPk);
+  deleteA.href = newCommentURL;
+
+  deleteA.append("삭제");
+  deleteBtn.append(deleteA);
+  cancleBtn.append("취소");
+
+  postManageBtns.appendChild(deleteBtn);
   postManageBtns.appendChild(cancleBtn);
 
   postManageView.appendChild(backgroundDiv);

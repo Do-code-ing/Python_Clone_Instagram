@@ -287,6 +287,7 @@ aside {
 }
 
 #user-detail-top #user-detail-info-top {
+  margin-top: 1rem;
   gap: 1rem;
 }
 
@@ -296,8 +297,35 @@ aside {
   gap: 1rem;
 }
 
+#follow-btn {
+  background-color: dodgerblue;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.3rem;
+  color: white;
+}
+
+#unfollow-btn {
+  padding: 0.2rem 1.5rem;
+  border: thin solid rgba(0, 0, 0, 0.12);
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+
+#unfollow-btn img:first-child {
+  width: 1.5rem;
+  height: auto;
+}
+
+#unfollow-btn img:last-child {
+  width: 1rem;
+  height: auto;
+}
+
 #user-detail-info #user-detail-info-bot {
-  gap: 1rem;
+  gap: 3rem;
 }
 
 .posts {
@@ -551,6 +579,16 @@ input[type="file"] {
   color: silver;
 }
 
+.comment-btn {
+  cursor: pointer;
+}
+
+.comment-btn img {
+  opacity: 70%;
+  width: 0.7rem;
+  height: auto;
+}
+
 .post-right .post-bot {
   position: absolute;
   width: inherit;
@@ -596,6 +634,7 @@ input[type="file"] {
 .post-bot .post-bot-bot input[type="submit"] {
   color: dodgerblue;
   font-weight: bold;
+  cursor: pointer;
 }
 
 /* post manage view */

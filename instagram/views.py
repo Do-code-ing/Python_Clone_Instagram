@@ -205,8 +205,15 @@ def search(request):
 
 def user_detail(request, username):
     user_ = get_object_or_404(User, username=username)
+    try:
+        Follow.objects.get(follower=user_, following=request.user)
+        followed = "True"
+    except:
+        followed = "False"
+
     context = {
-        "user_": user_
+        "user_": user_,
+        "followed": followed,
     }
     return render(request, "instagram/user_detail.html", context)
 

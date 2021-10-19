@@ -7,10 +7,11 @@
 <script defer>
     const user = "{{ user }}"
     const isFollowing = "{{ followed }}"
-    const postURL = "{% url 'instagram:post_detail' pk='❤' %}"
-    const updateURL = "{% url 'instagram:update' pk='❤' %}"
-    const deleteURL = "{% url 'instagram:delete' pk='❤' %}"
-    const followURL = "{% url 'instagram:follow' username='❤' %}"
+    const postURL = "{% url 'instagram:post_detail' pk=post.pk %}"
+    const updateURL = "{% url 'instagram:update' pk=post.pk %}"
+    const deleteURL = "{% url 'instagram:delete' pk=post.pk %}"
+    const followURL = "{% url 'instagram:follow' username=post.author %}"
+    const commentURL = "{% url 'instagram:comment_delete' pk=post.pk comment_pk='❤' %}"
 </script>
 {% endblock head %}
 
@@ -53,6 +54,11 @@
                         </div>
                         <div class="comment-create-date">
                             {{ comment.create_date }}
+                            {% if comment.author == user %}
+                            <span class="comment-btn">
+                                <img src="{% static 'image/horiz.png' %} " data-id-one="{{ comment.pk }}">
+                            </span>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
