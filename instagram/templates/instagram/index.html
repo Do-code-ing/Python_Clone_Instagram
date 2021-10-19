@@ -58,7 +58,8 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <div class="post-create-date">{{ post.create_date }}</div>
+                    <div class="post-create-date">
+                        {{ post.create_date }}{% if post.create_date != post.update_date %}(수정됨){% endif %}</div>
                 </section>
             </section>
             <br>
@@ -73,16 +74,5 @@
     {{ message.message }}
     {% endfor %}
 </aside>
-{% comment %} <article class="post-manage-view">
-    <div class="background-div"></div>
-    <div class="post-manage-btns">
-        <button class="post-manage-unfollow"><b>팔로우 취소</b></button>
-        <button class="post-manage-gotopost"><a href="">게시물로</a></button>
-        <button class="post-manage-update"><b>수정</b></button>
-        <button class="post-manage-delete"><b>삭제</b></button>
-        <button class="post-manage-copylink">링크 복사</button>
-        <button class="post-manage-cancle">취소</button>
-    </div>
-</article> {% endcomment %}
 
 {% endblock body %}

@@ -94,6 +94,14 @@ def post_detail(request, pk):
     if liked:
         context["liked"] = True
 
+    try:
+        Follow.objects.get(follower=post.author, following=request.user)
+        followed = "True"
+    except:
+        followed = "False"
+
+    context["followed"] = followed
+
     return render(request, "instagram/post_detail.html", context)
 
 

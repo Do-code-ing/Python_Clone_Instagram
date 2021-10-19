@@ -17,8 +17,6 @@ function handleToggleBtnClick(event) {
 
   const unFollowBtn = document.createElement("button");
   const unFollowA = document.createElement("a");
-  const goToPostBtn = document.createElement("button");
-  const goToPostA = document.createElement("a");
   const updateBtn = document.createElement("button");
   const updateA = document.createElement("a");
   const deleteBtn = document.createElement("button");
@@ -30,7 +28,6 @@ function handleToggleBtnClick(event) {
   backgroundDiv.className = "background-div";
   postManageBtns.className = "post-manage-btns";
   unFollowBtn.className = "post-manage-unfollow";
-  goToPostBtn.className = "post-manage-gotopost";
   updateBtn.className = "post-manage-update";
   deleteBtn.className = "post-manage-delete";
   copyLinkBtn.className = "post-manage-copylink";
@@ -55,10 +52,6 @@ function handleToggleBtnClick(event) {
     unFollowA.click();
   });
 
-  goToPostBtn.addEventListener("click", (event) => {
-    goToPostA.click();
-  });
-
   updateBtn.addEventListener("click", (event) => {
     updateA.click();
   });
@@ -72,15 +65,17 @@ function handleToggleBtnClick(event) {
   const newDeleteURL = deleteURL.replace("%E2%9D%A4", postPk);
   const newFollowURL = followURL.replace("%E2%9D%A4", postAuthor);
 
-  goToPostA.href = newPostURL;
   updateA.href = newUpdateURL;
   deleteA.href = newDeleteURL;
   unFollowA.href = newFollowURL;
 
-  unFollowA.append("팔로우 취소");
+  if (isFollowing === "True") {
+    unFollowA.append("팔로우 취소");
+  } else {
+    unFollowA.append("팔로우");
+    unFollowA.style.color = "green";
+  }
   unFollowBtn.append(unFollowA);
-  goToPostA.append("게시물로 이동");
-  goToPostBtn.append(goToPostA);
   updateA.append("수정");
   updateBtn.append(updateA);
   deleteA.append("삭제");
@@ -94,7 +89,6 @@ function handleToggleBtnClick(event) {
   } else {
     postManageBtns.appendChild(unFollowBtn);
   }
-  postManageBtns.appendChild(goToPostBtn);
   postManageBtns.appendChild(copyLinkBtn);
   postManageBtns.appendChild(cancleBtn);
 

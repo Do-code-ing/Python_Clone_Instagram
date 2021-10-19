@@ -3,6 +3,15 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
+<script defer src="{% static 'js/toggle_post.js' %}"></script>
+<script defer>
+    const user = "{{ user }}"
+    const isFollowing = "{{ followed }}"
+    const postURL = "{% url 'instagram:post_detail' pk='❤' %}"
+    const updateURL = "{% url 'instagram:update' pk='❤' %}"
+    const deleteURL = "{% url 'instagram:delete' pk='❤' %}"
+    const followURL = "{% url 'instagram:follow' username='❤' %}"
+</script>
 {% endblock head %}
 
 {% block body %}
@@ -25,10 +34,11 @@
                         class="user-href">{{ post.author }}</a>
                 </div>
                 <div class="post-btn">
-                    <img src="{% static 'image/horiz.png' %}">
+                    <img src="{% static 'image/horiz.png' %}" data-id-one="{{ post.author }}"
+                        data-id-two="{{ post.pk }}">
                 </div>
             </section>
-            <section class="post-mid border-light-top">
+            <section class=" post-mid border-light-top">
                 {% for comment in comments %}
                 <div class="post-user feed-post">
                     <div class="image-box">
@@ -41,7 +51,9 @@
                                 class="user-href">{{ comment.author }}</a>
                             <span class="comment-text">{{ comment.text }}</span>
                         </div>
-                        <div class="comment-create-date">{{ comment.create_date }}</div>
+                        <div class="comment-create-date">
+                            {{ comment.create_date }}
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
@@ -58,7 +70,8 @@
                         </a>
                     </div>
                     <div class="post-like">좋아요 {{ post.like_set.all|length }}개</div>
-                    <div class="post-create-date">{{ post.create_date }}</div>
+                    <div class="post-create-date">
+                        {{ post.create_date }}{% if post.create_date != post.update_date %}(수정됨){% endif %}</div>
                 </div>
                 <form action="{% url 'instagram:comment_create' pk=post.pk %}" method="POST"
                     class="post-bot-bot border-light-top">
