@@ -147,9 +147,11 @@ main #feed {
 }
 
 aside {
-  position: fixed;
-  top: 10%;
-  left: 60%;
+  position: sticky;
+  top: 12%;
+  right: 36%;
+  width: 10rem;
+  height: 10rem;
 }
 
 .post-wrapper {
@@ -587,4 +589,15 @@ input[type="file"] {
 .post-bot .post-bot-bot input[type="submit"] {
   color: dodgerblue;
   font-weight: bold;
+}
+
+/* post manage view */
+.post-manage-view {
+  position: absolute;
+}
+
+.post-manage-view .background-div {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.03);
 }
