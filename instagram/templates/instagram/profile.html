@@ -3,10 +3,10 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
-<script defer src="{% static 'js/toggle_profile.js' %}"></script>
+<script defer src="{% static 'js/toggle_follow.js' %}"></script>
 <script defer>
-    const user = "{{ user }}"
-    const followURL = "{% url 'instagram:follow' username='❤' %}"
+    const user = "{{ user }}";
+    const followURL = "{% url 'instagram:follow' username='❤' %}";
 </script>
 {% endblock head %}
 
@@ -31,10 +31,11 @@
                 {% if user_ == user %}
                 <a href="{% url 'instagram:profile_edit' %}" class="btn">프로필 편집</a>
                 {% elif followed == "True" %}
-                <div id="unfollow-btn"><img src="{% static 'image/follow.png' %}" alt=""><img
-                        src="{% static 'image/check.png' %}" alt=""></div>
+                <div class="unfollow-btn" data-id-one="{{ user_.username }}"><img src="{% static 'image/follow.png' %}"
+                        alt="" data-id-one="{{ user_.username }}"><img src="{% static 'image/check.png' %}" alt=""
+                        data-id-one="{{ user_.username }}"></div>
                 {% else %}
-                <a href="{% url 'instagram:follow' username=user_.username %}" id="follow-btn"><b>팔로우</b></a>
+                <a href="{% url 'instagram:follow' username=user_.username %}" class="follow-btn"><b>팔로우</b></a>
                 {% endif %}
             </div>
             <div class="flex-row" id="user-detail-info-bot">

@@ -5,13 +5,13 @@
 {% include 'base_instagram.html' %}
 <script defer src="{% static 'js/toggle_post.js' %}"></script>
 <script defer>
-    const user = "{{ user }}"
-    const isFollowing = "{{ followed }}"
-    const postURL = "{% url 'instagram:post_detail' pk=post.pk %}"
-    const updateURL = "{% url 'instagram:update' pk=post.pk %}"
-    const deleteURL = "{% url 'instagram:delete' pk=post.pk %}"
-    const followURL = "{% url 'instagram:follow' username=post.author %}"
-    const commentURL = "{% url 'instagram:comment_delete' pk=post.pk comment_pk='❤' %}"
+    const user = "{{ user }}";
+    const isFollowing = "{{ followed }}";
+    const postURL = "{% url 'instagram:post_detail' pk=post.pk %}";
+    const updateURL = "{% url 'instagram:update' pk=post.pk %}";
+    const deleteURL = "{% url 'instagram:delete' pk=post.pk %}";
+    const followURL = "{% url 'instagram:follow' username=post.author %}";
+    const commentURL = "{% url 'instagram:comment_delete' pk=post.pk comment_pk='❤' %}";
 </script>
 {% endblock head %}
 

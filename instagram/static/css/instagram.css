@@ -297,14 +297,14 @@ aside {
   gap: 1rem;
 }
 
-#follow-btn {
+.follow-btn b {
   background-color: dodgerblue;
-  padding: 0.5rem 1.5rem;
+  padding: 0.3rem 1.5rem;
   border-radius: 0.3rem;
   color: white;
 }
 
-#unfollow-btn {
+.unfollow-btn {
   padding: 0.2rem 1.5rem;
   border: thin solid rgba(0, 0, 0, 0.12);
   border-radius: 0.3rem;
@@ -314,12 +314,12 @@ aside {
   cursor: pointer;
 }
 
-#unfollow-btn img:first-child {
+.unfollow-btn img:first-child {
   width: 1.5rem;
   height: auto;
 }
 
-#unfollow-btn img:last-child {
+.unfollow-btn img:last-child {
   width: 1rem;
   height: auto;
 }
