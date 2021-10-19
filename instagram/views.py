@@ -195,6 +195,16 @@ def search(request):
             user_result = User.objects.filter(username__icontains=search_for)
             user_result = user_result.annotate(
                 count=Count("follower")).order_by("-count")
+
+            follow_result = []
+            for user_ in user_result:
+                try:
+                    Follow.objects.get(follower=user_, following=request.user)
+                    follow_result.append(user_)
+                except:
+                    continue
+
+            context["follow_result"] = follow_result
             context["user_result"] = user_result
             context["target"] = "both"
 

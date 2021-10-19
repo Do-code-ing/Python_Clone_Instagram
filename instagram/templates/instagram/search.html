@@ -3,6 +3,11 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
+<script defer src="{% static 'js/toggle_follow.js' %}"></script>
+<script defer>
+    const user = "{{ user }}";
+    const followURL = "{% url 'instagram:follow' username='❤' %}";
+</script>
 {% endblock head %}
 
 {% block body %}
@@ -27,10 +32,20 @@
                     </a>
                 </div>
                 <div class="search-result-user-div">
-                    <a href="{% url 'instagram:profile' username=user_.username %}"
-                        class="search-result-user">{{ user_.username }}</a>
-                    <p>팔로워 <b>{{ user_.follower.all|length }}</b></p>
-                    <a href="{% url 'instagram:follow' username=user_.username %}" class="a-btn">팔로우</a>
+                    <div>
+                        <a href="{% url 'instagram:profile' username=user_.username %}"
+                            class="search-result-user">{{ user_.username }}</a>
+                        <p>팔로워 <b>{{ user_.follower.all|length }}</b></p>
+                    </div>
+                    {% if user_ == user %}
+                    <a href="{% url 'instagram:profile_edit' %}" class="btn">프로필 편집</a>
+                    {% elif user_ in follow_result %}
+                    <div class="unfollow-btn" data-id-one="{{ user_.username }}"><img
+                            src="{% static 'image/follow.png' %}" alt="" data-id-one="{{ user_.username }}"><img
+                            src="{% static 'image/check.png' %}" alt="" data-id-one="{{ user_.username }}"></div>
+                    {% else %}
+                    <a href="{% url 'instagram:follow' username=user_.username %}" class="follow-btn"><b>팔로우</b></a>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
