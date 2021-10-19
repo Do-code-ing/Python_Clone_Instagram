@@ -8,13 +8,21 @@ if (toggleBtns) {
 }
 
 function handleToggleBtnClick(event) {
+  const postAuthor = event.target.dataset.idOne;
+  const postPk = event.target.dataset.idTwo;
+
   const postManageView = document.createElement("article");
   const backgroundDiv = document.createElement("div");
   const postManageBtns = document.createElement("div");
+
   const unFollowBtn = document.createElement("button");
+  const unFollowA = document.createElement("a");
   const goToPostBtn = document.createElement("button");
+  const goToPostA = document.createElement("a");
   const updateBtn = document.createElement("button");
+  const updateA = document.createElement("a");
   const deleteBtn = document.createElement("button");
+  const deleteA = document.createElement("a");
   const copyLinkBtn = document.createElement("button");
   const cancleBtn = document.createElement("button");
 
@@ -36,17 +44,56 @@ function handleToggleBtnClick(event) {
     cancleBtn.click();
   });
 
-  unFollowBtn.append("팔로우 취소");
-  goToPostBtn.append("게시물로 이동");
-  updateBtn.append("수정");
-  deleteBtn.append("삭제");
+  copyLinkBtn.addEventListener("click", (event) => {
+    const newURL = `${window.location.protocol}${window.location.host}${newPostURL}`;
+    navigator.clipboard.writeText(newURL).then(() => {
+      cancleBtn.click();
+    });
+  });
+
+  unFollowBtn.addEventListener("click", (event) => {
+    unFollowA.click();
+  });
+
+  goToPostBtn.addEventListener("click", (event) => {
+    goToPostA.click();
+  });
+
+  updateBtn.addEventListener("click", (event) => {
+    updateA.click();
+  });
+
+  deleteBtn.addEventListener("click", (event) => {
+    deleteA.click();
+  });
+
+  const newPostURL = postURL.replace("%E2%9D%A4", postPk);
+  const newUpdateURL = updateURL.replace("%E2%9D%A4", postPk);
+  const newDeleteURL = deleteURL.replace("%E2%9D%A4", postPk);
+  const newFollowURL = followURL.replace("%E2%9D%A4", postAuthor);
+  goToPostA.href = newPostURL;
+  updateA.href = newUpdateURL;
+  deleteA.href = newDeleteURL;
+  unFollowA.href = newFollowURL;
+
+  unFollowA.append("팔로우 취소");
+  unFollowBtn.append(unFollowA);
+  goToPostA.append("게시물로 이동");
+  goToPostBtn.append(goToPostA);
+  updateA.append("수정");
+  updateBtn.append(updateA);
+  deleteA.append("삭제");
+  deleteBtn.append(deleteA);
   copyLinkBtn.append("링크 복사");
   cancleBtn.append("취소");
 
-  postManageBtns.appendChild(unFollowBtn);
+  if (postAuthor === user) {
+    postManageBtns.appendChild(updateBtn);
+    postManageBtns.appendChild(deleteBtn);
+  } else {
+    postManageBtns.appendChild(unFollowBtn);
+  }
   postManageBtns.appendChild(goToPostBtn);
-  postManageBtns.appendChild(updateBtn);
-  postManageBtns.appendChild(deleteBtn);
   postManageBtns.appendChild(copyLinkBtn);
   postManageBtns.appendChild(cancleBtn);
 

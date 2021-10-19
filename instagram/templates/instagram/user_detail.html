@@ -44,11 +44,13 @@
                 <a>태그 됨</a>
             </nav>
         </article>
-        {% for post in user_.post_set.all %}
-        <a href="{% url 'instagram:post_detail' pk=post.pk %}">
-            <img src="{{ post.main_image.url }}" class="post-image">
-        </a>
-        {% endfor %}
+        <article class="posts">
+            {% for post in user_.post_set.all|dictsortreversed:"create_date" %}
+            <a href="{% url 'instagram:post_detail' pk=post.pk %}">
+                <img src="{{ post.main_image.url }}" class="post-image">
+            </a>
+            {% endfor %}
+        </article>
     </section>
 </main>
 

@@ -300,6 +300,12 @@ aside {
   gap: 1rem;
 }
 
+.posts {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 #user-detail-bot .post-image {
   width: 18rem;
   padding: 0.8rem;
