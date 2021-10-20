@@ -12,6 +12,7 @@ class UserImage(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     main_image = models.ImageField(upload_to="image", null=True)
+    main_comment = models.TextField(blank=True)
     create_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
 

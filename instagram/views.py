@@ -25,7 +25,7 @@ def index(request):
 
 
 @login_required
-def post_image(request):
+def post(request):
     if request.method == "POST":
         post = Post.objects.create(
             author=request.user,
@@ -35,13 +35,13 @@ def post_image(request):
         for image in images:
             Image.objects.create(post=post, image=image)
 
-        return redirect("instagram:post_comment", pk=post.pk)
+        return redirect("instagram:update", pk=post.pk)
 
     context = {
         "post_form": PostForm,
         "image_form": ImageForm,
     }
-    return render(request, "instagram/post_image.html", context)
+    return render(request, "instagram/post.html", context)
 
 
 def post_comment(request, pk):
@@ -83,6 +83,36 @@ def post_comment(request, pk):
         "comment_form": CommentForm,
     }
     return render(request, "instagram/post_comment.html", context)
+
+
+def update(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    try:
+        images = Image.objects.filter(post=post)
+    except:
+        images = None
+
+    if request.user == post.author:
+        if request.method == "POST":
+            post.main_comment = request.POST["main_comment"]
+            post.save()
+            return redirect("instagram:index")
+        else:
+            context = {
+                "post_comment_form": PostCommentForm(instance=post),
+            }
+            if images is not None:
+                context["images"] = images
+            return render(request, "instagram/update.html", context)
+    else:
+        return redirect("instagram:index")  # 에러 발생
+
+
+def delete(request, pk):
+    post = post = get_object_or_404(Post, id=pk)
+    if request.user == post.author:
+        post.delete()
+    return redirect("instagram:index")
 
 
 def post_detail(request, pk):
@@ -143,38 +173,6 @@ def like(request, pk):
         Like.objects.create(user=request.user, post=post)
     finally:
         return redirect("instagram:post_detail", pk=pk)
-
-
-def update(request, pk):
-    post = get_object_or_404(Post, id=pk)
-    images = None
-    try:
-        images = Image.objects.filter(post=post)
-    except:
-        pass
-
-    if request.user == post.author:
-        if request.method == "POST":
-            post.title = request.POST["title"]
-            post.content = request.POST["content"]
-            post.save()
-            return redirect("instagram:index")
-        else:
-            context = {
-                "post_form": PostForm(instance=post),
-            }
-            if images is not None:
-                context["images"] = images
-            return render(request, "instagram/update.html", context)
-    else:
-        return redirect("instagram:index")
-
-
-def delete(request, pk):
-    post = post = get_object_or_404(Post, id=pk)
-    if request.user == post.author:
-        post.delete()
-    return redirect("instagram:index")
 
 
 def search(request):

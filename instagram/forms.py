@@ -8,7 +8,6 @@ from django.utils.translation import gettext, gettext_lazy as _
 class PostForm(forms.ModelForm):
     main_image = forms.ImageField(
         label="",
-        label_suffix="",
     )
 
     field_order = [
@@ -23,7 +22,6 @@ class PostForm(forms.ModelForm):
 class ImageForm(forms.ModelForm):
     image = forms.ImageField(
         label="",
-        label_suffix="",
         required=False,
         widget=forms.ClearableFileInput(attrs={'multiple': True}),
     )
@@ -33,17 +31,17 @@ class ImageForm(forms.ModelForm):
         fields = ["image"]
 
 
-class PostingCommentForm(forms.ModelForm):
-    text = forms.CharField(
+class PostCommentForm(forms.ModelForm):
+    main_comment = forms.CharField(
         max_length=100,
-        label="내용",
-        label_suffix="",
+        label="",
         required=False,
+        widget=forms.TextInput(attrs={'placeholder': '내용을 입력하세요.'})
     )
 
     class Meta:
-        model = Comment
-        fields = ["text"]
+        model = Post
+        fields = ["main_comment"]
 
 
 class CommentForm(forms.ModelForm):

@@ -4,8 +4,7 @@ from . import views
 app_name = "instagram"
 urlpatterns = [
     path("", views.index, name="index"),
-    path("post_image/", views.post_image, name="post_image"),
-    path("post_comment/", views.post_comment, name="post_comment"),
+    path("post/", views.post, name="post"),
     path("update/<pk>/", views.update, name="update"),
     path("delete/<pk>/", views.delete, name="delete"),
     path("post_detail/<pk>/", views.post_detail, name="post_detail"),

@@ -3,28 +3,38 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
+<script defer src="{% static 'js/post.js' %}"></script>
 {% endblock head %}
 
 {% block body %}
 <header>
     {% include 'base_header.html' %}
 </header>
-
-<link rel="stylesheet" href="{% static 'css/post.css' %}">
-<div class="wrapper">
-    <div>
-        <h1>수정하기</h1>
-        {{ error }}
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% for image in images %}
-            <img src="{{ image.image.url }}">
-            {% endfor %}
-            <table>
-                {{ post_form.as_table }}
-            </table>
-            <input type="submit" value="Update">
-        </form>
+<main class="instagram-main">
+    <div class="post-update">
+        <p id="post-update-top-left">
+            <span>
+                <b>이미지 미리보기</b>
+            </span>
+        </p>
+        <p id="post-update-top-right">
+            <span>
+                <b>내용</b>
+            </span>
+            <button id="submit-btn">다음</button>
+        </p>
+        <div class="slide-image" id="post-update-bot-left">
+            <div id="prev-btn">◀</div>
+            <div id="next-btn">▶</div>
+            <div id="multiple-container"><img src="{% static 'image/dummy_image.jpg' %}" class="post-image"></div>
+        </div>
+        <div id="post-update-bot-right">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ post_comment_form }}
+                <input type="submit" id="real-submit-btn" hidden>
+            </form>
+        </div>
     </div>
-</div>
+</main>
 {% endblock body %}

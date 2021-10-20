@@ -31,7 +31,7 @@
             <div id="next-btn">▶</div>
             <div id="multiple-container"><img src="{% static 'image/dummy_image.jpg' %}" class="post-image"></div>
         </div>
-        <div id="empty-div">
+        <div class="empty-div">
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ post_form }}
