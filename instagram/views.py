@@ -100,6 +100,7 @@ def update(request, pk):
         else:
             context = {
                 "post_comment_form": PostCommentForm(instance=post),
+                "post": post
             }
             if images is not None:
                 context["images"] = images

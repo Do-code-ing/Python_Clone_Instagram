@@ -799,13 +799,6 @@ input[type="file"] {
   scroll-behavior: smooth;
 }
 
-#multiple-dummy-div {
-  position: absolute;
-  cursor: pointer;
-  width: 34rem;
-  height: 34rem;
-}
-
 .empty-div {
   height: 4rem;
   border-right: thin solid rgba(0, 0, 0, 0.07);

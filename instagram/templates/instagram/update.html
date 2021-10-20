@@ -3,7 +3,7 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
-<script defer src="{% static 'js/post.js' %}"></script>
+<script defer src="{% static 'js/update.js' %}"></script>
 {% endblock head %}
 
 {% block body %}
@@ -23,10 +23,19 @@
             </span>
             <button id="submit-btn">다음</button>
         </p>
-        <div class="slide-image" id="post-update-bot-left">
+        <div class="slide-image" id="post-update-bot-left" data-id="{{ images|length }}">
             <div id="prev-btn">◀</div>
             <div id="next-btn">▶</div>
-            <div id="multiple-container"><img src="{% static 'image/dummy_image.jpg' %}" class="post-image"></div>
+            <div id="multiple-container">
+                <div>
+                    <img src="{{ post.main_image.url }}" alt="" class="post-image">
+                </div>
+                {% for image in images %}
+                <div>
+                    <img src="{{ image.image.url }}" alt="" class="post-image">
+                </div>
+                {% endfor %}
+            </div>
         </div>
         <div id="post-update-bot-right">
             <form method="POST" enctype="multipart/form-data">
