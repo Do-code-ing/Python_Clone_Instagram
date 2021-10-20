@@ -743,7 +743,6 @@ input[type="file"] {
   grid-column: 1;
   grid-row: 2;
   border: thin solid rgba(0, 0, 0, 0.12);
-  border-bottom: none;
   border-left: none;
   width: 34rem;
   height: 34rem;
@@ -793,7 +792,9 @@ input[type="file"] {
   flex-direction: row;
   width: 34rem;
   height: 34rem;
-  border-top: thin solid rgba(0, 0, 0, 0.12);
+  border: thin solid rgba(0, 0, 0, 0.12);
+  border-left: none;
+  border-right: none;
   overflow: hidden;
   scroll-behavior: smooth;
 }
@@ -803,4 +804,9 @@ input[type="file"] {
   cursor: pointer;
   width: 34rem;
   height: 34rem;
+}
+
+#empty-div {
+  height: 4rem;
+  border-right: thin solid rgba(0, 0, 0, 0.12);
 }

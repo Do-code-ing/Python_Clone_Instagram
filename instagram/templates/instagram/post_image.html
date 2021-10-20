@@ -31,12 +31,14 @@
             <div id="next-btn">▶</div>
             <div id="multiple-container"><img src="{% static 'image/dummy_image.jpg' %}" class="post-image"></div>
         </div>
-        <form method="POST" enctype="multipart/form-data" hidden>
-            {% csrf_token %}
-            {{ post_form }}
-            {{ image_form }}
-            <input type="submit" value="Upload">
-        </form>
+        <div id="empty-div">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ post_form }}
+                {{ image_form }}
+                <input type="submit" id="real-submit-btn" hidden>
+            </form>
+        </div>
     </div>
 </main>
 {% endblock body %}

@@ -22,7 +22,7 @@ class PostForm(forms.ModelForm):
 
 class ImageForm(forms.ModelForm):
     image = forms.ImageField(
-        label="사진 추가",
+        label="",
         label_suffix="",
         required=False,
         widget=forms.ClearableFileInput(attrs={'multiple': True}),

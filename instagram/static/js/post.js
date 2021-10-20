@@ -1,5 +1,14 @@
 "use strict";
 
+const submitBtn = document.getElementById("submit-btn");
+const realSubmitBtn = document.getElementById("real-submit-btn");
+
+if (submitBtn) {
+  submitBtn.addEventListener("click", (event) => {
+    realSubmitBtn.click();
+  });
+}
+
 const mainImage = document.getElementById("id_main_image");
 const mainImageBtn = document.getElementById("main-image-btn");
 const dummyImage = document.getElementById("dummy-image");
