@@ -18,7 +18,6 @@ def index(request):
 
         context = {
             "posts": posts,
-            "page_name": "index",
         }
 
         return render(request, "instagram/index.html", context)
@@ -26,7 +25,7 @@ def index(request):
 
 
 @login_required
-def post(request):
+def post_image(request):
     if request.method == "POST":
         post = Post.objects.create(
             author=request.user,
@@ -36,6 +35,18 @@ def post(request):
         for image in images:
             Image.objects.create(post=post, image=image)
 
+        return redirect("instagram:post_comment", pk=post.pk)
+
+    context = {
+        "post_form": PostForm,
+        "image_form": ImageForm,
+    }
+    return render(request, "instagram/post_image.html", context)
+
+
+def post_comment(request, pk):
+    if request.method == "POST":
+        post = get_object_or_404(Post, id=pk)
         text = request.POST["text"]
         comment = Comment.objects.create(
             author=request.user, post=post, text=text)
@@ -69,12 +80,9 @@ def post(request):
         return redirect("instagram:index")
 
     context = {
-        "post_form": PostForm,
-        "image_form": ImageForm,
-        "comment_form": PostingCommentForm,
-        "page_name": "profile",
+        "comment_form": CommentForm,
     }
-    return render(request, "instagram/post.html", context)
+    return render(request, "instagram/post_comment.html", context)
 
 
 def post_detail(request, pk):
@@ -154,7 +162,6 @@ def update(request, pk):
         else:
             context = {
                 "post_form": PostForm(instance=post),
-                "page_name": "profile",
             }
             if images is not None:
                 context["images"] = images

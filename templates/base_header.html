@@ -1,14 +1,14 @@
 {% load static %}
 <article>
-    <a href="{% url 'instagram:index' %}" id="header-one"><img src="{% static 'image/instagram_small.png' %}"
-            class="instagram-image" tabindex="0"></a>
+    <a href="{% url 'instagram:index' %}" id="header-one" class="instagram-image"><img
+            src="{% static 'image/instagram_small.png' %}" tabindex="0"></a>
     <form action="{% url 'instagram:search' %}" method="POST" id="header-two">
         {% csrf_token %}
         <input type="search" name="search_for" placeholder="🔍검색" required id="search-input">
     </form>
     <nav id="header-three">
         <div class="instagram-image nav-div">
-            {% if page_name == "index" %}
+            {% if request.path == "/instagram/" %}
             <a href="{% url 'instagram:index' %}"><img src="{% static 'image/home_black.png' %}"></a>
             {% else %}
             <a href="{% url 'instagram:index' %}"><img src="{% static 'image/home.png' %}"></a>
@@ -29,7 +29,7 @@
             {% endif %}
         </div>
         <div class="instagram-image nav-div">
-            <a href="{% url 'instagram:post' %}"><img src="{% static 'image/posting.png' %}"></a>
+            <a href="{% url 'instagram:post_image' %}"><img src="{% static 'image/posting.png' %}"></a>
         </div>
         <div class="nav-div">
             {% if user.user_image %}

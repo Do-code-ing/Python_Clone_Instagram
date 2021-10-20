@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% include 'base_instagram.html' %}
+<script defer src="{% static 'js/post.js' %}"></script>
+{% endblock head %}
+
+{% block body %}
+<header>
+    {% include 'base_header.html' %}
+</header>
+<main class="instagram-main">
+    <div class="post-create">
+        <p id="post-create-top-left">
+            <span>
+                <b>메인 사진</b><button id="main-image-btn">+</button>
+            </span>
+        </p>
+        <p id="post-create-top-right">
+            <span>
+                <b>사진 추가</b><button id="sub-image-btn">+</button>
+            </span>
+            <button id="submit-btn">다음</button>
+        </p>
+        <div id="main-image-div">
+            <img src="{% static 'image/dummy_image.jpg' %}" class="post-image" id="dummy-image">
+        </div>
+        <div class="slide-image" id="sub-image-div">
+            <div id="prev-btn">◀</div>
+            <div id="next-btn">▶</div>
+            <div id="multiple-container"><img src="{% static 'image/dummy_image.jpg' %}" class="post-image"></div>
+        </div>
+        <form method="POST" enctype="multipart/form-data" hidden>
+            {% csrf_token %}
+            {{ post_form }}
+            {{ image_form }}
+            <input type="submit" value="Upload">
+        </form>
+    </div>
+</main>
+{% endblock body %}

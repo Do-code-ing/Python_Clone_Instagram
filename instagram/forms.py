@@ -7,7 +7,7 @@ from django.utils.translation import gettext, gettext_lazy as _
 
 class PostForm(forms.ModelForm):
     main_image = forms.ImageField(
-        label="메인 사진",
+        label="",
         label_suffix="",
     )
 
