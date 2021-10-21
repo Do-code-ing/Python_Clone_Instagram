@@ -23,11 +23,10 @@ const searchHref = document.getElementById("search-href");
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   let value = searchInput.value;
-  if (value[0] == "#") {
-    value = "%23" + value.slice(1);
-  } else if (value[0] == "!") {
-    value = "%21" + value.slice(1);
-  }
+  console.log(value);
+  value = value.replace(/#/gi, "%23");
+  value = value.replace(/\?/g, "%3F");
+  console.log(value);
   searchHref.href = searchURL.replace("%E2%9D%A4", value);
   searchHref.click();
 });

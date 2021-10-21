@@ -225,13 +225,12 @@ def like(request, pk):
 
 
 def search(request, search_for):
-    print(request.method)
     target = "tag only"
     context = {
         "search_for": search_for,
         "target": target,
     }
-
+    print(search_for)
     if not search_for.startswith("#"):
         user_result = User.objects.filter(username__icontains=search_for)
         user_result = user_result.annotate(
