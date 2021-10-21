@@ -39,6 +39,30 @@
                 </div>
             </section>
             <section class="post-mid border-light-top">
+                {% if post.main_comment %}
+                <div class="post-user feed-post">
+                    <div class="image-box">
+                        <a href="{% url 'instagram:profile' username=post.author %}">
+                            <img src="{{ post.author.user_image.image.url }}" alt="" class="profile-image"></a>
+                    </div>
+                    <div class="comment-div">
+                        <div>
+                            <a href="{% url 'instagram:profile' username=post.author %}"
+                                class="user-href">{{ post.author }}</a>
+                            <span class="comment-text">{{ post.main_comment }}
+                                <div>
+                                    {% for tag in post.posttag_set.all %}
+                                    <a href="{% url 'instagram:search' %}?search_for={{ tag.text }}"
+                                        class="hash-tag-href">{{ tag.text }}</a>{% endfor %}
+                                </div>
+                            </span>
+                        </div>
+                        <div class="comment-create-date">
+                            {{ post.create_date }}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
                 {% for comment in comments %}
                 <div class="post-user feed-post">
                     <div class="image-box">

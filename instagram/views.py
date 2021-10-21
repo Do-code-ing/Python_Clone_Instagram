@@ -42,7 +42,7 @@ def text_to_hashtag(texts):
             else:
                 comments.append(temp)
 
-        if comments[-1] != ["\n"]:
+        if comments and comments[-1] != ["\n"]:
             comments.append(["\n"])
 
     return tags, comments
@@ -100,8 +100,7 @@ def update(request, pk):
             text = request.POST["main_comment"]
             tags, comments = text_to_hashtag(text)
             result = []
-            print(comments)
-            print(tags)
+
             for comment in comments:
                 if comment:
                     result.append("".join(comment))

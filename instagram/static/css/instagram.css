@@ -886,11 +886,11 @@ input[type="file"] {
   overflow-y: scroll;
 }
 
-#post-tag-div a {
-  color: dodgerblue;
+.hash-tag-href {
+  color: dodgerblue !important;
   font-size: 0.9rem;
 }
 
-#post-tag-div a:hover {
+.hash-tag-href:hover {
   text-decoration: underline;
 }
