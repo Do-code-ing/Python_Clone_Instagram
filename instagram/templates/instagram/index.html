@@ -49,13 +49,48 @@
                 <section class="post-bot feed-post">
                     <div class="post-like">좋아요 {{ post.like_set.all|length }}개</div>
                     <div>
-                        {% for comment in post.comment_set.all|slice:":3" %}
+                        {% if post.main_comment %}
                         <div class="post-comment">
-                            <span class="comment-author"><a href="{% url 'instagram:profile' username=comment.author %}"
-                                    class="user-href">{{ comment.author }}</a></span>
-                            <span class="comment-text">{{ comment.text }}</span>
+                            <span class="comment-author">
+                                <a href="{% url 'instagram:profile' username=post.author %}"
+                                    class="user-href">{{ post.author }}</a>
+                            </span>
+                            <span class="comment-text">{{ post.main_comment }}
+                                {% for tag in post.posttag_set.all %}
+                                <a href="{% url 'instagram:search' %}?search_for={{ tag.text }}"
+                                    class="hash-tag-href">{{ tag.text }}</a>{% endfor %}
+                            </span>
+                        </div>
+                        {% for comment in post.comment_set.all|slice:":2" %}
+                        <div class="post-comment">
+                            <span class="comment-author">
+                                <a href="{% url 'instagram:profile' username=comment.author %}"
+                                    class="user-href">{{ comment.author }}</a>
+                            </span>
+                            <span class="comment-text">
+                                {{ comment.text }}
+                                {% for tag in comment.hashtag_set.all %}
+                                <a href="{% url 'instagram:search' %}?search_for={{ tag.text }}"
+                                    class="hash-tag-href">{{ tag.text }}</a>{% endfor %}
+                            </span>
                         </div>
                         {% endfor %}
+                        {% else %}
+                        {% for comment in post.comment_set.all|slice:":3" %}
+                        <div class="post-comment">
+                            <span class="comment-author">
+                                <a href="{% url 'instagram:profile' username=comment.author %}"
+                                    class="user-href">{{ comment.author }}</a>
+                            </span>
+                            <span class="comment-text">
+                                {{ comment.text }}
+                                {% for tag in comment.hashtag_set.all %}
+                                <a href="{% url 'instagram:search' %}?search_for={{ tag.text }}"
+                                    class="hash-tag-href">{{ tag.text }}</a>{% endfor %}
+                            </span>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="post-create-date">
                         {{ post.create_date }}{% if post.create_date != post.update_date %}(수정됨){% endif %}</div>
