@@ -15,7 +15,7 @@
     {% include 'base_header.html' %}
 </header>
 <main class="instagram-main">
-    <section id="user-detail-top">
+    <section id="profile-top">
         {% if user_.user_image %}
         <div class="image-box">
             <img src="{{ user_.user_image.image.url }}" class="profile-image">
@@ -25,8 +25,8 @@
             <img src="{% static 'image/profile.jpg' %}" class="profile-image">
         </div>
         {% endif %}
-        <div id="user-detail-info">
-            <div class="flex-row" id="user-detail-info-top">
+        <div id="profile-info">
+            <div class="flex-row" id="profile-info-top">
                 <h2>{{ user_.username }}</h2>
                 {% if user_ == user %}
                 <a href="{% url 'instagram:profile_edit' %}" class="btn">프로필 편집</a>
@@ -38,7 +38,7 @@
                 <a href="{% url 'instagram:follow' username=user_.username %}" class="follow-btn"><b>팔로우</b></a>
                 {% endif %}
             </div>
-            <div class="flex-row" id="user-detail-info-bot">
+            <div class="flex-row" id="profile-info-bot">
                 <p>게시물 <b>{{ user_.post_set.all|length }}</b></p>
                 <p>팔로워 <b>{{ user_.follower.all|length }}</b></p>
                 <p>팔로우 <b>{{ user_.following.all|length }}</b></p>
@@ -46,9 +46,9 @@
         </div>
     </section>
     <hr class="margin">
-    <section id="user-detail-bot">
+    <section id="profile-bot">
         <article class="grid-wrapper">
-            <nav id="user-detail-nav">
+            <nav id="profile-nav">
                 <a>게시물</a>
                 <a>릴스</a>
                 <a>동영상</a>

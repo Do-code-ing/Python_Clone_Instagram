@@ -9,6 +9,7 @@ from collections import deque
 
 
 def text_to_hashtag(texts):
+    texts = texts.lower()
     texts = texts.split("\r\n")
     tags = []
     comments = []
@@ -223,18 +224,6 @@ def search(request):
             "target": target,
         }
 
-        post_ids = []
-        hashtags = HashTag.objects.filter(text__icontains=search_for)
-        for tag in hashtags:
-            for comment in tag.comment.all():
-                post_ids.append(comment.post.pk)
-
-        tag_result = Post.objects.filter(id__in=post_ids)
-        tag_result_like = tag_result.order_by("-like")[:6]
-        tag_result_date = tag_result.order_by("-create_date")
-        context["tag_result_like"] = tag_result_like
-        context["tag_result_date"] = tag_result_date
-
         if not search_for.startswith("#"):
             user_result = User.objects.filter(username__icontains=search_for)
             user_result = user_result.annotate(
@@ -251,6 +240,25 @@ def search(request):
             context["follow_result"] = follow_result
             context["user_result"] = user_result
             context["target"] = "both"
+
+            search_for = "#" + search_for
+
+        post_ids = set()
+        hashtags = HashTag.objects.filter(text__iexact=search_for)
+        for tag in hashtags:
+            for comment in tag.comment.all():
+                post_ids.add(comment.post.pk)
+
+        tag_result = Post.objects.filter(id__in=post_ids)
+
+        posttags = PostTag.objects.filter(text__iexact=search_for)
+        for tag in posttags:
+            tag_result |= tag.post.all()
+
+        tag_result_like = tag_result.order_by("-like", "-create_date")[:6]
+        tag_result_date = tag_result.order_by("-create_date")
+        context["tag_result_like"] = tag_result_like
+        context["tag_result_date"] = tag_result_date
 
         return render(request, "instagram/search.html", context)
     else:

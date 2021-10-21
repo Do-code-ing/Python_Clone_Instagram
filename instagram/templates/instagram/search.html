@@ -53,10 +53,12 @@
         {% endif %}
         <section class="search-result-tag" id="search-result-tag-like">
             <h3>인기 게시물</h3>
-            {% for post in tag_result_like %}
-            <a href="{% url 'instagram:post_detail' pk=post.pk %}"><img src="{{ post.main_image.url }}" alt=""
-                    class="post-image"></a>
-            {% endfor %}
+            <article class="posts">
+                {% for post in tag_result_like %}
+                <a href="{% url 'instagram:post_detail' pk=post.pk %}"><img src="{{ post.main_image.url }}" alt=""
+                        class="post-image"></a>
+                {% endfor %}
+            </article>
         </section>
         <section class="search-result-tag" id="search-result-tag-date">
             <h3>최신 게시물</h3>
