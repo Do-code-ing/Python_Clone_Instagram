@@ -33,10 +33,10 @@ class ImageForm(forms.ModelForm):
 
 class PostCommentForm(forms.ModelForm):
     main_comment = forms.CharField(
-        max_length=100,
+        max_length=200,
         label="",
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': '내용을 입력하세요.'})
+        widget=forms.Textarea(attrs={'placeholder': '내용을 입력하세요.'})
     )
 
     class Meta:
@@ -46,9 +46,9 @@ class PostCommentForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
     text = forms.CharField(
-        max_length=100,
+        max_length=200,
         label="",
-        widget=forms.TextInput(attrs={'placeholder': '댓글 달기'})
+        widget=forms.Textarea(attrs={'placeholder': '댓글 달기'})
     )
 
     class Meta:

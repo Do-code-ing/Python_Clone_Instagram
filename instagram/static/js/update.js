@@ -47,3 +47,12 @@ Array.from(slideImages).forEach((slideImage) => {
   prevBtn.addEventListener("click", prev);
   nextBtn.addEventListener("click", next);
 });
+
+// tag list
+
+const mainCommentInput = document.getElementById("id_main_comment");
+if (mainCommentInput) {
+  tagList.forEach((tag) => {
+    mainCommentInput.value += `${tag} `;
+  });
+}

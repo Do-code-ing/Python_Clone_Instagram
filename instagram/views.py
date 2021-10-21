@@ -5,6 +5,47 @@ from django.contrib.auth import update_session_auth_hash
 from django.db.models import Count
 from .models import *
 from .forms import *
+from collections import deque
+
+
+def text_to_hashtag(texts):
+    texts = texts.split("\r\n")
+    tags = []
+    comments = []
+
+    for text in texts:
+        tagging = False
+        temp = []
+        q = deque(text)
+        while q:
+            x = q.popleft()
+
+            if x == "#":
+                if tagging:
+                    comments.append(temp)
+                temp = ["#"]
+                tagging = True
+            elif x == " ":
+                if tagging and len(temp) > 1:
+                    tags.append(temp)
+                else:
+                    temp.append(x)
+                    comments.append(temp)
+                temp = []
+                tagging = False
+            else:
+                temp.append(x)
+
+        if temp:
+            if temp[0] == "#" and len(temp) > 1:
+                tags.append(temp)
+            else:
+                comments.append(temp)
+
+        if comments[-1] != ["\n"]:
+            comments.append(["\n"])
+
+    return tags, comments
 
 
 def index(request):
@@ -44,47 +85,6 @@ def post(request):
     return render(request, "instagram/post.html", context)
 
 
-def post_comment(request, pk):
-    if request.method == "POST":
-        post = get_object_or_404(Post, id=pk)
-        text = request.POST["text"]
-        comment = Comment.objects.create(
-            author=request.user, post=post, text=text)
-        tagging = False
-        tag = ""
-        for t in text:
-            if t == "#":
-                if tagging:
-                    tag = ""
-                tagging = True
-            elif t == " ":
-                tagging = False
-                try:
-                    hashtag = HashTag.objects.get(text=tag)
-                except:
-                    hashtag = HashTag.objects.create(text=tag)
-                finally:
-                    hashtag.comment.add(comment)
-                tag = ""
-            if tagging:
-                tag += t
-
-        if tag.startswith("#"):
-            try:
-                hashtag = HashTag.objects.get(text=tag)
-            except:
-                hashtag = HashTag.objects.create(text=tag)
-            finally:
-                hashtag.comment.add(comment)
-
-        return redirect("instagram:index")
-
-    context = {
-        "comment_form": CommentForm,
-    }
-    return render(request, "instagram/post_comment.html", context)
-
-
 def update(request, pk):
     post = get_object_or_404(Post, id=pk)
     try:
@@ -94,7 +94,28 @@ def update(request, pk):
 
     if request.user == post.author:
         if request.method == "POST":
-            post.main_comment = request.POST["main_comment"]
+            for tag in post.posttag_set.all():
+                tag.post.remove(post)
+
+            text = request.POST["main_comment"]
+            tags, comments = text_to_hashtag(text)
+            result = []
+            print(comments)
+            print(tags)
+            for comment in comments:
+                if comment:
+                    result.append("".join(comment))
+
+            post.main_comment = "".join(result)
+            for tag in tags:
+                tag = "".join(tag)
+                try:
+                    tag = PostTag.objects.get(text=tag)
+                except:
+                    tag = PostTag.objects.create(text=tag)
+                finally:
+                    tag.post.add(post)
+
             post.save()
             return redirect("instagram:index")
         else:
@@ -110,10 +131,12 @@ def update(request, pk):
 
 
 def delete(request, pk):
-    post = post = get_object_or_404(Post, id=pk)
+    post = get_object_or_404(Post, id=pk)
     if request.user == post.author:
         post.delete()
-    return redirect("instagram:index")
+        return redirect("instagram:index")
+    else:
+        return redirect("instagram:index")  # 에러 발생
 
 
 def post_detail(request, pk):

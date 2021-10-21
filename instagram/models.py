@@ -37,10 +37,15 @@ class Follow(models.Model):
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    text = models.CharField(max_length=100)
+    text = models.CharField(max_length=200)
     create_date = models.DateTimeField(auto_now_add=True)
 
 
 class HashTag(models.Model):
     comment = models.ManyToManyField(Comment, blank=True)
+    text = models.TextField(unique=True)
+
+
+class PostTag(models.Model):
+    post = models.ManyToManyField(Post, blank=True)
     text = models.TextField(unique=True)

@@ -9,6 +9,13 @@ b {
   font-weight: bold;
 }
 
+textarea {
+  resize: none;
+  border: none;
+  font-family: inherit;
+  outline: none;
+}
+
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -611,6 +618,7 @@ input[type="file"] {
 .post-bot-bot {
   display: flex;
   flex-direction: row;
+  max-height: 4rem;
 }
 
 .post-bot .post-bot-bot input {
@@ -619,15 +627,19 @@ input[type="file"] {
   background-color: white;
 }
 
-.post-bot .post-bot-bot input[type="text"] {
+.post-bot .post-bot-bot textarea {
+  height: 1.6rem;
   width: 100%;
+  padding: 1rem;
+  padding-bottom: 0;
+  font-family: inherit;
 }
 
-.post-bot .post-bot-bot input[type="text"]:focus {
+.post-bot .post-bot-bot textarea:focus {
   outline: none;
 }
 
-.post-bot .post-bot-bot input[type="text"]::placeholder {
+.post-bot .post-bot-bot textarea::placeholder {
   color: lightgray;
 }
 
@@ -848,4 +860,37 @@ input[type="file"] {
   grid-column: 2;
   grid-row: 2;
   border-top: thin solid rgba(0, 0, 0, 0.07);
+  padding: 1rem;
+}
+
+#post-comment-form {
+  padding: 1rem;
+}
+
+#post-update-bot-right textarea {
+  padding: 1rem;
+  width: 14.4rem;
+  border: thin solid rgba(0, 0, 0, 0.12);
+  border-radius: 0.6rem;
+}
+
+#post-tag-div {
+  margin: 1rem;
+  margin-bottom: 0;
+  padding: 1rem;
+  width: 14.4rem;
+  height: 11rem;
+  border: thin solid rgba(0, 0, 0, 0.12);
+  border-radius: 0.6rem;
+  background-color: white;
+  overflow-y: scroll;
+}
+
+#post-tag-div a {
+  color: dodgerblue;
+  font-size: 0.9rem;
+}
+
+#post-tag-div a:hover {
+  text-decoration: underline;
 }
