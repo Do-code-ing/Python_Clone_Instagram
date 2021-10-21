@@ -32,19 +32,11 @@
             <a href="{% url 'instagram:post' %}"><img src="{% static 'image/posting.png' %}"></a>
         </div>
         <div class="nav-div">
-            {% if user.user_image %}
             <a href="{% url 'instagram:profile' username=user.username %}" id="nav-profile">
                 <div class="image-box">
                     <img src="{{ user.user_image.image.url }}" class="profile-image">
                 </div>
             </a>
-            {% else %}
-            <a href="{% url 'instagram:profile' username=user.username %}" id="nav-profile">
-                <div class="image-box">
-                    <img src="{% static 'image/profile.jpg' %}" class="profile-image">
-                </div>
-            </a>
-            {% endif %}
             <ul class="nav-menu" id="nav-profile-menu">
                 <a href="{% url 'instagram:profile' username=user.username %}">
                     <li>프로필</li>

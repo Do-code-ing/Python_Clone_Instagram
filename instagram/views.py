@@ -328,10 +328,7 @@ def profile_edit(request):
 
 @login_required
 def change_profile_image(request):
-    try:
-        user_image = UserImage.objects.get(user=request.user)
-    except:
-        user_image = UserImage.objects.create(user=request.user)
+    user_image = UserImage.objects.get(user=request.user)
     user_image.image = "profile.jpg"
     user_image.save()
     return redirect("instagram:profile_edit")

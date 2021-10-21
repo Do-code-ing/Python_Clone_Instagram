@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
+from instagram.models import UserImage
+
 
 def signup(request):
     if request.user.is_authenticated:
@@ -20,6 +22,7 @@ def signup(request):
                     password=request.POST["password1"],
                     email=request.POST["email"],
                 )
+                UserImage.objects.create(user=user)
                 auth.login(request, user)
                 return redirect("instagram:index")
             else:

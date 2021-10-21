@@ -16,15 +16,9 @@
 </header>
 <main class="instagram-main">
     <section id="profile-top">
-        {% if user_.user_image %}
         <div class="image-box">
             <img src="{{ user_.user_image.image.url }}" class="profile-image">
         </div>
-        {% else %}
-        <div class="image-box">
-            <img src="{% static 'image/profile.jpg' %}" class="profile-image">
-        </div>
-        {% endif %}
         <div id="profile-info">
             <div class="flex-row" id="profile-info-top">
                 <h2>{{ user_.username }}</h2>
