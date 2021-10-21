@@ -13,7 +13,7 @@ urlpatterns = [
     path("post_detail/<pk>/comment_delete/<comment_pk>/",
          views.comment_delete, name="comment_delete"),
     path("post_detail/<pk>/like/", views.like, name="like"),
-    path("search/", views.search, name="search"),
+    path("search/<search_for>", views.search, name="search"),
     path("profile/<username>/", views.profile, name="profile"),
     path("profile/<username>/follow/", views.follow, name="follow"),
     path("dm/", views.dm, name="dm"),

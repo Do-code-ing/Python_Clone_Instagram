@@ -1,11 +1,17 @@
 {% load static %}
 <article>
+    <script defer>
+        const searchURL = "{% url 'instagram:search' search_for='❤' %}"
+    </script>
     <a href="{% url 'instagram:index' %}" id="header-one" class="instagram-image"><img
             src="{% static 'image/instagram_small.png' %}" tabindex="0"></a>
-    <form action="{% url 'instagram:search' %}" method="POST" id="header-two">
-        {% csrf_token %}
-        <input type="search" name="search_for" placeholder="🔍검색" required id="search-input">
-    </form>
+    <div id="header-two">
+        <form id="search-form">
+            <a href="" id="search-href"></a>
+            <input type="search" name="search_for" placeholder="🔍검색" required id="search-input">
+            <input type="submit" id="search-btn" hidden>
+        </form>
+    </div>
     <nav id="header-three">
         <div class="instagram-image nav-div">
             {% if request.path == "/instagram/" %}

@@ -54,12 +54,21 @@ def index(request):
         posts = Post.objects.filter(
             author=request.user).order_by("-create_date")
 
+        followers = []
         for following in request.user.following.all():
             posts |= Post.objects.filter(
                 author=following.follower).order_by("-create_date")
+            followers.append(following.follower)
+
+        posts |= Post.objects.filter(author__in=followers)
+        posts.order_by("-create_date")
+
+        followers = User.objects.filter(
+            username__in=followers).order_by("-last_login")[:7]
 
         context = {
             "posts": posts,
+            "followers": followers,
         }
 
         return render(request, "instagram/index.html", context)
@@ -215,54 +224,51 @@ def like(request, pk):
         return redirect("instagram:post_detail", pk=pk)
 
 
-def search(request):
-    if request.method == "POST":
-        search_for = request.POST['search_for']
-        target = "tag only"
-        context = {
-            "search_for": search_for,
-            "target": target,
-        }
+def search(request, search_for):
+    print(request.method)
+    target = "tag only"
+    context = {
+        "search_for": search_for,
+        "target": target,
+    }
 
-        if not search_for.startswith("#"):
-            user_result = User.objects.filter(username__icontains=search_for)
-            user_result = user_result.annotate(
-                count=Count("follower")).order_by("-count")
+    if not search_for.startswith("#"):
+        user_result = User.objects.filter(username__icontains=search_for)
+        user_result = user_result.annotate(
+            count=Count("follower")).order_by("-count")
 
-            follow_result = []
-            for user_ in user_result:
-                try:
-                    Follow.objects.get(follower=user_, following=request.user)
-                    follow_result.append(user_)
-                except:
-                    continue
+        follow_result = []
+        for user_ in user_result:
+            try:
+                Follow.objects.get(follower=user_, following=request.user)
+                follow_result.append(user_)
+            except:
+                continue
 
-            context["follow_result"] = follow_result
-            context["user_result"] = user_result
-            context["target"] = "both"
+        context["follow_result"] = follow_result
+        context["user_result"] = user_result
+        context["target"] = "both"
 
-            search_for = "#" + search_for
+        search_for = "#" + search_for
 
-        post_ids = set()
-        hashtags = HashTag.objects.filter(text__iexact=search_for)
-        for tag in hashtags:
-            for comment in tag.comment.all():
-                post_ids.add(comment.post.pk)
+    post_ids = set()
+    hashtags = HashTag.objects.filter(text__iexact=search_for)
+    for tag in hashtags:
+        for comment in tag.comment.all():
+            post_ids.add(comment.post.pk)
 
-        tag_result = Post.objects.filter(id__in=post_ids)
+    tag_result = Post.objects.filter(id__in=post_ids)
 
-        posttags = PostTag.objects.filter(text__iexact=search_for)
-        for tag in posttags:
-            tag_result |= tag.post.all()
+    posttags = PostTag.objects.filter(text__iexact=search_for)
+    for tag in posttags:
+        tag_result |= tag.post.all()
 
-        tag_result_like = tag_result.order_by("-like", "-create_date")[:6]
-        tag_result_date = tag_result.order_by("-create_date")
-        context["tag_result_like"] = tag_result_like
-        context["tag_result_date"] = tag_result_date
+    tag_result_like = tag_result.order_by("-like", "-create_date")[:6]
+    tag_result_date = tag_result.order_by("-create_date")
+    context["tag_result_like"] = tag_result_like
+    context["tag_result_date"] = tag_result_date
 
-        return render(request, "instagram/search.html", context)
-    else:
-        return render(request, "instagram/search.html")
+    return render(request, "instagram/search.html", context)
 
 
 def profile(request, username):

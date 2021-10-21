@@ -19,9 +19,16 @@
 </header>
 <main class="instagram-main">
     <div id="feed">
-        <article class="follow-wrapper" id="follower">
-            {% for following in user.following.all %}
-            {{ following.follower }}
+        <article class="follow-wrapper post-wrapper" id="follower">
+            {% for follower in followers %}
+            <div class="follower">
+                <div class="image-box">
+                    <img src="{{ follower.user_image.image.url }}" alt="" class="profile-image">
+                </div>
+                <div class="follower-name">
+                    {{ follower }}
+                </div>
+            </div>
             {% endfor %}
         </article>
         <br>
@@ -57,7 +64,7 @@
                             </span>
                             <span class="comment-text">{{ post.main_comment }}
                                 {% for tag in post.posttag_set.all %}
-                                <a href="{% url 'instagram:search' %}?search_for={{ tag.text }}"
+                                <a href="{% url 'instagram:search' search_for=tag.text %}"
                                     class="hash-tag-href">{{ tag.text }}</a>{% endfor %}
                             </span>
                         </div>
@@ -70,7 +77,7 @@
                             <span class="comment-text">
                                 {{ comment.text }}
                                 {% for tag in comment.hashtag_set.all %}
-                                <a href="{% url 'instagram:search' %}?search_for={{ tag.text }}"
+                                <a href="{% url 'instagram:search' search_for=tag.text %}"
                                     class="hash-tag-href">{{ tag.text }}</a>{% endfor %}
                             </span>
                         </div>
@@ -85,7 +92,7 @@
                             <span class="comment-text">
                                 {{ comment.text }}
                                 {% for tag in comment.hashtag_set.all %}
-                                <a href="{% url 'instagram:search' %}?search_for={{ tag.text }}"
+                                <a href="{% url 'instagram:search' search_for=tag.text %}"
                                     class="hash-tag-href">{{ tag.text }}</a>{% endfor %}
                             </span>
                         </div>
