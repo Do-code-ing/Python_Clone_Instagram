@@ -50,11 +50,9 @@
                             <a href="{% url 'instagram:profile' username=post.author %}"
                                 class="user-href">{{ post.author }}</a>
                             <span class="comment-text">{{ post.main_comment }}
-                                <div>
-                                    {% for tag in post.posttag_set.all %}
-                                    <a href="{% url 'instagram:search' %}?search_for={{ tag.text }}"
-                                        class="hash-tag-href">{{ tag.text }}</a>{% endfor %}
-                                </div>
+                                {% for tag in post.posttag_set.all %}
+                                <a href="{% url 'instagram:search' %}?search_for={{ tag.text }}"
+                                    class="hash-tag-href">{{ tag.text }}</a>{% endfor %}
                             </span>
                         </div>
                         <div class="comment-create-date">
@@ -73,7 +71,12 @@
                         <div>
                             <a href="{% url 'instagram:profile' username=comment.author %}"
                                 class="user-href">{{ comment.author }}</a>
-                            <span class="comment-text">{{ comment.text }}</span>
+                            <span class="comment-text">
+                                {{ comment.text }}
+                                {% for tag in comment.hashtag_set.all %}
+                                <a href="{% url 'instagram:search' %}?search_for={{ tag.text }}"
+                                    class="hash-tag-href">{{ tag.text }}</a>{% endfor %}
+                            </span>
                         </div>
                         <div class="comment-create-date">
                             {{ comment.create_date }}

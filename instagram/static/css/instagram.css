@@ -587,7 +587,13 @@ input[type="file"] {
 }
 
 .comment-btn {
+  opacity: 0;
   cursor: pointer;
+  padding: 0.1rem;
+}
+
+.post-right .post-mid .post-user:hover .comment-btn {
+  opacity: 100%;
 }
 
 .comment-btn img {

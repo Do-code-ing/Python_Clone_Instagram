@@ -170,11 +170,27 @@ def post_detail(request, pk):
 def comment_create(request, pk):
     post = get_object_or_404(Post, id=pk)
     if request.method == "POST":
-        Comment.objects.create(
-            author=request.user,
-            post=post,
-            text=request.POST["text"]
-        )
+        text = request.POST["text"]
+        tags, comments = text_to_hashtag(text)
+        result = []
+
+        for comment in comments:
+            if comment:
+                result.append("".join(comment))
+
+        result = "".join(result)
+        comment = Comment.objects.create(
+            author=request.user, post=post, text=result)
+
+        for tag in tags:
+            tag = "".join(tag)
+            try:
+                tag = HashTag.objects.get(text=tag)
+            except:
+                tag = HashTag.objects.create(text=tag)
+            finally:
+                tag.comment.add(comment)
+
     return redirect("instagram:post_detail", pk=pk)
 
 
