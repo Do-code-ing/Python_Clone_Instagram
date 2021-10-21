@@ -40,7 +40,7 @@
         <div class="nav-div">
             <a href="{% url 'instagram:profile' username=user.username %}" id="nav-profile">
                 <div class="image-box">
-                    <img src="{{ user.user_image.image.url }}" class="profile-image">
+                    <img src="{{ user.profile.user_image.url }}" class="profile-image">
                 </div>
             </a>
             <ul class="nav-menu" id="nav-profile-menu">

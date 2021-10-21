@@ -23,7 +23,7 @@
             {% for follower in followers %}
             <div class="follower">
                 <div class="image-box">
-                    <img src="{{ follower.user_image.image.url }}" alt="" class="profile-image">
+                    <img src="{{ follower.profile.user_image.url }}" alt="" class="profile-image">
                 </div>
                 <div class="follower-name">
                     {{ follower }}
@@ -39,7 +39,7 @@
                     <div class="post-user feed-post">
                         <div class="image-box">
                             <a href="{% url 'instagram:profile' username=post.author %}">
-                                <img src="{{ post.author.user_image.image.url }}" alt="" class="profile-image"></a>
+                                <img src="{{ post.author.profile.user_image.url }}" alt="" class="profile-image"></a>
                         </div>
                         <a href="{% url 'instagram:profile' username=post.author %}"
                             class="user-href">{{ post.author }}</a>

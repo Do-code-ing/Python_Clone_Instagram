@@ -1,4 +1,5 @@
 from django import forms
+from django.db.models import fields
 from .models import *
 from django.contrib.auth import password_validation
 from django.core.exceptions import ValidationError
@@ -46,8 +47,8 @@ class PostCommentForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
     text = forms.CharField(
-        max_length=200,
         label="",
+        max_length=200,
         widget=forms.Textarea(attrs={'placeholder': '댓글 달기'})
     )
 
@@ -57,15 +58,36 @@ class CommentForm(forms.ModelForm):
 
 
 class UserImageForm(forms.ModelForm):
-    image = forms.ImageField(
+    user_image = forms.ImageField(
         required=False,
         label="프로필 사진 선택",
         label_suffix="",
     )
 
     class Meta:
-        model = Image
-        fields = ["image"]
+        model = Profile
+        fields = ["user_image"]
+
+
+class ProfileForm(forms.ModelForm):
+    name = forms.CharField(
+        label="",
+        max_length=50,
+    )
+    website = forms.CharField(
+        label="",
+        max_length=200,
+        widget=forms.TextInput(attrs={'placeholder': '웹사이트'})
+    )
+    introduction = forms.CharField(
+        max_length=200,
+        label="",
+        widget=forms.Textarea()
+    )
+
+    class Meta:
+        model = Profile
+        fields = ["name", "website", "introduction"]
 
 
 # for customizing

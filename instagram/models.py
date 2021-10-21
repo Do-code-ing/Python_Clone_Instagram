@@ -2,11 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class UserImage(models.Model):
-    user = models.OneToOneField(
-        User, related_name="user_image", on_delete=models.CASCADE)
-    image = models.ImageField(
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_image = models.ImageField(
         upload_to="image", null=True, blank=True, default="profile.jpg")
+    name = models.CharField(max_length=50, blank=True)
+    website = models.CharField(max_length=200, blank=True)
+    introduction = models.TextField(blank=True)
+    gender = models.TextField(default="None")
 
 
 class Post(models.Model):

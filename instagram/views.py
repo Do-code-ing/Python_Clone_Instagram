@@ -230,7 +230,7 @@ def search(request, search_for):
         "search_for": search_for,
         "target": target,
     }
-    print(search_for)
+
     if not search_for.startswith("#"):
         user_result = User.objects.filter(username__icontains=search_for)
         user_result = user_result.annotate(
@@ -314,28 +314,26 @@ def notice(request):
 
 @login_required
 def profile_edit(request):
-    try:
-        user_image = UserImage.objects.get(user=request.user)
-    except:
-        user_image = UserImage.objects.create(user=request.user)
+    profile = Profile.objects.get(user=request.user)
 
     if request.method == "POST":
-        image = request.FILES.get('image')
+        image = request.FILES.get('user_image')
         if image:
-            user_image.image = image
-            user_image.save()
+            profile.user_image = image
+            profile.save()
 
     context = {
         "user_image_form": UserImageForm,
+        "profile_form": ProfileForm,
     }
     return render(request, "instagram/profile_edit.html", context)
 
 
 @login_required
-def change_profile_image(request):
-    user_image = UserImage.objects.get(user=request.user)
-    user_image.image = "profile.jpg"
-    user_image.save()
+def reset_profile_image(request):
+    profile = Profile.objects.get(user=request.user)
+    profile.user_image = "profile.jpg"
+    profile.save()
     return redirect("instagram:profile_edit")
 
 

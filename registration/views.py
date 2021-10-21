@@ -2,8 +2,7 @@ from django.contrib import auth, messages
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-
-from instagram.models import UserImage
+from instagram.models import *
 
 
 def signup(request):
@@ -22,7 +21,7 @@ def signup(request):
                     password=request.POST["password1"],
                     email=request.POST["email"],
                 )
-                UserImage.objects.create(user=user)
+                Profile.objects.create(user=user)
                 auth.login(request, user)
                 return redirect("instagram:index")
             else:

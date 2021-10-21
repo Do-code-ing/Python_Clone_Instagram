@@ -25,18 +25,24 @@
                 {% csrf_token %}
                 <div class="profile-edit-form-div">
                     <div class="image-box">
-                        <img src="{{ user.user_image.image.url }}" class="profile-image" id="profile-image">
+                        <img src="{{ user.profile.user_image.url }}" class="profile-image" id="profile-image">
                     </div>
                     <div class="profile-edit-username-div">
                         <h2 class="profile-edit-form-username">{{ user.username }}</h2>
                         <div class="file-box">
-                            {{ user_image_form }} | <a href="{% url 'instagram:change_profile_image' %}">초기화</a>
+                            {{ user_image_form }} | <a href="{% url 'instagram:reset_profile_image' %}">초기화</a>
                         </div>
                     </div>
                 </div>
                 <input type="submit" id="change-profile-image-btn" hidden>
             </form>
+            <form action="">
+                {% csrf_token %}
+                {{ profile_form }}
+                {% comment %} 성별 선택 구현 {% endcomment %}
+            </form>
         </section>
     </article>
 </main>
+{% comment %} 성별 선택을 위한 토글 창 필요 {% endcomment %}
 {% endblock body %}
