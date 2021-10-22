@@ -54,8 +54,7 @@
                 <p><b>기존 태그</b></p>
                 <div id="post-tag-div">
                     {% for tag in post.posttag_set.all %}
-                    <a href="{% url 'instagram:search' %}?search_for={{ tag.text }}"
-                        class="hash-tag-href">{{ tag.text }}</a>
+                    <a href="{% url 'instagram:search' search_for=tag.text %}" class="hash-tag-href">{{ tag.text }}</a>
                     {% endfor %}
                 </div>
             </section>

@@ -1,9 +1,8 @@
 from django import forms
-from django.db.models import fields
 from .models import *
 from django.contrib.auth import password_validation
 from django.core.exceptions import ValidationError
-from django.utils.translation import gettext, gettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 class PostForm(forms.ModelForm):

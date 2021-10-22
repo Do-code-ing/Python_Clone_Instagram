@@ -56,7 +56,7 @@
                 <section class="post-bot feed-post">
                     <div class="post-like">좋아요 {{ post.like_set.all|length }}개</div>
                     <div>
-                        {% if post.main_comment %}
+                        {% if post.main_comment or post.posttag_set.all|length > 0 %}
                         <div class="post-comment">
                             <span class="comment-author">
                                 <a href="{% url 'instagram:profile' username=post.author %}"

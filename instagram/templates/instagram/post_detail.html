@@ -29,7 +29,7 @@
                 <div class="post-user feed-post">
                     <div class="image-box">
                         <a href="{% url 'instagram:profile' username=post.author %}">
-                            <img src="{{ post.author.user_image.image.url }}" alt="" class="profile-image"></a>
+                            <img src="{{ post.author.profile.user_image.url }}" alt="" class="profile-image"></a>
                     </div>
                     <a href="{% url 'instagram:profile' username=post.author %}" class="user-href">{{ post.author }}</a>
                 </div>
@@ -39,20 +39,22 @@
                 </div>
             </section>
             <section class="post-mid border-light-top">
-                {% if post.main_comment %}
+                {% if post.main_comment or post.posttag_set.all|length > 0 %}
                 <div class="post-user feed-post">
                     <div class="image-box">
                         <a href="{% url 'instagram:profile' username=post.author %}">
-                            <img src="{{ post.author.user_image.image.url }}" alt="" class="profile-image"></a>
+                            <img src="{{ post.author.profile.user_image.url }}" alt="" class="profile-image"></a>
                     </div>
                     <div class="comment-div">
                         <div>
                             <a href="{% url 'instagram:profile' username=post.author %}"
                                 class="user-href">{{ post.author }}</a>
-                            <span class="comment-text">{{ post.main_comment }}
+                            <span class="comment-text">
+                                {{ post.main_comment }}
                                 {% for tag in post.posttag_set.all %}
-                                <a href="{% url 'instagram:search' %}?search_for={{ tag.text }}"
-                                    class="hash-tag-href">{{ tag.text }}</a>{% endfor %}
+                                <a href="{% url 'instagram:search' search_for=tag.text %}"
+                                    class="hash-tag-href">{{ tag.text }}</a>
+                                {% endfor %}
                             </span>
                         </div>
                         <div class="comment-create-date">
@@ -65,7 +67,7 @@
                 <div class="post-user feed-post">
                     <div class="image-box">
                         <a href="{% url 'instagram:profile' username=comment.author %}">
-                            <img src="{{ comment.author.user_image.image.url }}" alt="" class="profile-image"></a>
+                            <img src="{{ comment.author.profile.user_image.url }}" alt="" class="profile-image"></a>
                     </div>
                     <div class="comment-div">
                         <div>
@@ -74,7 +76,7 @@
                             <span class="comment-text">
                                 {{ comment.text }}
                                 {% for tag in comment.hashtag_set.all %}
-                                <a href="{% url 'instagram:search' %}?search_for={{ tag.text }}"
+                                <a href="{% url 'instagram:search' search_for=tag.text %}"
                                     class="hash-tag-href">{{ tag.text }}</a>{% endfor %}
                             </span>
                         </div>
