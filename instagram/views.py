@@ -323,14 +323,15 @@ def profile_edit(request):
     profile = Profile.objects.get(user=request.user)
 
     if request.method == "POST":
-        image = request.FILES.get('user_image')
-        if image:
-            profile.user_image = image
-            profile.save()
+        if "image_change" in request.POST:
+            image = request.FILES.get('user_image')
+            if image:
+                profile.user_image = image
+                profile.save()
 
     context = {
         "user_image_form": UserImageForm,
-        "profile_form": ProfileForm,
+        "profile_form": ProfileForm(instance=profile),
     }
     return render(request, "instagram/profile_edit.html", context)
 

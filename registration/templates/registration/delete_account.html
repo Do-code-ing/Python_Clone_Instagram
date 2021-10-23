@@ -20,7 +20,7 @@
                     {% csrf_token %}
                     <input type="password" id="delete-account-input" name="password" required
                         placeholder="계정을 삭제하려면 비밀번호를 입력하세요.">
-                    <a href="{% url 'instagram:index' %}" class="href-btn">취소</a>
+                    <a href="{% url 'instagram:profile_edit' %}" class="href-btn">취소</a>
                     <input type="submit" value="{{ user.username }} 삭제">
                 </form>
             </section>

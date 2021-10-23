@@ -70,17 +70,20 @@ class UserImageForm(forms.ModelForm):
 
 class ProfileForm(forms.ModelForm):
     name = forms.CharField(
-        label="",
+        label="이름",
+        label_suffix="",
         max_length=50,
     )
     website = forms.CharField(
-        label="",
+        label="웹사이트",
+        label_suffix="",
         max_length=200,
         widget=forms.TextInput(attrs={'placeholder': '웹사이트'})
     )
     introduction = forms.CharField(
+        label="소개",
+        label_suffix="",
         max_length=200,
-        label="",
         widget=forms.Textarea()
     )
 

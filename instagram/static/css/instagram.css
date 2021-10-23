@@ -302,6 +302,114 @@ aside {
   grid-column: 2;
   border: thin solid rgba(0, 0, 0, 0.12);
   border-left: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-edit-form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+}
+
+.profile-edit-form p,
+.profile-edit-form .profile-edit-form-div {
+  position: relative;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profile-edit-form .profile-edit-form-div {
+  margin-bottom: 2rem;
+}
+
+.profile-edit-form .profile-edit-form-div .image-box {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.profile-edit-form p label,
+.profile-edit-form .profile-edit-form-div .image-box {
+  position: absolute;
+  right: 75%;
+  font-weight: bold;
+}
+
+.profile-edit-form .profile-edit-form-div .profile-edit-username-div {
+  position: absolute;
+  left: 28%;
+  width: 25rem;
+  padding: 0.6rem;
+}
+
+.profile-edit-form-bot p input[type="password"] {
+  padding: 0.5rem;
+  width: 20rem;
+}
+
+.profile-edit-form-bot p input[type="password"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.05rem black;
+}
+
+.profile-edit-form .profile-edit-form-div h2 {
+  font-size: 1.5rem;
+}
+
+.profile-edit-form-submit {
+  background-color: dodgerblue;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bolder;
+  margin-top: 1rem;
+  border: none;
+  padding: 0.4rem;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.profile-edit-form-bot {
+  padding: 0;
+}
+
+.profile-edit-form-bot p {
+  display: grid;
+  grid-template-columns: 3fr 8fr;
+  gap: 1rem;
+  padding: 0;
+  padding-bottom: 1rem;
+}
+
+.profile-edit-form-bot p label {
+  padding-top: 0.5rem;
+  text-align: right;
+  font-weight: bold;
+}
+
+.profile-edit-form-bot p input[type="button"],
+.profile-edit-form-bot p input[type="text"],
+.profile-edit-form-bot p textarea {
+  width: 20rem;
+  padding: 0.4rem;
+  border: thin solid rgba(0, 0, 0, 0.12);
+  border-radius: 0.2rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  font-size: 0.9rem;
+  color: black;
+  text-align: left;
+}
+
+.profile-edit-form-bot p input[type="button"] {
+  color: gray;
+  cursor: text;
+  width: 21rem;
+}
+
+.profile-edit-form p textarea {
+  height: 10rem;
 }
 
 /* profile */
@@ -397,72 +505,6 @@ aside {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   font-size: 0.8rem;
-}
-
-.profile-edit-form {
-  display: flex;
-  flex-direction: column;
-  padding: 2rem 0;
-}
-
-.profile-edit-form p,
-.profile-edit-form .profile-edit-form-div {
-  position: relative;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.profile-edit-form .profile-edit-form-div {
-  margin-bottom: 2rem;
-}
-
-.profile-edit-form .profile-edit-form-div .image-box {
-  width: 2.5rem;
-  height: 2.5rem;
-}
-
-.profile-edit-form p label,
-.profile-edit-form .profile-edit-form-div .image-box {
-  position: absolute;
-  right: 75%;
-  font-weight: bold;
-}
-
-.profile-edit-form p input[type="password"],
-.profile-edit-form .profile-edit-form-div .profile-edit-username-div {
-  position: absolute;
-  left: 28%;
-  width: 25rem;
-  padding: 0.6rem;
-}
-
-.profile-edit-form p input[type="password"] {
-  border-radius: 0.6rem;
-}
-
-.profile-edit-form p input[type="password"]:focus {
-  outline: none;
-  box-shadow: 0 0 0 0.05rem black;
-}
-
-.profile-edit-form .profile-edit-form-div h2 {
-  font-size: 1.5rem;
-}
-
-#profile-edit-form-submit {
-  position: absolute;
-  left: 28%;
-  background-color: dodgerblue;
-  color: white;
-  font-size: 0.9rem;
-  font-weight: bolder;
-  margin-top: 1rem;
-  border: none;
-  padding: 0.4rem;
-  cursor: pointer;
 }
 
 /* input file */
