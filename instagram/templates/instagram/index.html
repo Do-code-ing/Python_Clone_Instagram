@@ -33,7 +33,7 @@
         </article>
         <br>
         <article>
-            {% for post in posts %}
+            {% for post in posts.all|dictsortreversed:"create_date" %}
             <section class="post-wrapper">
                 <section class="post-top">
                     <div class="post-user feed-post">
@@ -100,7 +100,8 @@
                         {% endif %}
                     </div>
                     <div class="post-create-date">
-                        {{ post.create_date }}{% if post.create_date != post.update_date %}(수정됨){% endif %}</div>
+                        {{ post.postcomment.create_date }}{% if post.postcomment.create_date != post.postcomment.update_date %}(수정됨){% endif %}
+                    </div>
                 </section>
             </section>
             <br>

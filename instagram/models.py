@@ -15,9 +15,22 @@ class Profile(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     main_image = models.ImageField(upload_to="image", null=True)
-    main_comment = models.TextField(blank=True)  # 분리하자
+    create_date = models.DateTimeField(auto_now_add=True)
+
+
+class PostComment(models.Model):
+    post = models.OneToOneField(Post, on_delete=models.CASCADE)
+    text = models.TextField(blank=True)
     create_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
+
+
+class PostTag(models.Model):
+    post = models.ManyToManyField(Post, blank=True)
+    text = models.TextField(unique=True)
+
+    def __str__(self):
+        return self.text
 
 
 class Image(models.Model):
@@ -52,14 +65,6 @@ class Comment(models.Model):
 
 class HashTag(models.Model):
     comment = models.ManyToManyField(Comment, blank=True)
-    text = models.TextField(unique=True)
-
-    def __str__(self):
-        return self.text
-
-
-class PostTag(models.Model):
-    post = models.ManyToManyField(Post, blank=True)
     text = models.TextField(unique=True)
 
     def __str__(self):

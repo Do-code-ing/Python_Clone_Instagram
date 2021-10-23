@@ -50,7 +50,7 @@
                             <a href="{% url 'instagram:profile' username=post.author %}"
                                 class="user-href">{{ post.author }}</a>
                             <span class="comment-text">
-                                {{ post.main_comment }}
+                                {{ post.postcomment.text }}
                                 {% for tag in post.posttag_set.all %}
                                 <a href="{% url 'instagram:search' search_for=tag.text %}"
                                     class="hash-tag-href">{{ tag.text }}</a>
@@ -105,7 +105,8 @@
                     </div>
                     <div class="post-like">좋아요 {{ post.like_set.all|length }}개</div>
                     <div class="post-create-date">
-                        {{ post.create_date }}{% if post.create_date != post.update_date %}(수정됨){% endif %}</div>
+                        {{ post.postcomment.create_date }}{% if post.postcomment.create_date != post.postcomment.update_date %}(수정됨){% endif %}
+                    </div>
                 </div>
                 <form action="{% url 'instagram:comment_create' pk=post.pk %}" method="POST"
                     class="post-bot-bot border-light-top">

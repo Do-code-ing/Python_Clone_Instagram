@@ -51,17 +51,14 @@ def text_to_hashtag(texts):
 
 def index(request):
     if request.user.is_authenticated:
-        posts = Post.objects.filter(
-            author=request.user).order_by("-create_date")
+        posts = Post.objects.filter(author=request.user)
 
         followers = []
         for following in request.user.following.all():
-            posts |= Post.objects.filter(
-                author=following.follower).order_by("-create_date")
+            posts |= Post.objects.filter(author=following.follower)
             followers.append(following.follower)
 
         posts |= Post.objects.filter(author__in=followers)
-        posts.order_by("-create_date")
 
         followers = User.objects.filter(
             username__in=followers).order_by("-last_login")[:7]
@@ -107,7 +104,7 @@ def update(request, pk):
             for tag in post.posttag_set.all():
                 tag.post.remove(post)
 
-            text = request.POST["main_comment"]
+            text = request.POST["text"]
             tags, comments = text_to_hashtag(text)
             result = []
 
@@ -115,7 +112,16 @@ def update(request, pk):
                 if comment:
                     result.append("".join(comment))
 
-            post.main_comment = "".join(result)
+            comment = "".join(result)
+
+            try:
+                post_comment = PostComment.objects.get(post=post)
+                post_comment.text = comment
+                post_comment.save()
+            except:
+                post_comment = PostComment.objects.create(
+                    post=post, text=comment)
+
             for tag in tags:
                 tag = "".join(tag)
                 try:

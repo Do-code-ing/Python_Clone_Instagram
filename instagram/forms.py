@@ -32,7 +32,7 @@ class ImageForm(forms.ModelForm):
 
 
 class PostCommentForm(forms.ModelForm):
-    main_comment = forms.CharField(
+    text = forms.CharField(
         max_length=200,
         label="",
         required=False,
@@ -40,8 +40,8 @@ class PostCommentForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Post
-        fields = ["main_comment"]
+        model = PostComment
+        fields = ["text"]
 
 
 class CommentForm(forms.ModelForm):
