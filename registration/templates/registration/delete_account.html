@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% include 'base_registration.html' %}
+{% endblock head %}
+
+{% block body %}
+<main id="registration-main">
+    <article>
+        <section id="delete-account-section">
+            <section class="wrapper">
+                <img src="{% static 'image/instagram.png' %}">
+                <h2>계정 삭제</h2>
+                <div>
+                    {% for message in messages %}
+                    {{ message.message }}
+                    {% endfor %}
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="password" id="delete-account-input" name="password" required
+                        placeholder="계정을 삭제하려면 비밀번호를 입력하세요.">
+                    <a href="{% url 'instagram:index' %}" class="href-btn">취소</a>
+                    <input type="submit" value="{{ user.username }} 삭제">
+                </form>
+            </section>
+        </section>
+    </article>
+</main>
+{% endblock body %}

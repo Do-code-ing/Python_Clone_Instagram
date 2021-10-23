@@ -1,5 +1,7 @@
 from django.contrib import auth, messages
 from django.contrib.auth import authenticate
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from instagram.models import *
@@ -21,7 +23,7 @@ def signup(request):
                     password=request.POST["password1"],
                     email=request.POST["email"],
                 )
-                Profile.objects.create(user=user)
+                Profile.objects.create(user=user, name=user.username)
                 auth.login(request, user)
                 return redirect("instagram:index")
             else:
@@ -49,3 +51,15 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect("registration:login")
+
+
+@login_required
+def delete_account(request):
+    if request.method == "POST":
+        user = request.user
+        password = request.POST["password"]
+        if check_password(password, user.password):
+            user.delete()
+            return redirect("registration:login")
+
+    return render(request, "registration/delete_account.html")

@@ -62,4 +62,24 @@ form input[type="submit"] {
   margin-top: 1rem;
   border: none;
   padding: 0.4rem;
+  cursor: pointer;
+}
+
+/* delete account */
+#delete-account-input::placeholder {
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.href-btn:link,
+.href-btn:visited,
+.href-btn:active {
+  background-color: dodgerblue;
+  color: white;
+  font-weight: bolder;
+  margin-top: 1rem;
+  border-radius: 0.2rem;
+  border: none;
+  padding: 0.4rem;
+  font-size: 0.9rem;
 }
