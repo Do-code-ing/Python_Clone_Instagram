@@ -35,9 +35,11 @@
                     <div class="search-result-user-info">
                         <a href="{% url 'instagram:profile' username=user_.username %}"
                             class="search-result-user">{{ user_.username }}</a>
-                        <p>팔로워 <b>{{ user_.follower.all|length }}</b></p>
-                        <p><b>{{ user_.profile.name }}</b></p>
-                        <p>{{ user_.profile.introduction }}</p>
+                        <span class="flex-row">
+                            <p><b>{{ user_.profile.name }}</b></p>
+                            <p>팔로워 <b>{{ user_.follower.all|length }}</b></p>
+                        </span>
+                        <p class="user-introduction">{{ user_.profile.introduction }}</p>
                     </div>
                     {% if user_ == user %}
                     <a href="{% url 'instagram:profile_edit' %}" class="btn">프로필 편집</a>
