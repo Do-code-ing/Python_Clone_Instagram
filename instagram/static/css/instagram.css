@@ -40,6 +40,7 @@ header {
   background-color: white;
   border: thin solid rgba(0, 0, 0, 0.12);
   align-items: center;
+  z-index: 10000;
 }
 
 header article {
