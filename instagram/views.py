@@ -135,9 +135,14 @@ def update(request, pk):
             return redirect("instagram:index")
         else:
             context = {
-                "post_comment_form": PostCommentForm(instance=post),
                 "post": post
             }
+            try:
+                context["post_comment_form"] = PostCommentForm(
+                    instance=post.postcomment)
+            except:
+                context["post_comment_form"] = PostCommentForm
+
             if images is not None:
                 context["images"] = images
             return render(request, "instagram/update.html", context)
