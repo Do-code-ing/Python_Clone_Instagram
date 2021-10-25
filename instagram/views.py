@@ -244,6 +244,7 @@ def search(request, search_for):
 
     if not search_for.startswith("#"):
         user_result = User.objects.filter(username__icontains=search_for)
+        user_result |= User.objects.filter(profile__name__icontains=search_for)
         user_result = user_result.annotate(
             count=Count("follower")).order_by("-count")
 
