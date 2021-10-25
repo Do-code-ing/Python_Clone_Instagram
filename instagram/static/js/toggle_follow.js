@@ -8,6 +8,7 @@ if (toggleFollowBtn) {
 }
 
 function handleToggleFollowBtnClick(event) {
+  document.body.style.overflow = "hidden";
   const followName = event.target.dataset.idOne;
 
   const postManageView = document.createElement("article");

@@ -8,6 +8,7 @@ if (toggleBtns) {
 }
 
 function handleToggleBtnClick(event) {
+  document.body.style.overflow = "hidden";
   const postAuthor = event.target.dataset.idOne;
   const postPk = event.target.dataset.idTwo;
 

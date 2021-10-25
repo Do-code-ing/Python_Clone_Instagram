@@ -30,8 +30,8 @@
             <button id="submit-btn">다음</button>
         </p>
         <div class="slide-image" id="post-update-bot-left" data-id="{{ images|length }}">
-            <div id="prev-btn">◀</div>
-            <div id="next-btn">▶</div>
+            <div id="prev-btn"><img src="{% static 'image/prev_btn.png' %}" alt=""></div>
+            <div id="next-btn"><img src="{% static 'image/next_btn.png' %}" alt=""></div>
             <div id="multiple-container">
                 <div>
                     <img src="{{ post.main_image.url }}" alt="" class="post-image">

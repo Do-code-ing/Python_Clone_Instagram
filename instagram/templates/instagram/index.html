@@ -3,6 +3,7 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
+<script defer src="{% static 'js/index.js' %}"></script>
 <script defer src="{% static 'js/toggle_index.js' %}"></script>
 <script defer>
     const user = "{{ user }}";
@@ -50,8 +51,20 @@
                     </div>
                 </section>
                 <section class="post-mid">
-                    <a href="{% url 'instagram:post_detail' pk=post.pk %}"><img src="{{ post.main_image.url }}"
-                            class="post-image"></a>
+                    <div class="slide-image" id="post-update-bot-left" data-id="{{ post.image_set.all|length }}">
+                        <div id="prev-btn"><img src="{% static 'image/prev_btn.png' %}" alt=""></div>
+                        <div id="next-btn"><img src="{% static 'image/next_btn.png' %}" alt=""></div>
+                        <div id="multiple-container">
+                            <div>
+                                <img src="{{ post.main_image.url }}" alt="" class="post-image">
+                            </div>
+                            {% for image in post.image_set.all %}
+                            <div>
+                                <img src="{{ image.image.url }}" alt="" class="post-image">
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </section>
                 <section class="post-bot feed-post">
                     <div class="post-like">좋아요 {{ post.like_set.all|length }}개</div>
@@ -100,7 +113,9 @@
                         {% endif %}
                     </div>
                     <div class="post-create-date">
-                        {{ post.postcomment.create_date }}{% if post.postcomment.create_date != post.postcomment.update_date %}(수정됨){% endif %}
+                        <a href="{% url 'instagram:post_detail' pk=post.pk %}">
+                            {{ post.postcomment.create_date }}{% if post.postcomment.create_date != post.postcomment.update_date %}(수정됨){% endif %}
+                        </a>
                     </div>
                 </section>
             </section>

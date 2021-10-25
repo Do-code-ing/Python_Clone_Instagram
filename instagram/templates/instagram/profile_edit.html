@@ -4,6 +4,7 @@
 {% block head %}
 {% include 'base_instagram.html' %}
 <script defer src="{% static 'js/profile_edit.js' %}"></script>
+<script defer src="{% static 'js/toggle_profile_edit.js' %}"></script>
 <script defer>
     const currentGender = "{{ user.profile.gender }}"
 </script>

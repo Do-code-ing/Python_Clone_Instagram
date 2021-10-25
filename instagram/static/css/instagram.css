@@ -257,14 +257,19 @@ aside {
   padding: 0.1rem 0;
 }
 
-.post-bot .post-create-date {
+.post-bot .post-create-date,
+.post-bot .post-create-date a {
   font-size: 0.7rem;
   color: silver;
+  font-weight: 400;
 }
 
-#multiple-container {
-  display: flex;
-  flex-direction: row;
+.post-bot .post-create-date a:active {
+  opacity: 50%;
+}
+
+#feed .post-mid .slide-image {
+  border: none;
 }
 
 /* profile-edit */
@@ -766,7 +771,8 @@ input[type="file"] {
   background-color: white;
   color: black;
   font-size: 0.9rem;
-  border: thin solid rgba(0, 0, 0, 0.07);
+  border: none;
+  border-top: thin solid rgba(0, 0, 0, 0.07);
   width: 20rem;
   cursor: pointer;
 }
@@ -777,6 +783,7 @@ input[type="file"] {
 
 .post-manage-view .post-manage-btns button:first-child {
   border-radius: 1rem 1rem 0 0;
+  border: none;
 }
 
 .post-manage-view .post-manage-btns button:last-child {
@@ -950,6 +957,7 @@ input[type="file"] {
   align-items: center;
   justify-content: center;
   z-index: 100;
+  opacity: 20%;
 }
 
 #next-btn {
@@ -962,6 +970,12 @@ input[type="file"] {
   align-items: center;
   justify-content: center;
   z-index: 100;
+  opacity: 20%;
+}
+
+:is(#prev-btn, #next-btn) img {
+  width: 2rem;
+  height: 2rem;
 }
 
 #multiple-container {
