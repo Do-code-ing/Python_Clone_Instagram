@@ -22,14 +22,16 @@
     <div id="feed">
         <article class="follow-wrapper post-wrapper" id="follower">
             {% for follower in followers %}
-            <div class="follower">
-                <div class="image-box">
-                    <img src="{{ follower.profile.user_image.url }}" alt="" class="profile-image">
+            <a href="{% url 'instagram:profile' username=follower %}">
+                <div class="follower">
+                    <div class="image-box">
+                        <img src="{{ follower.profile.user_image.url }}" alt="" class="profile-image">
+                    </div>
+                    <div class="follower-name">
+                        {{ follower }}
+                    </div>
                 </div>
-                <div class="follower-name">
-                    {{ follower }}
-                </div>
-            </div>
+            </a>
             {% endfor %}
         </article>
         <br>
