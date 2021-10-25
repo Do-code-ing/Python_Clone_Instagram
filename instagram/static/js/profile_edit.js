@@ -8,3 +8,5 @@ if (imagePicker) {
     changeBtn.click();
   });
 }
+
+// gender btn

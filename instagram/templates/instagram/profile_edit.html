@@ -4,6 +4,9 @@
 {% block head %}
 {% include 'base_instagram.html' %}
 <script defer src="{% static 'js/profile_edit.js' %}"></script>
+<script defer>
+    const currentGender = "{{ user.profile.gender }}"
+</script>
 {% endblock head %}
 
 {% block body %}
@@ -45,7 +48,7 @@
                 {{ profile_form.as_p }}
                 <p>
                     <label for="">성별</label>
-                    <input type="button" value="성별">
+                    <input type="button" value="성별" id="gender-btn">
                     {% comment %} 토글창 {% endcomment %}
                 </p>
                 <p>
@@ -56,4 +59,33 @@
         </section>
     </article>
 </main>
+<article id="gender-select-view">
+    <div class="background-div"></div>
+    <div id="gender-select-form">
+        <div id="gender-select-form-top">
+            <b>성별</b>
+            <img id="close-btn" src="{% static 'image/close.png' %}" alt="">
+        </div>
+        <div id="gender-select-form-bot">
+            <fieldset>
+                <span>
+                    <input type="radio" name="gender" id="1"><b>남성</b>
+                </span>
+                <span>
+                    <input type="radio" name="gender" id="2"><b>여성</b>
+                </span>
+                <span>
+                    <input type="radio" name="gender" id="3"><b>맞춤 성별</b>
+                    <input type="text" name="custom-gender" id="custom-gender" maxlength="12" placeholder="맞춤 성별">
+                </span>
+                <span>
+                    <input type="radio" name="gender" id="4"><b>밝히고 싶지 않음</b>
+                </span>
+            </fieldset>
+            <input type="button" value="완료" class="profile-edit-form-submit">
+        </div>
+    </div>
+</article>
+
+</article>
 {% endblock body %}

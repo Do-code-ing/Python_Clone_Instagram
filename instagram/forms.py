@@ -36,7 +36,10 @@ class PostCommentForm(forms.ModelForm):
         max_length=200,
         label="",
         required=False,
-        widget=forms.Textarea(attrs={'placeholder': '내용을 입력하세요.'})
+        widget=forms.Textarea(attrs={
+            'placeholder': '내용을 입력하세요.',
+            'spellcheck': 'false',
+        })
     )
 
     class Meta:
@@ -48,7 +51,10 @@ class CommentForm(forms.ModelForm):
     text = forms.CharField(
         label="",
         max_length=200,
-        widget=forms.Textarea(attrs={'placeholder': '댓글 달기'})
+        widget=forms.Textarea(attrs={
+            'placeholder': '댓글 달기',
+            'spellcheck': 'false',
+        })
     )
 
     class Meta:
@@ -73,18 +79,26 @@ class ProfileForm(forms.ModelForm):
         label="이름",
         label_suffix="",
         max_length=50,
+        widget=forms.TextInput(attrs={
+            'spellcheck': 'false',
+        })
     )
     website = forms.CharField(
         label="웹사이트",
         label_suffix="",
         max_length=200,
-        widget=forms.TextInput(attrs={'placeholder': '웹사이트'})
+        widget=forms.TextInput(attrs={
+            'placeholder': '웹사이트',
+            'spellcheck': 'false',
+        })
     )
     introduction = forms.CharField(
         label="소개",
         label_suffix="",
         max_length=200,
-        widget=forms.Textarea()
+        widget=forms.Textarea(attrs={
+            'spellcheck': 'false',
+        })
     )
 
     class Meta:

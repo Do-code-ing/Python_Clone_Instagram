@@ -9,7 +9,8 @@ class Profile(models.Model):
     name = models.CharField(max_length=50, blank=True)
     website = models.CharField(max_length=200, blank=True)
     introduction = models.TextField(blank=True)
-    gender = models.TextField(default="None")
+    gender = models.CharField(max_length=20, default="conceal")
+    custom_gender = models.CharField(max_length=12, blank=True)
 
 
 class Post(models.Model):
