@@ -937,7 +937,7 @@ input[type="file"] {
   height: 34rem;
   position: relative;
   font-size: 2rem;
-  color: rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.5);
 }
 
 #prev-btn {
@@ -967,6 +967,7 @@ input[type="file"] {
 #multiple-container {
   display: flex;
   flex-direction: row;
+  align-items: center;
   width: 34rem;
   height: 34rem;
   border: thin solid rgba(0, 0, 0, 0.07);

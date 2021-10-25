@@ -44,6 +44,9 @@ Array.from(slideImages).forEach((slideImage) => {
   }
 
   prevBtn.style.display = "none";
+  if (fileCount == 1) {
+    nextBtn.style.display = "none";
+  }
   prevBtn.addEventListener("click", prev);
   nextBtn.addEventListener("click", next);
 });
