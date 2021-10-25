@@ -328,6 +328,21 @@ def profile_edit(request):
             if image:
                 profile.user_image = image
                 profile.save()
+        else:
+            name = request.POST["name"]
+            website = request.POST["website"]
+            introduction = request.POST["introduction"]
+            gender = request.POST["gender"]
+            profile.name = name
+            profile.website = website
+            profile.introduction = introduction
+
+            profile.gender = gender
+            if gender not in ("male", "female", "conceal"):
+                profile.gender = "custom"
+                profile.custom_gender = gender
+
+            profile.save()
 
     context = {
         "user_image_form": UserImageForm,

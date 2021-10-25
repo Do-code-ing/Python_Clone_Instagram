@@ -87,6 +87,7 @@ class ProfileForm(forms.ModelForm):
         label="웹사이트",
         label_suffix="",
         max_length=200,
+        required=False,
         widget=forms.TextInput(attrs={
             'placeholder': '웹사이트',
             'spellcheck': 'false',
@@ -96,6 +97,7 @@ class ProfileForm(forms.ModelForm):
         label="소개",
         label_suffix="",
         max_length=200,
+        required=False,
         widget=forms.Textarea(attrs={
             'spellcheck': 'false',
         })

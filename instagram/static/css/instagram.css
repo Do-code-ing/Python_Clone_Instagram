@@ -799,6 +799,7 @@ input[type="file"] {
   z-index: 100;
   width: 100vw;
   height: 100vh;
+  display: none;
 }
 
 #gender-select-view .background-div {
@@ -833,15 +834,7 @@ input[type="file"] {
   align-items: center;
   justify-content: center;
   font-size: 1rem !important;
-  position: relative;
   border-bottom: none !important;
-}
-
-#gender-select-form-top #close-btn {
-  position: absolute;
-  right: 0;
-  width: 2rem;
-  height: 2rem;
 }
 
 #gender-select-form-bot {
@@ -851,14 +844,14 @@ input[type="file"] {
   border-top: none !important;
 }
 
-#gender-select-form-bot fieldset {
+#gender-select-form-bot #gender-select-fieldset {
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
   gap: 0.1rem;
 }
 
-#gender-select-form-bot fieldset span {
+#gender-select-form-bot #gender-select-fieldset span {
   padding: 0.1rem;
   display: flex;
   flex-direction: row;
@@ -866,22 +859,23 @@ input[type="file"] {
   gap: 0.2rem;
 }
 
-#gender-select-form-bot fieldset span input[type="radio"] {
+#gender-select-form-bot #gender-select-fieldset span input[type="radio"] {
   width: 1rem;
   height: 1rem;
 }
 
-#gender-select-form-bot fieldset span #custom-gender {
+#gender-select-form-bot #gender-select-fieldset span #custom-text {
   padding: 0.5rem;
   background-color: white;
+  display: none;
 }
 
-#gender-select-form-bot fieldset span #custom-gender:focus {
+#gender-select-form-bot #gender-select-fieldset span #custom-text:focus {
   outline: none;
   box-shadow: 0 0 0 0.05rem black;
 }
 
-#gender-select-form-bot fieldset span #custom-gender::placeholder {
+#gender-select-form-bot #gender-select-fieldset span #custom-text::placeholder {
   color: lightgray;
 }
 
