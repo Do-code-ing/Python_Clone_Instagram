@@ -32,10 +32,15 @@
                 <a href="{% url 'instagram:follow' username=user_.username %}" class="follow-btn"><b>팔로우</b></a>
                 {% endif %}
             </div>
-            <div class="flex-row" id="profile-info-bot">
+            <div class="flex-row" id="profile-info-mid">
                 <p>게시물 <b>{{ user_.post_set.all|length }}</b></p>
                 <p>팔로워 <b>{{ user_.follower.all|length }}</b></p>
                 <p>팔로우 <b>{{ user_.following.all|length }}</b></p>
+            </div>
+            <div id="profile-info-bot">
+                <p><b>{{ user_.profile.name }}</b></p>
+                <p>{{ user_.profile.introduction }}</p>
+                <p><a href="{{ user_.profile.website }}" target="_blank"><b>{{ user_.profile.website }}</b></a></p>
             </div>
         </div>
     </section>

@@ -473,8 +473,23 @@ aside {
   height: auto;
 }
 
-#profile-info #profile-info-bot {
+#profile-info #profile-info-mid {
   gap: 3rem;
+}
+
+#profile-info #profile-info-bot {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+#profile-info #profile-info-bot a {
+  color: dodgerblue;
+}
+
+#profile-info #profile-info-bot a:active {
+  opacity: 50%;
 }
 
 .posts {
