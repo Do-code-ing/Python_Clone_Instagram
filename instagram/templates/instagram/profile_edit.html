@@ -3,7 +3,7 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
-<script defer>
+<script>
     const currentGender = "{{ user.profile.gender }}"
 </script>
 <script defer src="{% static 'js/profile_edit.js' %}"></script>

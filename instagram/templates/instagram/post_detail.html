@@ -3,7 +3,7 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
-<script defer>
+<script>
     const user = "{{ user }}";
     const isFollowing = "{{ followed }}";
     const postURL = "{% url 'instagram:post_detail' pk=post.pk %}";
@@ -39,7 +39,7 @@
                 </div>
             </section>
             <section class="post-mid border-light-top">
-                {% if post.main_comment or post.posttag_set.all|length > 0 %}
+                {% if post.postcomment.text or post.posttag_set.all|length > 0 %}
                 <div class="post-user feed-post">
                     <div class="image-box">
                         <a href="{% url 'instagram:profile' username=post.author %}">

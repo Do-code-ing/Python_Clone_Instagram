@@ -70,3 +70,18 @@ class HashTag(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class Notice(models.Model):
+    TYPE_CHOICES = (
+        ("like", "like"),
+        ("comment", "comment"),
+        ("follow", "follow"),
+    )
+
+    sender = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="sender")
+    receiver = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="receiver")
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    create_date = models.DateTimeField(auto_now_add=True)
