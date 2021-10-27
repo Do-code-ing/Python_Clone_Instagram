@@ -49,6 +49,7 @@ def text_to_hashtag(texts):
     return tags, comments
 
 
+@login_required
 def index(request):
     if request.user.is_authenticated:
         posts = Post.objects.filter(author=request.user)
@@ -92,6 +93,7 @@ def post(request):
     return render(request, "instagram/post.html", context)
 
 
+@login_required
 def update(request, pk):
     post = get_object_or_404(Post, id=pk)
     try:
@@ -150,6 +152,7 @@ def update(request, pk):
         return redirect("instagram:index")  # 에러 발생
 
 
+@login_required
 def delete(request, pk):
     post = get_object_or_404(Post, id=pk)
     if request.user == post.author:
@@ -159,6 +162,7 @@ def delete(request, pk):
         return redirect("instagram:index")  # 에러 발생
 
 
+@login_required
 def post_detail(request, pk):
     post = get_object_or_404(Post, id=pk)
     comments = Comment.objects.filter(post=post.id)
@@ -235,6 +239,7 @@ def like(request, pk):
         return redirect("instagram:post_detail", pk=pk)
 
 
+@login_required
 def search(request, search_for):
     target = "tag only"
     context = {
@@ -282,6 +287,7 @@ def search(request, search_for):
     return render(request, "instagram/search.html", context)
 
 
+@login_required
 def profile(request, username):
     user_ = get_object_or_404(User, username=username)
     try:

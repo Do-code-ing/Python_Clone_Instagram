@@ -48,6 +48,7 @@ def login(request):
     return render(request, "registration/login.html")
 
 
+@login_required
 def logout(request):
     auth.logout(request)
     return redirect("registration:login")
@@ -61,5 +62,7 @@ def delete_account(request):
         if check_password(password, user.password):
             user.delete()
             return redirect("registration:login")
+        else:
+            messages.error(request, "비밀번호가 일치하지 않습니다.")
 
     return render(request, "registration/delete_account.html")
