@@ -31,23 +31,23 @@ textarea {
 }
 
 header {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   width: 100vw;
   height: 5.5vh;
   background-color: white;
   border: thin solid rgba(0, 0, 0, 0.12);
-  align-items: center;
-  z-index: 10000;
 }
 
 header article {
-  grid-column: 2;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   padding-top: 0.4rem;
+  width: 60rem;
 }
 
 #header-two {
@@ -147,6 +147,8 @@ input#search-input {
 main.instagram-main {
   grid-column: 2;
   margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 main #feed {
@@ -155,12 +157,9 @@ main #feed {
 }
 
 aside {
-  position: sticky;
-  z-index: -100;
-  top: 12%;
-  right: 36%;
-  width: 10rem;
-  height: 10rem;
+  position: fixed;
+  top: 5rem;
+  left: 66rem;
 }
 
 .follow-wrapper {
@@ -498,16 +497,56 @@ aside {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1rem;
 }
 
-.posts a {
+.profile-post {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 18rem;
+  height: 18rem;
+}
+
+.profile-post a {
   display: flex;
   align-items: center;
 }
 
-#profile-bot .post-image {
+.profile-post .post-image {
   width: 18rem;
-  padding: 0.8rem;
+}
+
+.profile-post-background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18rem;
+  height: 18rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: none;
+}
+
+.profile-post-info {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  display: none;
+  gap: 2rem;
+}
+
+.profile-post-info div {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.profile-post-info img {
+  width: 1.5rem;
 }
 
 .btn {
@@ -585,8 +624,6 @@ input[type="file"] {
 }
 
 #search-result-user .search-result-user-div .search-result-user-info {
-  display: flex;
-  flex-direction: column;
   gap: 0.3rem;
   width: 20rem;
 }

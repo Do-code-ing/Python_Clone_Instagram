@@ -24,8 +24,8 @@
             <div class="flex-row">
                 <div class="image-box">
                     <a href="{% url 'instagram:profile' username=user_.username %}">
-                        {% if user_.user_image %}
-                        <img src="{{ user_.user_image.url }}" alt="" class="profile-image">
+                        {% if user_.profile %}
+                        <img src="{{ user_.profile.user_image.url }}" alt="" class="profile-image">
                         {% else %}
                         <img src="{% static 'image/profile.jpg' %}" class="profile-image">
                         {% endif %}

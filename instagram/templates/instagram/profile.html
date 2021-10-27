@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_tag %}
 
 {% block head %}
 {% include 'base_instagram.html' %}
+<script defer src="{% static 'js/profile.js' %}"></script>
 <script defer src="{% static 'js/toggle_follow.js' %}"></script>
 <script defer>
     const user = "{{ user }}";
@@ -56,9 +58,26 @@
         </article>
         <article class="posts">
             {% for post in user_.post_set.all|dictsortreversed:"create_date" %}
-            <a href="{% url 'instagram:post_detail' pk=post.pk %}">
-                <img src="{{ post.main_image.url }}" class="post-image">
-            </a>
+            <div class="profile-post">
+                <a href="{% url 'instagram:post_detail' pk=post.pk %}">
+                    <img src="{{ post.main_image.url }}" class="post-image">
+                    <div class="profile-post-background"></div>
+                    <div class="profile-post-info">
+                        <div>
+                            <img src="{% static 'image/white_heart.png' %}" alt="">
+                            <b class="profile-post-info-text">{{ post.like_set.all|length|cool_number }}</b>
+                        </div>
+                        <div>
+                            <img src="{% static 'image/chat_bubble.png' %}" alt="">
+                            {% if post.postcomment.text or post.posttag_set.all|length > 0 %}
+                            <b class="profile-post-info-text">{{ post.comment_set.all|length|add:1|cool_number }}</b>
+                            {% else %}
+                            <b class="profile-post-info-text">{{ post.comment_set.all|length|cool_number }}</b>
+                            {% endif %}
+                        </div>
+                    </div>
+                </a>
+            </div>
             {% endfor %}
         </article>
     </section>

@@ -38,6 +38,7 @@ function handleToggleBtnClick(event) {
   cancleBtn.className = "post-manage-cancle";
 
   cancleBtn.addEventListener("click", (event) => {
+    document.body.style.overflow = "scroll";
     postManageView.remove();
   });
 
