@@ -43,6 +43,16 @@
                 <p><b>{{ user_.profile.name }}</b></p>
                 <p>{{ user_.profile.introduction|linebreaksbr }}</p>
                 <p><a href="{{ user_.profile.website }}" target="_blank"><b>{{ user_.profile.website }}</b></a></p>
+                <br>
+                <p id="profile-follow-list">
+                    {% if follow_list %}
+                    {% for user__ in follow_list %}
+                    <a href="{% url 'instagram:profile' username=user__.username %}"
+                        class="profile-follow-list-a"><b>{{ user__ }}</b></a>님
+                    {% endfor %}
+                    이 팔로우합니다
+                    {% endif %}
+                </p>
             </div>
         </div>
     </section>

@@ -290,6 +290,15 @@ def search(request, search_for):
 @login_required
 def profile(request, username):
     user_ = get_object_or_404(User, username=username)
+    following_with_my_following = []
+    if request.user != user_:
+        for following in request.user.following.all():
+            my_following = following.follower
+            check = Follow.objects.filter(
+                follower=user_, following=my_following)
+            if check:
+                following_with_my_following.append(my_following)
+
     try:
         Follow.objects.get(follower=user_, following=request.user)
         followed = "True"
@@ -299,6 +308,7 @@ def profile(request, username):
     context = {
         "user_": user_,
         "followed": followed,
+        "follow_list": following_with_my_following,
     }
     return render(request, "instagram/profile.html", context)
 

@@ -448,6 +448,10 @@ aside {
   gap: 1rem;
 }
 
+.follow-btn {
+  padding: 0.5rem 0;
+}
+
 .follow-btn b {
   background-color: dodgerblue;
   padding: 0.3rem 1.5rem;
@@ -492,6 +496,15 @@ aside {
 
 #profile-info #profile-info-bot a:active {
   opacity: 50%;
+}
+
+#profile-info #profile-info-bot #profile-follow-list {
+  font-size: 0.72rem;
+  color: darkgray;
+}
+
+#profile-info #profile-info-bot #profile-follow-list .profile-follow-list-a {
+  color: darkslategray;
 }
 
 .posts {
@@ -625,7 +638,9 @@ input[type="file"] {
 }
 
 #search-result-user .search-result-user-div .search-result-user-info {
-  gap: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   width: 20rem;
 }
 
