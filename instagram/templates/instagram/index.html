@@ -3,8 +3,6 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
-<script defer src="{% static 'js/index.js' %}"></script>
-<script defer src="{% static 'js/toggle_index.js' %}"></script>
 <script defer>
     const user = "{{ user }}";
     const postURL = "{% url 'instagram:post_detail' pk='❤' %}";
@@ -12,6 +10,8 @@
     const deleteURL = "{% url 'instagram:delete' pk='❤' %}";
     const followURL = "{% url 'instagram:follow' username='❤' %}";
 </script>
+<script defer src="{% static 'js/index.js' %}"></script>
+<script defer src="{% static 'js/toggle_index.js' %}"></script>
 {% endblock head %}
 
 {% block body %}

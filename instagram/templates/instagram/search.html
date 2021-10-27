@@ -3,11 +3,11 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
-<script defer src="{% static 'js/toggle_follow.js' %}"></script>
 <script defer>
     const user = "{{ user }}";
     const followURL = "{% url 'instagram:follow' username='❤' %}";
 </script>
+<script defer src="{% static 'js/toggle_follow.js' %}"></script>
 {% endblock head %}
 
 {% block body %}

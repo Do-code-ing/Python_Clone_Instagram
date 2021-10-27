@@ -3,13 +3,13 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
-<script defer src="{% static 'js/update.js' %}"></script>
 <script async>
     const tagList = []
     "{% for tag in post.posttag_set.all %}"
     tagList.push("{{ tag.text }}")
     "{% endfor %}"
 </script>
+<script defer src="{% static 'js/update.js' %}"></script>
 {% endblock head %}
 
 {% block body %}

@@ -41,6 +41,7 @@ header {
   height: 5.5vh;
   background-color: white;
   border: thin solid rgba(0, 0, 0, 0.12);
+  z-index: 150;
 }
 
 header article {
@@ -814,7 +815,7 @@ input[type="file"] {
 /* post manage view */
 .post-manage-view {
   position: fixed;
-  z-index: 100;
+  z-index: 200;
   width: 100vw;
   height: 100vh;
 }

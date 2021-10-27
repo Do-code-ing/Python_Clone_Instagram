@@ -3,7 +3,6 @@
 
 {% block head %}
 {% include 'base_instagram.html' %}
-<script defer src="{% static 'js/toggle_post.js' %}"></script>
 <script defer>
     const user = "{{ user }}";
     const isFollowing = "{{ followed }}";
@@ -13,6 +12,7 @@
     const followURL = "{% url 'instagram:follow' username=post.author %}";
     const commentURL = "{% url 'instagram:comment_delete' pk=post.pk comment_pk='❤' %}";
 </script>
+<script defer src="{% static 'js/toggle_post.js' %}"></script>
 {% endblock head %}
 
 {% block body %}
