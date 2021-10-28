@@ -116,7 +116,7 @@
                     </div>
                     <div class="post-create-date">
                         <a href="{% url 'instagram:post_detail' pk=post.pk %}">
-                            {{ post.postcomment.create_date }}{% if post.postcomment.create_date != post.postcomment.update_date %}(수정됨){% endif %}
+                            {{ post.postcomment.create_date_string }}{% if post.postcomment.create_date != post.postcomment.update_date %}(수정됨){% endif %}
                         </a>
                     </div>
                 </section>
