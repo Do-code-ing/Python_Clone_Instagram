@@ -12,17 +12,17 @@
 </header>
 <main class="instagram-main">
     <div class="post-create">
-        <p id="post-create-top-left">
-            <span>
+        <div id="post-create-top-left">
+            <div class="post-create-main-image-div">
                 <b>메인 사진</b><button id="main-image-btn">+</button>
-            </span>
-        </p>
-        <p id="post-create-top-right">
-            <span>
+            </div>
+        </div>
+        <div id="post-create-top-right">
+            <div class="post-create-sub-image-div">
                 <b>사진 추가</b><button id="sub-image-btn">+</button>
-            </span>
-            <button id="submit-btn">다음</button>
-        </p>
+            </div>
+            <div id="submit-btn">다음</div>
+        </div>
         <div id="main-image-div">
             <img src="{% static 'image/dummy_image.jpg' %}" class="post-image" id="dummy-image">
         </div>

@@ -18,17 +18,17 @@
 </header>
 <main class="instagram-main">
     <div class="post-update">
-        <p id="post-update-top-left">
-            <span>
+        <div id="post-update-top-left">
+            <div class="post-create-main-image-div">
                 <b>이미지 미리보기</b>
-            </span>
-        </p>
-        <p id="post-update-top-right">
-            <span>
+            </div>
+        </div>
+        <div id="post-update-top-right">
+            <div class="post-create-sub-image-div">
                 <b>글 남기기</b>
-            </span>
-            <button id="submit-btn">다음</button>
-        </p>
+            </div>
+            <div id="submit-btn">다음</div>
+        </div>
         <div class="slide-image" id="post-update-bot-left" data-id="{{ images|length }}">
             <div id="prev-btn"><img src="{% static 'image/prev_btn.png' %}" alt=""></div>
             <div id="next-btn"><img src="{% static 'image/next_btn.png' %}" alt=""></div>
