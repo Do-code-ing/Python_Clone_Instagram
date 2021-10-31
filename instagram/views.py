@@ -359,10 +359,12 @@ def profile_edit(request):
             profile.website = website
             profile.introduction = introduction
 
-            profile.gender = gender
             if gender not in ("male", "female", "conceal"):
                 profile.gender = "custom"
                 profile.custom_gender = gender
+            else:
+                profile.gender = gender
+                profile.custom_gender = ""
 
             profile.save()
 

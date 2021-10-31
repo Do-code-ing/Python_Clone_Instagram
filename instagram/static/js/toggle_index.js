@@ -1,5 +1,9 @@
 "use strict";
 
+if (user == undefined) {
+  location.reload();
+}
+
 const toggleBtns = document.getElementsByClassName("post-btn");
 if (toggleBtns) {
   Array.from(toggleBtns).forEach((toggleBtn) => {
