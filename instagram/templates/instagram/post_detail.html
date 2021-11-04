@@ -40,8 +40,6 @@
             </section>
             <section class="post-mid border-light-top">
                 {% if post.postcomment.text or post.posttag_set.all|length > 0 %}
-                {{ post.postcomment.create_date }}
-                {{ post.postcomment.update_date }}
                 <div class="post-user feed-post">
                     <div class="image-box">
                         <a href="{% url 'instagram:profile' username=post.author %}">
